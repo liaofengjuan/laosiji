@@ -13,22 +13,16 @@
 
 
 
-Route::get('/l', function () {
-    return view('home.aaa');
-});
 
-Route::get('/rrr', function () {
-    return view('home.register');
-});
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	Route::get('/login','LoginController@index');
 	Route::post('/login','LoginController@login');
 	Route::post('/code','LoginController@code');
 	Route::get('/','IndexController@index');
-	Route::get('/info','IndexController@info');
 	Route::resource('/user','UserController');
-	Route::post('/user/username','UserController@username');
+	Route::post('/user/username','UserController@username');//验证用户名
+	Route::post('/user/phone','UserController@phone');//验证手机号
 });
 
 //前台路由组

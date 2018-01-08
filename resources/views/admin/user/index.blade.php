@@ -1,4 +1,5 @@
 @extends('layout.admin')
+@section('content')
 <div class="tpl-portlet-components" >
     <div class="portlet-title">
         <div class="caption font-green bold">
@@ -69,7 +70,7 @@
                             <tr>
                                 <td><input type="checkbox"></td>
                                 <td>{{$v['id']}}</td>
-                                <td>{{$v->userinfo->username}}</td>
+                                <td>{{$v->username}}</td>
                                 <td>{{$v->phone}}</td>
                                 <td>{{$v->userinfo->age}}</td>
                                 <td>{{$v->userinfo->sex}}</td>
@@ -107,3 +108,4 @@
     </div>
     <div class="tpl-alert"></div>
 </div>
+@endsection
