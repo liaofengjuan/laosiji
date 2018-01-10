@@ -21,9 +21,17 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	Route::post('/code','LoginController@code');
 	Route::get('/','IndexController@index');
 	Route::resource('/user','UserController');
+
 	Route::post('/user/username','UserController@username');//验证用户名
 	Route::post('/user/phone','UserController@phone');//验证手机号
+
+	//视频
+	Route::resource('/video','VideoController');
+	//友情链接
+	Route::resource('/friend','FriendController');
+
 });
+
 
 //前台路由组
 Route::group(['namespace'=>'Home'],function(){

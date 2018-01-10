@@ -16,13 +16,9 @@
     <link rel="stylesheet" href="/admins/css/amazeui.min.css" />
     <link rel="stylesheet" href="/admins/css/admin.css">
     <link rel="stylesheet" href="/admins/css/app.css">
-   <script src="/admins/js/echarts.min.js"></script>
+   
 
-    <script src="/admins/js/jquery.min.js"></script>
-    <script src="/admins/js/amazeui.min.js"></script>
-   <script src="/admins/js/iscrolls.js"></script>
-    <script src="/admins/js/app.js"></script>
-    <script type="text/javascript" src="/layer/layer.js"></script>
+    
 </head>
 
 <body data-type="index">
@@ -176,23 +172,19 @@
                         <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                             <i class="am-icon-user"></i>
                             <span>用户管理</span>
-                            <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                            <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right "></i>
                         </a>
                         <ul class="tpl-left-nav-sub-menu yonghu">
                             <li>
                                 <a href="{{url('admin/user')}}" target='main'>
                                     <i class="am-icon-angle-right"></i>
-                                    <span>浏览前台用户</span>
-                                    <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
-                                </a>
-
-                                <a href="table-images-list.html">
-                                    <i class="am-icon-angle-right"></i>
-                                    <span>浏览管理员用户</span>
+                                    <span>浏览用户</span>
+                                    <i class="tpl-left-nav-content-ico am-fr am-margin-right"></i>
                                 </a>
                                 <a href="{{url('admin/user/create')}}" target="main">
                                     <i class="am-icon-angle-right"></i>
                                     <span>添加管理员</span>
+                                    <i class="tpl-left-nav-content-ico am-fr am-margin-right"></i>
                                 </a>
                             </li>
                         </ul>
@@ -205,7 +197,7 @@
                         </a>
                         <ul class="tpl-left-nav-sub-menu shilei">
                             <li>
-                                <a href="table-font-list.html">
+                                <a href="{{url('/admin/video')}}">
                                     <i class="am-icon-angle-right"></i>
                                     <span>分类列表</span>
                                     <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
@@ -278,9 +270,10 @@
                                     <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
                                 </a>
 
-                                <a href="table-images-list.html">
+                                <a href="/admin/friend/create">
                                     <i class="am-icon-angle-right"></i>
                                     <span>添加友情链接</span>
+                                    <i class="tpl-left-nav-content-ico am-fr am-margin-right"></i>
                                 </a>
                             </li>
                         </ul>
@@ -306,23 +299,30 @@
 
 
 
-
+<script src="/admins/js/jquery.min.js"></script>
+<script src="/admins/js/echarts.min.js"></script>
+<script src="/admins/js/amazeui.min.js"></script>
+<script src="/admins/js/iscrolls.js"></script>
+<script src="/admins/js/app.js"></script>
+<script type="text/javascript" src="/layer/layer.js"></script>
   <script type="text/javascript">
        var preg_path = /^\/admin\/user.*$/;
-       var path = window.location.pathname
+       var path = window.location.pathname;
        if(preg_path.test(path)){
            $('.yonghu').css('display','block');
        }
-   </script>
+    //    $('.tpl-left-nav-link-list').on('click', function() {
+    //     $(this).siblings('.tpl-left-nav-sub-menu').slideToggle(80)
+    //         .end()
+    //         .find('.tpl-left-nav-more-ico').toggleClass('tpl-left-nav-more-ico-rotate');
+    // })
+ </script>
    
         @section('content')
         
         @show
 
-    </div>
-
-
-   
+    </div> 
 </body>
 
 </html>

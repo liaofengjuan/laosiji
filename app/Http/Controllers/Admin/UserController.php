@@ -78,7 +78,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -89,7 +89,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = User::where('id',$id)->first();
+        $status = $data->userinfo->status;
+        return view('admin.user.edit',['data'=>$data,'status'=>$status,'id'=>$id]);
     }
 
     /**
@@ -101,7 +103,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $userinfo = UserInfo::where('uid',$id)->first();
+        $userinfo->status = $request -> input('status');
+        if($request -> input('vip')){
+            $vip = $request -> input('vip');
+            $vip_time = $userinfo['vip_time']-time();
+            if($vip_time>0){
+                $vip_time = 60*60*24*30*$vip+$vip_time+time();
+            }else{
+                $vip_time = 60*60*24*30*$vip+time();
+            }
+            $userinfo->vip_time = $vip_time; 
+        }
+        $res = $userinfo -> save();
+        if($res!=false){
+            return 0;//说明成功了
+        }else{
+            return 1;
+        }
     }
 
     /**
