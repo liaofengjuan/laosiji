@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Model\User;//使用模型
 use App\Model\UserInfo;//使用模型
+use Hash;//使用hash
 
 class UserController extends Controller
 {
@@ -38,14 +39,35 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 执行添加.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        //获取用户提交的信息
+        $data1 = $request -> only("phone",'username');
+        $data2 = $request -> only('email');
+        //密码加密
+        $password = Hash::make($request -> input('password'));
+        $data1['password'] = $password;
+        //往user表里插入数据
+        $id = User::insertGetId($data1);
+        if(!$id){
+            echo '1';
+        }
+
+        $data2['uid'] = $id;
+        $data2['authority'] = 2;
+        $res2 = UserInfo::insert($data2);
+        if($res2){
+            echo '0';
+        }else{
+            echo '1';
+        }
+
+        
     }
 
     /**
@@ -56,7 +78,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -67,7 +89,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = User::where('id',$id)->first();
+        $status = $data->userinfo->status;
+        return view('admin.user.edit',['data'=>$data,'status'=>$status,'id'=>$id]);
     }
 
     /**
@@ -79,7 +103,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $userinfo = UserInfo::where('uid',$id)->first();
+        $userinfo->status = $request -> input('status');
+        if($request -> input('vip')){
+            $vip = $request -> input('vip');
+            $vip_time = $userinfo['vip_time']-time();
+            if($vip_time>0){
+                $vip_time = 60*60*24*30*$vip+$vip_time+time();
+            }else{
+                $vip_time = 60*60*24*30*$vip+time();
+            }
+            $userinfo->vip_time = $vip_time; 
+        }
+        $res = $userinfo -> save();
+        if($res!=false){
+            return 0;//说明成功了
+        }else{
+            return 1;
+        }
     }
 
     /**
@@ -94,19 +135,33 @@ class UserController extends Controller
     }
 
     /**
-     * 判断用户名
+     * 判断用户名是否存在
      */
     public function username(Request $request)
     {
         //获取用户信息
-        // $username = $request -> input('username');
-        echo 0;
-        // $info = UserInfo::where('username',$username);
-        // if($info){
-        //     echo 1;
-        // }else{
-        //     echo 0;
-        // }
+        $username = $request -> input('username');
+        $info = User::where('username',$username)->first();
+        if($info){
+            echo 1;//说明该用户名已存在
+        }else{
+            echo 0;
+        }
+    }
+
+    /**
+     * 判断手机号是否存在
+     */
+    public function phone(Request $request)
+    {
+        // 获取用户信息
+        $phone = $request -> input('phone');
+        $data = User::where('phone',$phone)->first();
+        if($data){
+            echo 1;//说明该手机号已注册
+        }else{
+            echo 0;
+        }
     }
 
 }
