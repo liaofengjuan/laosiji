@@ -11,16 +11,6 @@
 |
 */
 
-
-
-Route::get('/l', function () {
-    return view('home.aaa');
-});
-
-Route::get('/rrr', function () {
-    return view('home.register');
-});
-
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	Route::get('/login','LoginController@index');
 	Route::post('/login','LoginController@login');
@@ -32,17 +22,25 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 });
 
 //前台路由组
-Route::group(['namespace'=>'Home'],function(){
+Route::group(['namespace'=>'Home'],function()
+{
 
 	//前台首页
 	Route::get('/',"IndexController@index");
 
 	//登录页面
 	Route::get('/login',"LoginController@index");
+	//创建验证码
+	Route::get('/create_code/{id}',"LoginController@create_code");
+	//执行登录
+	Route::post('/do_login',"LoginController@do_login");
+	//发送手机验证码
+	Route::post('/alidayu',"LoginController@alidayu");
+	//执行短信验证登录
+	Route::post('/phone_login',"LoginController@phone_login");
 
 	//注册页面
 	Route::get('/register',"RegisterController@index");
-
 	//执行注册
 	Route::post('/do_register',"RegisterController@do_register");
 

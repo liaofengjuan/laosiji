@@ -54,14 +54,14 @@
     </div>
 	<div class="regist">
     	<div class="log_img"><img src="/homes/login_register/images/l_img.png" width="611" height="425" /></div>
-		<div class="reg_c">
+		<div class="reg_c" style="height:500px">
         	<form>
             <table border="0" style="width:420px; font-size:14px; margin-top:20px;" cellspacing="0" cellpadding="0">
               <tr height="50" valign="top">
               	<td width="95">&nbsp;</td>
                 <td>
                 	<span class="fl" style="font-size:24px;">注册</span>
-                    <span class="fr">已有商城账号，<a href="Login.html" style="color:#ff4e00;">我要登录</a></span>
+                    <span class="fr">已有商城账号，<a href="/login" style="color:#ff4e00;">我要登录</a></span>
                 </td>
               </tr>
               <tr height="50">
@@ -74,7 +74,7 @@
               </tr>
               <tr height="50">
                 <td align="right"><font color="#ff4e00">*</font>&nbsp;密码 &nbsp;</td>
-                <td><input type="password" value="" class="l_pwd" name="password" placeholder="6-18位大小写字母、数字、下划线" /></td>
+                <td><input type="password" value="" class="l_pwd" name="password" placeholder="6-18位非空白字符" /></td>
               </tr>
               <tr height="18">
                 <td align="right"><font color="#ff4e00"></font></td>
@@ -91,15 +91,21 @@
               <tr height="50">
                 <td align="right"> <font color="#ff4e00">*</font>&nbsp;验证码 &nbsp;</td>
                 <td>
-                    <input type="text" value="" class="l_ipt" />
-                    <a href="#" style="font-size:12px; font-family:'宋体';">换一张</a>
+                    <input type="text" value="" class="l_ipt djbd12" />
+                    <span class="dianhuan" style="display:inline-block;font-size:12px; font-family:'宋体';cursor:pointer">换一张</span>
+                    <img class="djbd dianhuan" src="/create_code/2" style="vertical-align: middle;"/>
+                    <script type="text/javascript">
+                      $('.dianhuan').click(function(){
+                        $('.djbd').attr('src','/create_code/'+Math.ceil(Math.random()*1000));
+                      });
+                    </script>
                 </td>
               </tr>
               <tr>
               	<td>&nbsp;</td>
                 <td style="font-size:12px; padding-top:20px;">
                 	<span style="font-family:'宋体';" class="fl">
-                    	<label class="r_rad"><input type="checkbox" /></label><label class="r_txt">我已阅读并接受《用户协议》</label>
+                    	<label class="r_rad"><input id="chedd" type="checkbox" /></label><label class="r_txt">我已阅读并接受《用户协议》</label>
                     </span>
                 </td>
               </tr>
@@ -140,7 +146,7 @@
   //验证密码
   $('.l_pwd').eq(0).blur(function(){
     //验证密码正则表达式
-    var reg = /^[a-zA-Z0-9_-]{6,18}$/;
+    var reg = /^\S{6,18}$/;
     //验证是否为空
     if(!$(this).val()){
       $('#bd_2').html("<font color='red'>密码不能为空！</font>");
@@ -171,7 +177,7 @@
       $('#bd_3').html("<font color='red'>两次输入密码不一致！</font>");
       ok3 = false;
     }else{
-      $('#bd_3').html("<font color='#0c0'>恭喜你，已经能连续输两次密码了！</font>");
+      $('#bd_3').html("<font color='#0c0'>恭喜你，已经能连续输俩密码了！</font>");
       ok3 = true;
     }
   }).keyup(function(){
@@ -180,26 +186,46 @@
 
   //执行注册
   $('input[type="button"]').click(function(){
+    //用户协议
+    if(!$('#chedd').prop('checked')){
+      layer.msg('请阅读用户协议并同意！');
+      return false;
+    }
     //进行总验证
     $('.l_tel,.l_pwd').trigger('blur');
     if(ok1 && ok2 && ok3){
         var phone = $('.l_tel').val();
         var pass = $('.l_pwd').val();
+        var code = $('.djbd12').val();
 
-        $.post('/do_register',{'phone':phone,'pass':pass,'_token':'{{ csrf_token() }}'},function(msg){
-          console.log(msg);
+        $.post('/do_register',{'phone':phone,'pass':pass,code:code,'_token':'{{ csrf_token() }}'},function(msg){
+          // console.log(msg);
           switch(msg){
-            case 2: //该手机号已被注册
+            case '2': //该手机号已被注册
               layer.msg('该手机号码已被注册！');
               break;
-            case 1: //注册成功
-
+            case '1': //注册成功
+              layer.alert('注册成功！', {
+                icon: 6,
+                skin: 'layer-ext-moon'
+              },function(){
+                window.location.href = '/login';
+              });
               break;
-            case 3: //失败
-
+            case '3': //失败
+              layer.alert('找管理员去吧,出幺蛾子了！', {
+                icon: 5,
+                skin: 'layer-ext-moon' 
+              });
+              break;
+            case '4':
+              layer.alert('验证码错误!', {
+                icon: 5,
+                skin: 'layer-ext-moon' 
+              });
               break;
             default: //失败
-
+              layer.msg('注册失败！');
               break;
           }
         });
@@ -207,7 +233,6 @@
         layer.msg('请正确填写注册信息！');
         return false;
     }
-    
   });
   
 </script>

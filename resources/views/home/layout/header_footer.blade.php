@@ -20,7 +20,12 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
 <div class="head">
 <div class="headm">
 <!--登陆后显示会员-->
-<div class="member"><div class="tuxiang"><img src="/homes/images/hyimg.jpg" width="35" height="35" /></div><div class="hyname"><a href="#">AmyHan</a></div></div>
+<div class="member">
+@if(session('user'))
+<div class="tuxiang"><img src="/homes/images/hyimg.jpg" width="35" height="35" /></div><div class="hyname"><a href="#">{{session('user')}}</a></div></div>
+@else
+<div class="huiyuan"><ul><li class="hy1"><a href="/login">登录</a></li><li class="hy2"><a href="/register";>注册</a></li></ul></div></div>
+@endif
 <!--快捷导航-->
 <div class="kjnav">
 <ul>
