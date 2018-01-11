@@ -92,4 +92,12 @@ class VideoController extends Controller
     {
         //
     }
+
+    /**
+     * 查看该类视频详情
+     */
+    public function info($id)
+    {
+        echo '查看该子类的所有视频';
+    }
 }

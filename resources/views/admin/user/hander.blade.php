@@ -59,7 +59,6 @@
                     <table class="am-table am-table-striped am-table-hover table-main" >
                         <thead>
                             <tr>
-                                <th class="table-check"><input type="checkbox" class="tpl-table-fz-check"></th>
                                 <th>ID</th>
                                 <th>用户名</th>
                                 <th>手机</th>
@@ -73,7 +72,6 @@
                         <tbody>
                             @foreach($data as $v)
                             <tr>
-                                <td><input type="checkbox"></td>
                                 <td>{{$v['id']}}</td>
                                 <td>{{$v->username}}</td>
                                 <td>{{$v->phone}}</td>
@@ -83,10 +81,9 @@
                                 <td>@if($v->userinfo->vip_time-time()>0) {{ceil(($v->userinfo->vip_time-time())/3600)}}h @else 0 @endif</td>
                                 <td>
                                     <div class="am-btn-toolbar">
-                                        <div class="am-btn-group am-btn-group-xs">
+                                        <div class="am-btn-group am-btn-group-xs" >
                                             <a class="am-btn am-btn-default am-btn-secondary" role="button" href="{{url('admin/user/'.$v['id'].'/edit')}}"><span class="am-icon-pencil-square-o"></span>编辑</a>
-                                            <!--<a class="am-btn am-btn-default am-btn-danger" role="button" href="#"><span class="am-icon-trash-o"></span>删除</a>-->
-                                            <a class="am-btn am-btn-default am-btn-success" role="button" href="#"><span class="am-icon-copy"></span>历史</a>
+                                            <a class="am-btn am-btn-default am-btn-danger del" role="button" href="javascript:;" onclick="del({{$v['id']}},$(this))"><span class="am-icon-trash"></span>删除</a>
                                         </div>
                                     </div>
                                 </td>
@@ -111,4 +108,21 @@
     </div>
     <div class="tpl-alert"></div>
 </div>
+<script type="text/javascript">
+    function del(id,obj){
+        layer.confirm('确定要删除吗？', {
+          btn: ['确定','取消'] //按钮
+        },function(){
+            $.post("/admin/user/"+id,{'_method':'delete','_token':'{{csrf_token()}}'},function(data){
+                if(data=='0'){
+                    layer.msg('恭喜删除成功', {icon: 1});
+                    obj.parent().parent().parent().parent().remove();
+                }else{
+                    layer.msg('抱歉删除失败');
+                }
+            })
+        })
+        
+    }
+</script>
 @endsection

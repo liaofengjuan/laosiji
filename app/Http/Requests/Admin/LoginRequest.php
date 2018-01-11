@@ -24,8 +24,9 @@ class LoginRequest extends Request
     public function rules()
     {
         return [
-            'phone' => 'required',
+            'username' => 'required',
             'password' => 'required',
+            'code' => 'required',
         ];
     }
 
@@ -37,8 +38,9 @@ class LoginRequest extends Request
     public function messages()
     {
         return [
-            'phone.required' => '手机号必填',
+            'username.required' => '手机号必填',
             'password.required' => '密码必填',
+            'code.required' => '验证码必填',
         ];
     }
 }

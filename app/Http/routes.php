@@ -12,18 +12,26 @@
 */
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
-	Route::get('/login','LoginController@index');
-	Route::post('/login','LoginController@login');
-	Route::post('/code','LoginController@code');
-	Route::get('/','IndexController@index');
-	Route::resource('/user','UserController');
+	Route::get('/login','LoginController@index');//加载登录页
+	Route::post('/login','LoginController@login');//执行登录
+	Route::get('/login/create_code/{id}','LoginController@create_code');//生成验证码
+	Route::post('/login/signout','LoginController@signout');//退出登录
 
+	Route::get('/','IndexController@index');
+	Route::get('/user/hander','UserController@hander');//加载管理员列表
 	Route::post('/user/username','UserController@username');//验证用户名
 	Route::post('/user/phone','UserController@phone');//验证手机号
+	
+
+	Route::resource('/user','UserController');
+	
 
 	//视频
+	Route::get('/video/info/{id}','VideoController@info');//查看详情
 	Route::resource('/video','VideoController');
+
 	//友情链接
+	Route::post('/friend/uploadImg','FriendController@uploadImg');//上传图片
 	Route::resource('/friend','FriendController');
 
 });

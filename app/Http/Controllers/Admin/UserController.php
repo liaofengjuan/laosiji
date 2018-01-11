@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Model\User;//使用模型
 use App\Model\UserInfo;//使用模型
 use Hash;//使用hash
+use DB;
 
 class UserController extends Controller
 {
@@ -20,8 +21,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //查询数据库有没有该用户
-        $data = User::paginate(3);
+        
+        $data = User::where('authority','!=','2')->paginate(3);
         
         return view('admin.user.index',['data'=>$data]);
     }
@@ -52,19 +53,21 @@ class UserController extends Controller
         //密码加密
         $password = Hash::make($request -> input('password'));
         $data1['password'] = $password;
-        //往user表里插入数据
+        $data1['authority'] = 2;
+        //开启事务
+        DB::beginTransaction();
+        //往user表里插入数据，并获取添加成功的id
         $id = User::insertGetId($data1);
-        if(!$id){
-            echo '1';
-        }
 
         $data2['uid'] = $id;
-        $data2['authority'] = 2;
         $res2 = UserInfo::insert($data2);
-        if($res2){
-            echo '0';
+        //判断是否添加成功
+        if($res2 && $id){
+            DB::commit();
+            return '0';
         }else{
-            echo '1';
+            DB::rollBack();
+            return '1';
         }
 
         
@@ -124,14 +127,26 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 执行删除管理员动作
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        //开启事务
+        DB::beginTransaction();
+        //执行删除
+        $res1 = User::where('id',$id)->delete();
+        $res2 = UserInfo::where('uid',$id)->delete();
+        //判断是否成功
+        if($res1 && $res2){
+            DB::commit();
+            return 0;//删除成功
+        }else{
+            DB::rollBack();
+            return 1;
+        }
     }
 
     /**
@@ -162,6 +177,16 @@ class UserController extends Controller
         }else{
             echo 0;
         }
+    }
+
+    /**
+     * 加载管理员列表
+     */
+    public function hander()
+    {
+        $data = User::where('authority','2')->paginate(3);
+        
+        return view('admin.user.hander',['data'=>$data]);
     }
 
 }

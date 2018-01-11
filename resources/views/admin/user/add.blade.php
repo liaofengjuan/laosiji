@@ -1,79 +1,80 @@
 @extends('layout.admin')
+
 @section('content')
-<div class="tpl-content-wrapper">
+<div class="tpl-content-wrapper" style="min-height:100vh">
     <div class="tpl-content-page-title">
         首页
     </div>
     <ol class="am-breadcrumb">
         <li><a href="#" class="am-icon-home">首页</a></li>
         <li><a href="#">用户管理</a></li>
-        <li class="am-active">新增管理员</li>
+        <li class="am-active">新增用户</li>
     </ol>
-    <div class="tpl-portlet-components">
-        <div class="portlet-title">
-            <div class="caption font-green bold">
-                <span class="am-icon-plus"></span> 新增管理员
-            </div>
-            <div class="tpl-portlet-input tpl-fz-ml">
-                
-            </div>
-
-
+<div class="tpl-portlet-components">
+    <div class="portlet-title">
+        <div class="caption font-green bold">
+            <span class="am-icon-plus"></span> 新增管理员
         </div>
-        <div class="tpl-block ">
-
-            <div class="am-g tpl-amazeui-form">
-
-
-                <div class="am-u-sm-12 am-u-md-9">
-                    <form class="am-form am-form-horizontal" >
-                        <div class="am-form-group">
-                            <label for="username" class="am-u-sm-3 am-form-label">用户名</label>
-                            <div class="am-u-sm-9">
-                                <input type="text" class="yyyy" name="username" value="{{old('username')}}" id="username" placeholder="请输入用户名" >
-                                <small class='little'></small>
-                            </div>
-                        </div>
-                        <div class="am-form-group">
-                            <label for="password" class="am-u-sm-3 am-form-label">密码</label>
-                            <div class="am-u-sm-9">
-                                <input type="password" name="password" id="password" placeholder="请输入密码">
-                                <small class='little'></small>
-                            </div>
-                        </div>
-                        <div class="am-form-group">
-                            <label for="repass" class="am-u-sm-3 am-form-label">确认密码</label>
-                            <div class="am-u-sm-9">
-                                <input type="password" name="repass" id="repass" placeholder="请输入确认密码">
-                                <small class='little'></small>
-                            </div>
-                        </div>
-                        <div class="am-form-group">
-                            <label for="phone" class="am-u-sm-3 am-form-label">手机号</label>
-                            <div class="am-u-sm-9">
-                                <input type="text" value="{{old('phone')}}" name="phone" id="phone" placeholder="请输入手机号">
-                                <small class='little'></small>
-                            </div>
-                        </div>
-                        <div class="am-form-group">
-                            <label for="email" class="am-u-sm-3 am-form-label">邮箱</label>
-                            <div class="am-u-sm-9">
-                                <input type="text" value="{{old('email')}}" name="email" id="email" placeholder="请输入邮箱">
-                                <small class='little'></small>
-                            </div>
-                        </div>
-
-                        <div class="am-form-group">
-                            <div class="am-u-sm-9 am-u-sm-push-3">
-                                <button type="button" class="am-btn am-btn-primary">新增管理员</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="tpl-portlet-input tpl-fz-ml">
+            
         </div>
+
 
     </div>
+    <div class="tpl-block ">
+
+        <div class="am-g tpl-amazeui-form">
+
+
+            <div class="am-u-sm-12 am-u-md-9">
+                <form class="am-form am-form-horizontal" >
+                    <div class="am-form-group">
+                        <label for="username" class="am-u-sm-3 am-form-label">用户名</label>
+                        <div class="am-u-sm-9">
+                            <input type="text" class="yyyy" name="username" value="{{old('username')}}" id="username" placeholder="请输入用户名" >
+                            <small class='little'></small>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="password" class="am-u-sm-3 am-form-label">密码</label>
+                        <div class="am-u-sm-9">
+                            <input type="password" name="password" id="password" placeholder="请输入密码">
+                            <small class='little'></small>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="repass" class="am-u-sm-3 am-form-label">确认密码</label>
+                        <div class="am-u-sm-9">
+                            <input type="password" name="repass" id="repass" placeholder="请输入确认密码">
+                            <small class='little'></small>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="phone" class="am-u-sm-3 am-form-label">手机号</label>
+                        <div class="am-u-sm-9">
+                            <input type="text" value="{{old('phone')}}" name="phone" id="phone" placeholder="请输入手机号">
+                            <small class='little'></small>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="email" class="am-u-sm-3 am-form-label">邮箱</label>
+                        <div class="am-u-sm-9">
+                            <input type="text" value="{{old('email')}}" name="email" id="email" placeholder="请输入邮箱">
+                            <small class='little'></small>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <div class="am-u-sm-9 am-u-sm-push-3">
+                            <button type="button" class="am-btn am-btn-primary">新增管理员</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
 </div>
 <script type="text/javascript">
     
@@ -196,12 +197,10 @@
             $.post('/admin/user',{'username':username,'password':password,'phone':phone,'email':email,'_token':'{{csrf_token()}}'},function(data){
                     // 判断
                     if(data==0){
-                        alert('恭喜，注册成功');
-                        window.location.href = '/admin/user';
-                       
-                        // alert(2);
-                        // location.href = '/admin/user';
+                        alert('恭喜，添加成功');
+                        window.location.href = '/admin/user/hander';
                     }else{
+                        alert('抱歉，添加失败！');
                         return false;
                     }
 
