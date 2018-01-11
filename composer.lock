@@ -6,6 +6,7 @@
     ],
 
     "content-hash": "ebf226180c010d21d736b6713a982738",
+
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -3585,11 +3586,11 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.3.15",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "7c80d81b5805589be151b85b0df785f0dc3269cf"
+                "reference": "ddc23324e6cfe066f3dd34a37ff494fa80b617ed"
             },
             "dist": {
                 "type": "zip",
@@ -3598,7 +3599,7 @@
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8"
+                "php": ">=5.5.9"
             },
             "require-dev": {
                 "symfony/console": "~2.8|~3.0"

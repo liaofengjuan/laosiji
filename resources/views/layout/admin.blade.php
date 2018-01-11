@@ -269,7 +269,7 @@
                         </a>
                         <ul class="tpl-left-nav-sub-menu friendlink">
                             <li>
-                                <a href="table-font-list.html">
+                                <a href="/admin/friend">
                                     <i class="am-icon-angle-right"></i>
                                     <span>浏览友情链接</span>
                                     <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>

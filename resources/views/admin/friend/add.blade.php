@@ -73,6 +73,7 @@
 
     </div>
 </div>
+
 <script type="text/javascript">
    
     $('#pic').change(function(){
@@ -158,5 +159,6 @@
     })
     
 </script>
+
 
 @endsection
