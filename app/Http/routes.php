@@ -35,6 +35,8 @@ Route::group(['namespace'=>'Home'],function()
 
 	//前台首页
 	Route::get('/',"IndexController@index");
+	//执行注销
+	Route::get('/signout',"IndexController@signout");
 
 	//登录页面
 	Route::get('/login',"LoginController@index");
@@ -42,6 +44,8 @@ Route::group(['namespace'=>'Home'],function()
 	Route::get('/create_code/{id}',"LoginController@create_code");
 	//执行登录
 	Route::post('/do_login',"LoginController@do_login");
+	//检测手机是否注册
+	Route::post('/test_phone',"LoginController@test_phone");
 	//发送手机验证码
 	Route::post('/alidayu',"LoginController@alidayu");
 	//执行短信验证登录
@@ -52,8 +56,14 @@ Route::group(['namespace'=>'Home'],function()
 	//执行注册
 	Route::post('/do_register',"RegisterController@do_register");
 
-	//个人中心首页
-	Route::get('/center',"UsersController@index");
+	//个人中心路由组
+	Route::group(['middleware' => 'loginStatus'],function(){
+		//个人中心首页
+		Route::get('/center/self',"UsersController@index");
+		//账户安全页
+		Route::get('/center/self/pass',"UsersController@psw");
+		//
+	});
 
 	//视频列表页
 	Route::get('/list','ListController@index');

@@ -79,7 +79,7 @@
               </tr>
               <tr class="qieh5" style="display:none" height="70">
                 <td>校验码</td>
-                <td><input style="width:152px;" type="text" value="" name="abcd4" class="l_pwd" /><button type="button" id="alidayu" style="height:39px;width:115px">获取校验码</button></td>
+                <td><input style="width:152px;" type="text" value="" name="abcd4" class="l_pwd jiaoyanm" /><button type="button" id="alidayu" style="height:39px;width:115px">获取校验码</button></td>
               </tr>
 
               <tr style="display:table-row" height="70">
@@ -108,7 +108,7 @@
               <tr height="60">
               	<td>&nbsp;</td>
                 <td class="log_mima"><input type="button" value="登录" class="log_btn l_mima" /></td>
-                <td style="display:none" class="log_phone"><input type="submit" value="登录" class="log_btn l_phonema" /></td>
+                <td style="display:none" class="log_phone"><input type="button" value="登录" class="log_btn l_phonema" /></td>
               </tr>
             </table>
             </form>
@@ -226,7 +226,8 @@
     });
     /*账号登录结束!!!!*/
 
-    /*发送验证码alidayu登录开始*/
+
+    /*发送验证码alidayu登录开始!!!*/
     //检测手机号格式
     function phone_test()
     {
@@ -241,7 +242,6 @@
         });
         return false;
       }
-
       //验证手机格式是否正确
       if(!reg.test(phone))
       {
@@ -250,7 +250,55 @@
         });
         return false;
       }
+      //检测手机号是否注册
+      var p_test;
+      $.ajax({
+        type: "POST",
+        url: "/test_phone",
+        async: false,
+        data: "phone="+phone+"&_token={{csrf_token()}}",
+        success: function(msg){
+         if(msg == '2')
+           {          
+             p_test = 2; //手机号未注册
+           }
+        }
+      });
+      //判断手机号是否注册
+      if(p_test == 2){
+        layer.confirm('该手机还未注册，是否去注册？', {
+          btn: ['确定','取消'] //按钮
+        }, function(){
+          window.location.href = "/register";
+        }, function(){
+        });
+        return false;
+      }
       return phone;
+    }
+
+    //验证码输入框验证
+    function test_code()
+    {
+      var code = $('.l_llla').eq(2).val();
+      //验证码是否为空
+      if(!code)
+      {
+        layer.tips('验证码不能为空！', $('.l_llla').eq(2), {
+          tips: [2,'red']
+        });
+        return false;
+      }
+
+      // if(code != cod)
+      // {
+      //   layer.tips('验证码错误！', $('.l_llla').eq(2), {
+      //     tips: [2,'red']
+      //   });
+      //   return false;
+      // }
+
+      return code;
     }
 
     //阿里大鱼
@@ -259,9 +307,6 @@
       var res = phone_test();
       if(!res)
       {
-        layer.tips('请正确填写手机号！', '.l_userjb', {
-          tips: [2,'red']
-        });
         return false;
       }
 
@@ -281,14 +326,52 @@
 
        //发送ajax,发送短信验证码
        $.post('/alidayu',{phone:res,_token:"{{csrf_token()}}"},function(msg){
-        console.log(msg);
-       },'json');
+       });
     });
 
     //执行手机验证码登录
     $('.l_phonema').click(function()
-    {
-      // alert('asdf');m
+    {     
+      var p_code = $('.jiaoyanm').val();
+      if(!p_code)
+      {
+        layer.tips('校验码不能为空！', $('#alidayu'), {
+          tips: [2,'red']
+        });
+      }
+      var res_code = test_code(); //结果为验证码
+      var phone = phone_test();
+      if(p_code && phone && res_code)
+      {
+        //执行登录
+        $.post('/phone_login',{phone:phone,p_code:p_code,code:res_code,_token:'{{csrf_token()}}'},function(msg){
+          switch(msg)
+          {
+            case '1': //手机号未注册
+              layer.confirm('该手机还未注册，是否去注册？', {
+                btn: ['确定','取消'] //按钮
+              }, function(){
+                window.location.href = "/register";
+              }, function(){
+              });
+              break;
+            case '2': //校验码错误
+              layer.msg('手机校验码错误!');
+              break;
+            case '3':
+              layer.msg('验证码错误!');
+              break;
+            case '4':
+              layer.alert('恭喜您，登录成功！', {
+                icon: 6,
+                skin: 'layer-ext-moon'
+              },function(){
+                window.location.href = '/';
+              });
+              break;
+          }
+        });
+      }
     });
 </script>
 
