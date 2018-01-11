@@ -250,10 +250,11 @@
 <!-- 循环最高级分类 -->
 
 <!--人气班级-->
+@foreach($data as $k=>$v)
 <div class="classes">
   <div class="picScroll-left">
     <div class="hd">
-      <h1>人气班级</h1>
+      <h1>{{$k}}</h1>
 	  <div class="change"><a href="#">换一组</a></div>
     </div>
     <div class="bd">
@@ -261,13 +262,12 @@
         <li>
           <div class="pic"><a href="#" target="_blank"><img src="/homes/images/pic4.jpg" /></a></div>
           <div class="titlei"><span class="classtitle"><a href="#" target="_blank">MBA备考班</a></span><span class="classinfo">学生数：<a href="#">10255</a>人  开班讲师：<a href="#">Class01</a></span></div>
-        </li>
-        
+        </li>      
       </ul>
     </div>
   </div>
 </div>
-
+@endforeach
 <!-- 循环最高级分类结束 -->
 
 <!--状元楼-->

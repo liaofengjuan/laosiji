@@ -8,10 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\User;
 
-use Flc\Alidayu\Client;
-use Flc\Alidayu\App;
-use Flc\Alidayu\Requests\AlibabaAliqinFcSmsNumSend;
-use Flc\Alidayu\Requests\IRequest;
+use Flc\Dysms\Client;
+use Flc\Dysms\Request\SendSms;
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
 
@@ -78,41 +76,73 @@ class LoginController extends Controller
     	}
     }
 
+    //检测手机是否注册(阿里短信)
+    public function test_phone(Request $request)
+    {
+        $phone = $request -> input('phone');
+        //验证手机
+        $res = User::where('phone',$phone)->first();
+        if(!$res)
+        {
+            echo 2;
+        }
+    }
 
-    //阿里大鱼
-    public function alidayu(Request $request){
+    //阿里短信
+    public function alidayu(Request $request)
+    {
 
         //获取手机号
         $phone = $request -> input('phone');
-    	// 配置信息
-		$config = [
-		    'app_key'    => 'LTAIu6DtG8qdFkFV',
-		    'app_secret' => 'CjDTQo0OofsF3v729lJGlr72wmYFNz',
-		    // 'sandbox'    => true,  // 是否为沙箱环境，默认false
-		];
 
+        $config = [
+            'accessKeyId'    => 'LTAIu6DtG8qdFkFV',
+            'accessKeySecret' => 'CjDTQo0OofsF3v729lJGlr72wmYFNz',
+        ];
 
-		// 使用方法一
-		$client = new Client(new App($config));
-		$req    = new AlibabaAliqinFcSmsNumSend;
-        $jiaoyanma = rand(100000, 999999);
-		$req->setRecNum($phone)
-		    ->setSmsParam([
-		        'number' => $jiaoyanma
-		    ])
-		    ->setSmsFreeSignName('李博雅')
-		    ->setSmsTemplateCode('SMS_120376028');
+        //发送的验证码
+        $code = rand(100000, 999999);
 
-		$resp = $client->execute($req);
+        $client  = new Client($config);
+        $sendSms = new SendSms;
+        $sendSms->setPhoneNumbers($phone);
+        $sendSms->setSignName('李博雅');
+        $sendSms->setTemplateCode('SMS_120376028');
+        $sendSms->setTemplateParam(['code' => $code]);
+        $sendSms->setOutId('demo');
+        $client->execute($sendSms);
 
 		//保存session
-		// session(['phone_code'=>$jiaoyanma]);
+		session(['phone_code'=>$code]);
     }
 
 
     //执行短信验证登录
     public function phone_login(Request $request)
     {
-
+        $phone = $request -> input('phone');
+        $code = $request -> input('code');
+        $p_code = $request -> input('p_code');
+        //判断手机号
+        $res_p = User::where('phone',$phone)->first();
+        if(!$res_p)
+        {
+            echo 1; //手机号未注册
+            return;
+        }
+        //判断手机校验码
+        if($p_code != session('phone_code'))
+        {
+            echo 2; //手机校验码错误
+            return;
+        }
+        //判断验证码
+        if($code != session('code'))
+        {
+            echo 3; //验证码错误
+            return;
+        }
+        session(['user' => $res_p['username']]);
+        echo 4; //登录成功
     }
 }

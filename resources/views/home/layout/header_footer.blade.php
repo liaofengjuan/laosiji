@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>安徽慕界网络科技有限公司</title>
 <link href="/homes/css/whir_common.css" rel="stylesheet" type="text/css" />
-<link href="/homes/css/whir_home.css" rel="stylesheet" type="text/css" />
+<link href="/homes/css/whir_homes.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/homes/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/homes/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/homes/js/index_solid.js"></script>
@@ -17,12 +17,35 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
 </head>
 <body>
 <!--头部-->
-<div class="head">
+<div class="head" style="background-color:#F0F0F0">
 <div class="headm">
 <!--登陆后显示会员-->
 <div class="member">
 @if(session('user'))
-<div class="tuxiang"><img src="/homes/images/hyimg.jpg" width="35" height="35" /></div><div class="hyname"><a href="#">{{session('user')}}</a></div></div>
+  <div class="tuxiang">
+    <img src="/homes/images/hyimg.jpg" width="35" height="35" />
+  </div>
+  <div class="hyname">
+    <ul id="xiala">
+      <li><a href="#">{{session('user')}}</a>
+        <ul id="xl" style="display:none;position:absolute;background-color:#F0F0F0;border:1px solid #dfdfdf;border-top:none;text-align:center">
+          <li><a style="display:block;padding:0 5px" href="/center/self">个人中心</a></li>
+          <li><a style="display:block;padding:0 5px" href="/signout">注销</a></li>
+        </ul>
+      </li>
+    </ul>
+<script type="text/javascript">
+  var xiala = document.getElementById('xiala');
+  var xl = document.getElementById('xl');
+  xiala.onmouseover = function(){
+    xl.style.display = 'block';
+  }
+  xiala.onmouseout = function(){
+    xl.style.display = 'none';
+  }
+</script>  
+  </div>
+</div>
 @else
 <div class="huiyuan"><ul><li class="hy1"><a href="/login">登录</a></li><li class="hy2"><a href="/register";>注册</a></li></ul></div></div>
 @endif

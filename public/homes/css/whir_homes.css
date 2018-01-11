@@ -298,6 +298,6 @@ span.gksj{ font-size:14px; color:#666666;}
 .title5 h2.hover{ background:url(../images/icon7.jpg) bottom center no-repeat; border-bottom:2px solid #3daee7;}
 
 .title6{ height:50px; border-bottom:1px solid #d2d2d2;}
-.title6 h1{ font-family:"微软雅黑"; width:100px; height:50px; padding-left:40px; background:url(../images/wtjd.jpg) left center no-repeat; line-height:50px; font-size:22px; color:#3daee7; text-align:center; border-bottom:2px solid #3daee7; float:left;}
+.wenticolumn .title6 h1{ font-family:"微软雅黑"; width:100px; height:50px; padding-left:40px; background:url(../images/wtjd.jpg) left center no-repeat; line-height:50px; font-size:22px; color:#3daee7; text-align:center; border-bottom:2px solid #3daee7; float:left;}
 .title6 .change{ width:67px; height:23px; float:right; margin-right:10px; margin-top:20px;  background:url(../images/change.jpg) no-repeat; text-align:center; line-height:23px;}
 .title6 .change a{ color:#3daee7;}
