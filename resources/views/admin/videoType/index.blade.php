@@ -44,9 +44,7 @@
               <a href="#">删除</a>
             </td>
             <td align="center">
-              <a role="button" class="am-btn am-btn-xs am-btn-secondary" href="">
-                <span class=""></span> 查看该类视频
-              </a>
+             
             </td>
         </tr>
       </table>
@@ -62,12 +60,12 @@
         var id = $(this).parent().parent().find("td").html();
         var mythis = $(this);
         //发送ajaxs
-        $.get('/admin/video/'+id,function(data){
+        $.get('/admin/videoType/'+id,function(data){
             if(data.length>0){
               for(var i=0;i<data.length;i++){
                 $('.zi td:eq(0)').html(data[i].id);
                 $('.zi td:eq(1)').html(data[i].title);
-                $('.zi td:eq(3)').find('a').attr('href',"/admin/video/info/"+data[i].id);
+                $('.zi td:eq(3)').find('a').attr('href',"/admin/videoType/info/"+data[i].id);
                 mythis.parent().parent().after($('.zi').clone().addClass('clone').css('display','table-row'));
               }
             }else{

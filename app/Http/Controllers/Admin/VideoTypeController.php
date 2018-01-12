@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Model\VideoType;//使用模型
 use App\Model\VideoInfo;//使用模型
 
-class VideoController extends Controller
+class VideoTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class VideoController extends Controller
     {
         //查询数据
         $data = VideoType::where('pid','0')->get();
-        return view('admin.video.index',['data'=>$data]);
+        return view('admin.videoType.index',['data'=>$data]);
     }
 
     /**

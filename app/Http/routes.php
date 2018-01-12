@@ -27,8 +27,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	
 
 	//视频
-	Route::get('/video/info/{id}','VideoController@info');//查看详情
-	Route::resource('/video','VideoController');
+	Route::get('/videoType/info/{id}','VideoTypeController@info');//查看详情
+	Route::resource('/videoType','VideoTypeController');
 
 	//友情链接
 	Route::post('/friend/uploadImg','FriendController@uploadImg');//上传图片
