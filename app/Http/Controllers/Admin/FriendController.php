@@ -9,8 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Model\FriendLink;
 
 
-use App\Model\FriendLink;//使用模型
-
 class FriendController extends Controller
 {
     /**
@@ -21,8 +19,8 @@ class FriendController extends Controller
     public function index()
     {
 
-        // $data = FriendLink::paginate(3);
-        $data = FriendLink::paginate(5);
+        $data = FriendLink::paginate(3);
+        // $data = FriendLink::paginate(5);
         // dump($data) ;
        // dd('you');
         return view('admin.friend.index',['data'=>$data]);
@@ -124,12 +122,12 @@ class FriendController extends Controller
      */
     public function destroy($id)
     {
-        $data = FriendLink::where('id',$id)->delete();
-        if($data){
-            echo '1';
-        }else{
-            echo '2';
-        }
+        // $data = FriendLink::where('id',$id)->delete();
+        // if($data){
+        //     echo '1';
+        // }else{
+        //     echo '2';
+        // }
     }
 
     
