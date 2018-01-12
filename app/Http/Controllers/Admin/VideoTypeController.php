@@ -31,7 +31,7 @@ class VideoTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.videoType.addFather');
     }
 
     /**
@@ -42,7 +42,18 @@ class VideoTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //获取添加的信息
+        $data = $request->only('title','status');
+        //添加path信息
+        $data['pid'] = 0;
+        $data['path'] = 0;
+        //执行添加
+        $res = VideoType::insert($data);
+        if($res){
+            return 0;//添加成功
+        }else{
+            return 1;//失败
+        }
     }
 
     /**
@@ -67,11 +78,15 @@ class VideoTypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        //查询该类的信息
+        $data = VideoType::where('id',$id)->first();
+        //加载修改页面
+        return view('admin.videoType.edit',['data'=>$data]);
+
     }
 
     /**
-     * Update the specified resource in storage.
+     * 执行修改
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -79,7 +94,18 @@ class VideoTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //获取要修改的信息
+        $data = $request->only('status','title');
+        //执行修改
+        $type = VideoType::find($id);
+        $type->status = $data['status'];
+        $type->title = $data['title'];
+        $res = $type->save();
+        if($res){
+            return 0;//修改成功
+        }else{
+            return 1;
+        }
     }
 
     /**
@@ -90,14 +116,56 @@ class VideoTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //判断该类有没有子类
+        $type = VideoType::find($id);
+        if($type['pid']==0){
+            $res = VideoType::where('pid',$id);
+            if($res){
+                return '1';
+            }
+        }
+        $res = VideoType::find($id)->delete();
+        if($res){
+            return "0";
+        }else{
+            return "2";
+        }
+        //$flight = App\Flight::find(1);
+
+        // $flight->delete();
     }
 
     /**
-     * 查看该类视频详情
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function info($id)
+    public function addSon($id)
     {
-        echo '查看该子类的所有视频';
+        //查询父类第信息
+        $data = VideoType::find($id);
+        return view('admin.videoType.addSon',['data'=>$data]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeSon(Request $request,$id)
+    {
+        //获取用户提交的信息
+        $data = $request->only('title','status');
+        //将pid和path存入数组
+        $data['pid'] = $id;
+        $data['path'] = '0-'.$id;
+        //执行添加
+        $res = VideoType::insert($data);
+        if($res){
+            return 0;//添加成功
+        }else{
+            return 1;//添加失败
+        }
     }
 }

@@ -20,11 +20,15 @@ input {
 a {
     color: #337ab7;
 }
-
 a:hover {
     cursor: pointer;
     color: #23527c;
 }
+/*自定义开始*/
+.l-height{
+    min-height:90vh;
+}
+/*自定义结束*/
 
 .am-breadcrumb {
     padding: 0;

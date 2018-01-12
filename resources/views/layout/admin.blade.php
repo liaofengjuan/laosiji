@@ -156,7 +156,7 @@
     <div class="tpl-page-container tpl-page-header-fixed">
 
 
-        <div class="tpl-left-nav tpl-left-nav-hover">
+        <div class="tpl-left-nav tpl-left-nav-hover" style="height: calc(100vh - 55px)">
             <div class="tpl-left-nav-title">
                 Amaze UI 列表
             </div>
@@ -200,7 +200,7 @@
                             <span>视频分类</span>
                             <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
                         </a>
-                        <ul class="tpl-left-nav-sub-menu shilei">
+                        <ul class="tpl-left-nav-sub-menu fenlei">
                             <li>
                                 <a href="{{url('/admin/videoType')}}">
                                     <i class="am-icon-angle-right"></i>
@@ -208,7 +208,7 @@
                                     <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
                                 </a>
 
-                                <a href="table-images-list.html">
+                                <a href="{{url('/admin/videoType/create')}}">
                                     <i class="am-icon-angle-right"></i>
                                     <span>添加父类</span>
                                 </a>
@@ -311,16 +311,25 @@
 <script src="/admins/js/app.js"></script>
 <script type="text/javascript" src="/layer/layer.js"></script>
   <script type="text/javascript">
-       var preg_path = /^\/admin\/user.*$/;
+        //用户管理模块
+       var preg_user = /^\/admin\/user.*$/;
        var path = window.location.pathname;
-       if(preg_path.test(path)){
+       if(preg_user.test(path)){
            $('.yonghu').css('display','block');
        }
-    //    $('.tpl-left-nav-link-list').on('click', function() {
-    //     $(this).siblings('.tpl-left-nav-sub-menu').slideToggle(80)
-    //         .end()
-    //         .find('.tpl-left-nav-more-ico').toggleClass('tpl-left-nav-more-ico-rotate');
-    // })
+       //视频分类/admin/videoType
+       var preg_type = /^\/admin\/videoType.*$/;
+       
+       if(preg_type.test(path)){
+           $('.fenlei').css('display','block');
+       }
+       //友情链接
+       var preg_friend = /^\/admin\/friend.*$/;
+       
+       if(preg_friend.test(path)){
+           $('.friendlink').css('display','block');
+       }
+        
     
     //执行退出
     function signout(){

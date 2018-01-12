@@ -52,7 +52,7 @@
                             <label class="am-u-sm-3 am-form-label">logo图片</label>
                             <div class="am-u-sm-9">
                                 <div class="img-wrap" style="width:100px;overflow:hidden;position:relative">
-                                    <img src="/admins/img/upload_icon.jpg" id="myimg"alt="点击选择图片" class="am-img-thumbnail">
+                                    <img src="" onerror="javascript:this.src='/admins/img/upload_icon.jpg'" id="myimg" class="am-img-thumbnail">
                                     <input type="file" value="" name="pic" id="pic" style="position:  absolute;top: 0;width:  100px;height:  83px;opacity:  0;" >
                                     <input type="hidden" value="" name="logo" id="logo">
 
@@ -108,7 +108,7 @@
             contentType: false,
             processData: false,
             beforeSend:function(XMLHttpRequest){
-                // layer.load();
+                $('#myimg').attr('src','/admins/img/run.gif');
             },
             success: function(data) {
                 // layer.close();

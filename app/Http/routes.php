@@ -27,7 +27,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	
 
 	//视频
-	Route::get('/videoType/info/{id}','VideoTypeController@info');//查看详情
+	Route::get('/videoType/addSon/{id}','VideoTypeController@addSon');//添加子类
+	Route::post('/videoType/storeSon/{pid}','VideoTypeController@storeSon');//执行添加子类
 	Route::resource('/videoType','VideoTypeController');
 
 	//友情链接
