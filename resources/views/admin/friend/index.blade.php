@@ -72,24 +72,28 @@
                           @foreach($data as $v)
                             <tr class="gradeX">
                                 <td>{{$v['id']}}</td>
-                                <td>{{$v->logo}}</td>
+                                <td>
+                                <div class="img-wrap" style="width:100px;overflow:hidden;position:relative">
+                                    <img src="{{env('PATH_IMG').$v['logo']}}?imageView2/1/w/100/h/40/q/75|imageslim"  class="am-img-thumbnail">
+                                </div>
+                                </div>
+                              </td>
                                 <td>{{$v->title}}</td>
                                 <td>{{$v->path}}</td>
-                                <td>{{$v->create_at}}</td>
-                                <td>{{$v->state}}</td>
+                                <td>{{date('Y-m-d H:i:s',$v->create_at)}}</td>
+                                @if($v['status']==0)
+                                    <td align="center" >开启</td>
+                                    @else
+                                    <td align="center" >关闭</td>
+                                    @endif
                                 <td>
-                                    <div class="tpl-table-black-operation">
-                                        <class="am-btn-group am-btn-group-xs">
-                                        <form action="{{url('admin/friend/'.$v['id'].'/destroy')}}" method='post' style='display :inline;'>
-                                          {{ csrf_field() }}
-                                          {{ method_field('DELETE') }}
-                                          <button class='btn btn-waring btn-xs'><span class="am-icon-pencil-square-o"></span>删除</button>
-                                        </form>
-                                        <class="am-btn-group am-btn-group-xs">
-                                        <form action="{{url('admin/friend/'.$v['id'].'/edit')}}" method="GET" style='display:inline;'>
-                                          {{ csrf_field() }}
-                                          {{ method_field('PUT') }}
-                                          <button class='btn btn-info btn-xs'><span class="am-icon-pencil-square-o"></span>修改</button>
+                                    <div class="am-btn-toolbar">
+                                        <div class="am-btn-group am-btn-group-xs">
+                                            <a class="am-btn am-btn-default am-btn-secondary" role="button" href="{{url('admin/friend/'.$v['id'].'/edit')}}"><span class="am-icon-pencil-square-o"></span>编辑</a>
+                                            
+                                            <a class="am-btn am-btn-default am-btn-danger" role="button"href="javascript:;" onclick="del({{$v['id']}},$(this))"><span class="am-icon-trash-o"></span>删除</a>
+                                            <!-- <a class="am-btn am-btn-default am-btn-success" role="button" href="#"><span class="am-icon-copy"></span>历史</a> -->
+                                        </div>
                                     </div>
                                 </td>
                             </tr> 
@@ -113,5 +117,19 @@
     </div>
     <div class="tpl-alert"></div>
 </div>
+<script type="text/javascript">
+   //执行删除
+    function del(id,obj){
+        $.post('/admin/friend/'+id,{'_token':"{{csrf_token()}}",'_method':'delete'},function(data){
+            if(data=='0'){
+                alert('恭喜，删除成功');
+                obj.parent().parent().parent().parent().remove();
+            }else{
+                alert('抱歉，删除失败');
+                return false;
+            }
+        })
+    }
+</script>
     
 @endsection
