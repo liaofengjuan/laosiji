@@ -12,5 +12,7 @@ class VideoInfo extends Model
     public $timestamps = false;
     protected $dateFormat = 'U';
 
+    
+
 
 }

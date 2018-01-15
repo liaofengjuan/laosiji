@@ -10,12 +10,15 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	Route::get('/login','LoginController@index');//加载登录页
 	Route::post('/login','LoginController@login');//执行登录
 	Route::get('/login/create_code/{id}','LoginController@create_code');//生成验证码
-	Route::post('/login/signout','LoginController@signout');//退出登录
+});
+
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'adminLogin'],function(){
+	
+	Route::post('/login/signout','LoginController@signout');//注销
 
 	Route::get('/','IndexController@index');
 	Route::get('/user/hander','UserController@hander');//加载管理员列表
@@ -26,10 +29,15 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	Route::resource('/user','UserController');
 	
 
-	//视频
+	//视频分类
 	Route::get('/videoType/addSon/{id}','VideoTypeController@addSon');//添加子类
 	Route::post('/videoType/storeSon/{pid}','VideoTypeController@storeSon');//执行添加子类
 	Route::resource('/videoType','VideoTypeController');
+
+	//视频
+	Route::get('/video/review','VideoController@review');//加载审核视频列表页
+	Route::post('/video/searchSon/{pid}','VideoController@searchSon');//查询子类的信息
+	Route::resource('/video','VideoController');
 
 	//友情链接
 	Route::post('/friend/uploadImg','FriendController@uploadImg');//上传图片

@@ -10,7 +10,7 @@
         <li><a href="#">首页</a></li>
         <li class="am-active">内容</li>
     </ol>
-	<div class="tpl-content-scope">
+	<div class="tpl-content-scope l-height">
 	    content
 	</div>
 </div>
