@@ -67,7 +67,9 @@ class LoginController extends Controller
     	//匹配密码
     	if(Hash::check($pass,$res['password']))
         {
-    		session(['user' => $res['username']]);
+            // dd($res->userinfo->pic);
+            session(['user' => $res['username']]);
+    		session(['pic' => $res->userinfo->pic]);
     		echo 2; //登录成功
     		return;
     	}else{

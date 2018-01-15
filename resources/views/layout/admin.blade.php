@@ -202,7 +202,7 @@
                         </a>
                         <ul class="tpl-left-nav-sub-menu shilei">
                             <li>
-                                <a href="{{url('/admin/video')}}">
+                                <a href="">
                                     <i class="am-icon-angle-right"></i>
                                     <span>分类列表</span>
                                     <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>

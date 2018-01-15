@@ -17,7 +17,8 @@ class LoginStatusMiddleware
     {
         if(!session('user'))
         {
-            // return view('home.register');
+            echo "<script>alert('aaa')</script>";
+            return redirect('/login');
         }
         return $next($request);
     }

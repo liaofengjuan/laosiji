@@ -5,34 +5,35 @@
   <!--左侧部分-->
   <div class="left180">
     <div class="grtx">
-      <div class="grimg"><img src="/homes/images/grzx/grtx.jpg" /></div>
-      <div class="grname"><a href="班级.html">计算机班级</a></div>
-    </div>
+      <!-- <div class="grimg"><img src="{{$data->userinfo->pic or '/homes/images/my_moren.jpg'}}" /></div> -->
+      <div class="grimg"><img src="{{session('pic')}}" /></div>
+      <div class="grname"><a href="#">{{session('user')}}</a></div>
+    </div>  
 
     <ul class="menu1">
-      <li><a onclick="return click_a('divOne_1','div_one')" style="cursor:pointer;"><em id="div_one">个人资料</em></a></li>
+      <li id="dianli1"><a onclick="return click_a('divOne_1','div_one')" style="cursor:pointer;"><em id="div_one">个人资料</em></a></li>
       <div class="menubox"  id="divOne_1" style="display:none;">
         <p><a href="/center/self" >信息完善</a></p>
-        <p><a href="班级公告.html" >修改图像</a></p>
+        <p><a href="/center/self/sc" >修改头像</a></p>
         <p><a href="/center/self/pass" >账户安全</a></p>
       </div>
     </ul>
     
- 	<ul class="menu2 menu1">
+ 	<!-- <ul class="menu2 menu1">
       <li><a onclick="return click_a('divOne_2','div_two')" style="cursor:pointer;"><em id="div_two">班级管理</em></a></li>
       <div class="menubox"  id="divOne_2" style="display:none;">
         <p><a href="班级-发布资料.html" >班级资料</a></p>
         <p><a href="班级公告.html" >班级公告</a></p>
         <p><a href="#" >班级学生</a></p>
       </div>
-    </ul>
+    </ul> -->
 
     <ul class="menu3 menu1">
-      <li><a onclick="return click_a('divOne_3','div_three')" style="cursor:pointer;"><em id="div_three">班级管理</em></a></li>
+      <li id="dianli3"><a onclick="return click_a('divOne_3','div_three')" style="cursor:pointer;"><em id="div_three">视频管理</em></a></li>
       <div class="menubox"  id="divOne_3" style="display:none;">
-        <p><a href="班级-发布资料.html" >班级资料</a></p>
-        <p><a href="班级公告.html" >班级公告</a></p>
-        <p><a href="#" >班级学生</a></p>
+        <p><a href="/center/video/index" >我的视频</a></p>
+        <p><a href="#" >上传视频</a></p>
+        <p><a href="/center/video/history" >观看记录</a></p>
       </div>
     </ul>
 
@@ -46,6 +47,24 @@
     </ul>
 
     <script language="javascript" type="text/javascript">
+        //设置导航栏状态
+        var path = window.location.pathname;
+        var preg_path_self = /^\/center\/self.*$/;
+        var preg_path_video = /^\/center\/video.*$/;
+        
+        if(preg_path_self.test(path))
+        { 
+          document.getElementById('divOne_1').style.display = 'block';
+          document.getElementById('dianli1').setAttribute('class','on');
+        }
+
+        if(preg_path_video.test(path))
+        { 
+          document.getElementById('divOne_3').style.display = 'block';
+          document.getElementById('dianli3').setAttribute('class','on');
+        }
+
+        
         function click_a(divDisplay,bgPosition)
         {
             if(document.getElementById(divDisplay).style.display != "block")
@@ -90,10 +109,7 @@
         <p><a href="班级-学生提问.html" >学生提问</a></p>
       </div>
     </ul> -->
-
-
   </div>
-
 @section('right')
 @show
 @endsection
