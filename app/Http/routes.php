@@ -36,6 +36,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'adminLogin']
 
 	//视频
 	Route::get('/video/review','VideoController@review');//加载审核视频列表页
+	Route::post('/video/pass/{id}','VideoController@pass');//审核视频
 	Route::post('/video/searchSon/{pid}','VideoController@searchSon');//查询子类的信息
 	Route::resource('/video','VideoController');
 

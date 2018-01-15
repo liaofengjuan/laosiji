@@ -3,7 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Model\VideoType;//使用模型
+use App\Model\Comment;//使用模型
 
 class VideoInfo extends Model
 {
@@ -13,6 +13,9 @@ class VideoInfo extends Model
     protected $dateFormat = 'U';
 
     
-
+    public function comment()
+    {
+    	return $this->hasMany('App\Model\Comment','vid');
+    }
 
 }

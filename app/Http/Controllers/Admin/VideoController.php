@@ -21,7 +21,7 @@ class VideoController extends Controller
     public function index()
     {
         //查询所有视频
-        $data = VideoInfo::get();
+        $data = VideoInfo::where('check',1)->get();
         $arr = array();
         foreach($data as $k=>$v){
             $stype = VideoType::where('id',$v['tid'])->first();//查询该电影的子类
@@ -77,6 +77,7 @@ class VideoController extends Controller
         $username = session('user');
         $res = User::where('username',$username)->first();
         $data['uid'] = $res['id'];
+        $data['check'] = 1;
         //将电影信息存入数据库
         $res = VideoInfo::insert($data);
         if($res){
@@ -173,7 +174,29 @@ class VideoController extends Controller
     public function review()
     {
         //查询需要审核的视频
-        
-        return view('admin.video.review');
+        $data = VideoInfo::where('check',0)->get();
+        $arr = array();
+        foreach($data as $k=>$v){
+            $stype = VideoType::where('id',$v['tid'])->first();//查询该电影的子类
+            $ftype = VideoType::where('id',$stype['pid'])->first();//查询该电影的父类
+            $v['type'] = $ftype['title'].'/'.$stype['title'];//拼接视频类型
+            $arr[$k]=$v;//将信息赋值给$arr
+        }
+        return view('admin.video.review',['arr'=>$arr]);
+    }
+
+     /**
+     * 审核视频
+     */
+    public function pass($id)
+    {   
+        //审核视频
+        $res = VideoInfo::where('id',$id)->update(['check'=>1]);
+        if($res){
+            return 0;//成功
+        }else{
+            return 1;
+        }
+
     }
 }

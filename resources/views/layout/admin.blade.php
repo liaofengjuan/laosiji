@@ -46,12 +46,12 @@
 
                 <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                     <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                        <span class="tpl-header-list-user-nick">禁言小张</span><span class="tpl-header-list-user-ico"> <img src="/admins/img/user01.png" onerror="javascript:this.src='/admins/img/user01.png'"></span>
+                        <span class="tpl-header-list-user-nick">{{session('user')}}</span><span class="tpl-header-list-user-ico"> <img src="" onerror="javascript:this.src='/admins/img/user01.png'"></span>
                     </a>
                     <ul class="am-dropdown-content">
                         <li><a href="#"><span class="am-icon-bell-o"></span> 资料</a></li>
                         <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
-                        <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
+                        <li><a href="javascript:;" onclick="signout()"><span class="am-icon-power-off"></span> 退出</a></li>
                     </ul>
                 </li>
                 <li><a href="javascript:;" class="tpl-header-list-link" onclick="signout()" ><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span>安全退出</a></li>
@@ -69,7 +69,7 @@
 
 
         <div class="tpl-left-nav tpl-left-nav-hover l-height" >
-            <div class="tpl-sidebar-user-panel">
+            <!--<div class="tpl-sidebar-user-panel">
                 <div class="tpl-user-panel-slide-toggleable" style="text-align: center;">
                     <div class="tpl-user-panel-profile-picture">
                         <img src="/admins/img/user04.png" alt="">
@@ -80,7 +80,7 @@
                     </span>
                     
                 </div>
-            </div>
+            </div>-->
 
             <div class="tpl-left-nav-list">
                 <ul class="tpl-left-nav-menu">

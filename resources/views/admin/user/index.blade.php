@@ -33,14 +33,11 @@
             </div>
             <div class="am-u-sm-12 am-u-md-3">
                 <div class="am-form-group">
-                    <select data-am-selected="{btnSize: 'sm'}">
-                      <option value="option1">所有类别</option>
-                      <option value="option2">IT业界</option>
-                      <option value="option3">数码产品</option>
-                      <option value="option3">笔记本电脑</option>
-                      <option value="option3">平板电脑</option>
-                      <option value="option3">只能手机</option>
-                      <option value="option3">超极本</option>
+                    <select data-am-selected="{btnSize: 'sm'}" class="doSearch">
+                      <option value="0">搜索条件</option>
+                      <option value="1">用户名</option>
+                      <option value="2">手机号</option>
+                      <option value="3">是否为vip(是|否)</option>
                     </select>
                 </div>
             </div>
@@ -48,7 +45,7 @@
                 <div class="am-input-group am-input-group-sm">
                     <input type="text" class="am-form-field">
                     <span class="am-input-group-btn">
-                    <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search" type="button"></button>
+                    <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search" type="button" onclick="doSearch($(this))"></button>
                   </span>
                 </div>
             </div>
@@ -78,15 +75,23 @@
                                 <td>{{$v->username}}</td>
                                 <td>{{$v->phone}}</td>
                                 <td>{{$v->userinfo->email}}</td>
-                                <td>{{$v->userinfo->authority}}</td>
-                                <td>{{$v->userinfo->status}}</td>
+                                @if(($v->userinfo->authority)==0)
+                                <td>普通</td>
+                                @elseif(($v->userinfo->authority)==1)
+                                <td>vip</td>
+                                @endif
+                                @if(($v->userinfo->status)==0)
+                                <td>正常</td>
+                                @else
+                                <td>禁言</td>
+                                @endif
                                 <td>@if($v->userinfo->vip_time-time()>0) {{ceil(($v->userinfo->vip_time-time())/3600)}}h @else 0 @endif</td>
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
                                             <a class="am-btn am-btn-default am-btn-secondary" role="button" href="{{url('admin/user/'.$v['id'].'/edit')}}"><span class="am-icon-pencil-square-o"></span>编辑</a>
                                             <!--<a class="am-btn am-btn-default am-btn-danger" role="button" href="#"><span class="am-icon-trash-o"></span>删除</a>-->
-                                            <a class="am-btn am-btn-default am-btn-success" role="button" href="#"><span class="am-icon-copy"></span>历史</a>
+                                            <!-- <a class="am-btn am-btn-default am-btn-success" role="button" href="#"><span class="am-icon-copy"></span>历史</a> -->
                                         </div>
                                     </div>
                                 </td>
@@ -111,4 +116,12 @@
     </div>
     <div class="tpl-alert"></div>
 </div>
+<script type="text/javascript">
+    function doSearch(obj){
+        var search_type = $('.doSearch').val();
+        var search_content = obj.siblings().first('input');
+        console.log(search_content);
+        console.log(search_type);
+    }
+</script>
 @endsection

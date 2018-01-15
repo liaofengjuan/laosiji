@@ -76,8 +76,12 @@
                                 <td>{{$v->username}}</td>
                                 <td>{{$v->phone}}</td>
                                 <td>{{$v->userinfo->email}}</td>
-                                <td>{{$v->userinfo->authority}}</td>
-                                <td>{{$v->userinfo->status}}</td>
+                                <td>普通管理员</td>
+                                @if(($v->userinfo->status)==0)
+                                <td>正常</td>
+                                @else
+                                <td>禁言</td>
+                                @endif
                                 <td>@if($v->userinfo->vip_time-time()>0) {{ceil(($v->userinfo->vip_time-time())/3600)}}h @else 0 @endif</td>
                                 <td>
                                     <div class="am-btn-toolbar">

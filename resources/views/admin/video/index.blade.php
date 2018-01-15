@@ -27,7 +27,7 @@
             <div class="am-u-sm-12 am-u-md-6">
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                        <a class="am-btn am-btn-default am-btn-success" role="button" href="{{url('admin/user/create')}}" target="main"><span class="am-icon-plus"></span>发布视频</a>
+                        <a class="am-btn am-btn-default am-btn-success" role="button" href="{{url('/admin/video/create')}}" target="main"><span class="am-icon-plus"></span>发布视频</a>
                     </div>
                 </div>
             </div>
@@ -65,6 +65,8 @@
                                 <th>vip</th>
                                 <th>状态</th>
                                 <th>点击量</th>
+                                <th>点赞量</th>
+                                <th>评论数</th>
                                 <th>发布时间</th>
                                 <th class="table-set">操作</th>
                             </tr>
@@ -86,6 +88,8 @@
                                 <td>关闭</td>
                                 @endif
                                 <td>{{$v['clicks']}}</td>
+                                <td>{{$v['good']}}</td>
+                                <td>{{count($v->comment)}}</td>
                                 <td>{{date('Y-m-d H:i:s',$v['create_at'])}}</td>
                                 <td>
                                     <div class="am-btn-toolbar">
@@ -123,15 +127,21 @@
     }
     //执行删除
     function del(id,obj){
-        $.post('/admin/video/'+id,{'_token':"{{csrf_token()}}",'_method':'delete'},function(data){
-            if(data=='0'){
-                alert('恭喜，删除成功');
-                obj.parent().parent().parent().parent().remove();
-            }else{
-                alert('抱歉，删除失败');
-                return false;
-            }
-        })
+        layer.confirm('确定要删除吗？', {
+          btn: ['确定','取消'] //按钮
+        }, function(){
+            $.post('/admin/video/'+id,{'_token':"{{csrf_token()}}",'_method':'delete'},function(data){
+                if(data=='0'){
+                    layer.msg('恭喜，删除成功', {icon: 1});
+                    obj.parent().parent().parent().parent().remove();
+                }else{
+                    layer.msg('抱歉，删除失败', {icon: 5});
+                    return false;
+                }
+            })
+           
+        });
+        
     }
 </script>
 @endsection

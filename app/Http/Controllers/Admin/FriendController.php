@@ -40,7 +40,8 @@ class FriendController extends Controller
         $extension = $file->getClientOriginalExtension();//获取文件后缀
         $fileName = md5(date('YmdHis',time())).'.'.$extension;//随机文件名
         $path = $file->getRealPath();//获取文件在缓存中的路径
-        $disk->put($fileName,fopen($path,'r+'));//上传至七牛云
+        $path = file_get_contents($path);
+        $disk->put($fileName,$path);//上传至七牛云
         $filePath = $disk->getDriver()->downloadUrl($fileName);//获取文件在七牛云的url
         return Response()->json([
             'filePath' => $filePath,

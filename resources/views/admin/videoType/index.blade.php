@@ -27,7 +27,7 @@
             <td align="center" >关闭</td>
             @endif
             <td align="center"  >
-              <a href="{{url('/admin/videoType/'.$v['id'].'/edit')}}">修改</a>
+              <a href="{{url('/admin/videoType/'.$v['id'].'/edit')}}" >修改</a>
               <span class="gray">&nbsp;|&nbsp;</span>
               <a href="{{url('/admin/videoType/addSon/'.$v['id'])}}">添加子类</a>
              
