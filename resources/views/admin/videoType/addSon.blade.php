@@ -64,7 +64,7 @@
 <script type="text/javascript">
     $('button[type=button]').click(function(){
         var title = $('input[name=title]').val();
-        var status = $('input[name=status]').val();
+        var status = $('input[name=status]:checked').val();
         //判断不能为空
        if(title.length==0){
             alert('不能提交空数据');

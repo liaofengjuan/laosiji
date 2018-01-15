@@ -19,12 +19,38 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //获取搜索条件
+        $search_type = $request->input('search_type');
+        $search_content = $request->input('search_content');
+        $requestall = $request->all();
+        //实例化一个user表
+        $user = new User;
+        // 判断where条件
+        if($search_content!=''){
+            switch($search_type){
+                case 2://手机号
+                    $user = $user->where('phone','like','%'.$search_content.'%');
+                    break;
+                case 3:
+                    if($search_content=='是'){
+                        $user = $user->where('authority',1);
+                    }else{
+                        $user = $user->where('authority',0);
+                    }
+                    break;
+                default:
+                    $user = $user->where('username','like','%'.$search_content.'%');
+                    break;
+            }
+        }
+        $user = $user->where('authority','!=','2');
+        $data = $user->paginate(5);
+        return view('admin.user.index',['data'=>$data,'request'=>$requestall]);
+        // $data = User::where('authority','!=','2')->paginate(3);
         
-        $data = User::where('authority','!=','2')->paginate(3);
-        
-        return view('admin.user.index',['data'=>$data]);
+        // return view('admin.user.index',['data'=>$data]);
     }
 
     /**
@@ -182,11 +208,31 @@ class UserController extends Controller
     /**
      * 加载管理员列表
      */
-    public function hander()
-    {
-        $data = User::where('authority','2')->paginate(3);
+    public function hander(Request $request)
+    {   
+        //获取搜索条件
+        $search_type = $request->input('search_type');
+        $search_content = $request->input('search_content');
+        $requestall = $request->all();
+        //实例化一个user表
+        $user = new User;
+        // 判断where条件
+        if($search_content!=''){
+            switch($search_type){
+                case 2://手机号
+                    $user = $user->where('phone','like','%'.$search_content.'%');
+                    break;
+                default:
+                    $user = $user->where('username','like','%'.$search_content.'%');
+                    break;
+            }
+        }
+        $user = $user->where('authority','2');
+        $data = $user->paginate(1);
+        return view('admin.user.hander',['data'=>$data,'request'=>$requestall]);
+        // $data = User::where('authority','2')->paginate(3);
         
-        return view('admin.user.hander',['data'=>$data]);
+        // return view('admin.user.hander',['data'=>$data]);
     }
 
 }

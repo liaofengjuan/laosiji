@@ -107,8 +107,8 @@
     $('button[type="button"]').click(function(){
         var sid = $('#zi').val();
         var video_title = $('input[name=video_title]').val();
-        var vip = $('input[name=vip]').val();
-        var status = $('input[name=status]').val();
+        var vip = $('input[name=vip]:checked').val();
+        var status = $('input[name=status]:checked').val();
         var info = $('input[name=info]').val();
         //判断是否为空
         if(!(sid!='' && video_title!='' && vip!='' && status!='' && info!='')){

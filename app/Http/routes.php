@@ -25,8 +25,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'adminLogin']
 	Route::post('/user/username','UserController@username');//验证用户名
 	Route::post('/user/phone','UserController@phone');//验证手机号
 	
-
-	Route::resource('/user','UserController');
+	Route::resource('/user','UserController');//
 	
 
 	//视频分类
@@ -44,6 +43,11 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'adminLogin']
 	//友情链接
 	Route::post('/friend/uploadImg','FriendController@uploadImg');//上传图片
 	Route::resource('/friend','FriendController');
+
+	//轮播图
+	Route::resource('/slideshow','SlideshowController');
+
+
 
 });
 

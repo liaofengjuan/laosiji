@@ -165,6 +165,27 @@
                     <li class="tpl-left-nav-item">
                         <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                             <i class="am-icon-codepen"></i>
+                            <span>轮播图管理</span>
+                            <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                        </a>
+                        <ul class="tpl-left-nav-sub-menu slideshow">
+                            <li>
+                                <a href="{{url('/admin/slideshow')}}">
+                                    <i class="am-icon-angle-right"></i>
+                                    <span>轮播图列表</span>
+                                    <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
+                                </a>
+
+                                <a href="{{url('/admin/slideshow/create')}}">
+                                    <i class="am-icon-angle-right"></i>
+                                    <span>添加轮播图</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-codepen"></i>
                             <span>广告管理</span>
                             <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
                         </a>
@@ -191,13 +212,13 @@
                         </a>
                         <ul class="tpl-left-nav-sub-menu friendlink">
                             <li>
-                                <a href="/admin/friend">
+                                <a href="{{url('/admin/friend')}}">
                                     <i class="am-icon-angle-right"></i>
                                     <span>浏览友情链接</span>
                                     <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
                                 </a>
 
-                                <a href="/admin/friend/create">
+                                <a href="{{url('/admin/friend/create')}}">
                                     <i class="am-icon-angle-right"></i>
                                     <span>添加友情链接</span>
                                     <i class="tpl-left-nav-content-ico am-fr am-margin-right"></i>
@@ -247,8 +268,12 @@
        }
        //视频/admin/video
        var preg_video = /^\/admin\/video\/.*$/;
+       var preg_video1 = /^\/admin\/video$/;
        
        if(preg_video.test(path)){
+           $('.shiguan').css('display','block');
+       }
+       if(preg_video1.test(path)){
            $('.shiguan').css('display','block');
        }
        //友情链接
@@ -257,7 +282,11 @@
        if(preg_friend.test(path)){
            $('.friendlink').css('display','block');
        }
-        
+
+       var preg_slideshow = /^\/admin\/slideshow.*$/;
+       if(preg_slideshow.test(path)){
+           $('.slideshow').css('display','block');
+       }
     
     //执行退出
     function signout(){

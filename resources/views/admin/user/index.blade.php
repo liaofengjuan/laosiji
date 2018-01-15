@@ -31,9 +31,10 @@
                     </div>
                 </div>
             </div>
+            <form action="/admin/user" method="get">
             <div class="am-u-sm-12 am-u-md-3">
                 <div class="am-form-group">
-                    <select data-am-selected="{btnSize: 'sm'}" class="doSearch">
+                    <select data-am-selected="{btnSize: 'sm'}" name="search_type">
                       <option value="0">搜索条件</option>
                       <option value="1">用户名</option>
                       <option value="2">手机号</option>
@@ -43,12 +44,13 @@
             </div>
             <div class="am-u-sm-12 am-u-md-3">
                 <div class="am-input-group am-input-group-sm">
-                    <input type="text" class="am-form-field">
+                    <input type="text" name="search_content" value="" class="am-form-field">
                     <span class="am-input-group-btn">
-                    <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search" type="button" onclick="doSearch($(this))"></button>
+                    <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search" type="submit" ></button>
                   </span>
                 </div>
             </div>
+            </form>
         </div>
         <div class="am-g">
             <div class="am-u-sm-12">
@@ -103,7 +105,7 @@
                     <div class="am-cf">
                         
                         <div class="am-fr">
-                            {!! $data->render() !!}
+                            {!! $data->appends($request)->render() !!}
                         </div>
                     </div>
 
@@ -116,12 +118,5 @@
     </div>
     <div class="tpl-alert"></div>
 </div>
-<script type="text/javascript">
-    function doSearch(obj){
-        var search_type = $('.doSearch').val();
-        var search_content = obj.siblings().first('input');
-        console.log(search_content);
-        console.log(search_type);
-    }
-</script>
+
 @endsection

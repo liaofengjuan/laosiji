@@ -18,4 +18,10 @@ class VideoInfo extends Model
     	return $this->hasMany('App\Model\Comment','vid');
     }
 
+    //一对一
+    public function slideshow()
+    {
+        return $this->hasOne('App\Model\Slideshow','vid');
+    }
+
 }

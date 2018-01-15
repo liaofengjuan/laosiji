@@ -127,7 +127,7 @@
         var title = $('input[name=title]').val();
         var path = $('input[name=path]').val();
         var logo = $('input[name=logo]').val();
-        var status = $('input[name=status]').val();
+        var status = $('input[name=status]:checked').val();
         //判断是否提交了空数据
         if(title.length!=0 && path.length!=0 && logo.length!=0){
             $.ajax({

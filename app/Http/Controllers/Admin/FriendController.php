@@ -70,6 +70,7 @@ class FriendController extends Controller
     public function store(Request $request)
     {
         $data = $request -> except(['_token','pic']);
+        $data['create_at'] = time();
         $res = FriendLink::insert($data);
         // return 12;
         if($res){

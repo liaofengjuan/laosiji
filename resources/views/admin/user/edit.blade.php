@@ -55,8 +55,8 @@
 <script type="text/javascript">
 
     $('button[type=button]').click(function(){
-        var status = $('input[name=status]').val();
-        var vip = $('input[name=vip]').val();
+        var status = $('input[name=status]:checked').val();
+        var vip = $('input[name=vip]:checked').val();
         var id = {{$id}};
         $.post('{{"/admin/user/".$id}}',{'vip':vip,'status':status,'_method':'put','_token':'{{csrf_token()}}'},function(data){
             if(data==0){
@@ -64,6 +64,7 @@
                 window.location.href = '/admin/user';
             }else{
                 alert('抱歉，修改失败');
+                return;
             }
         })
     })

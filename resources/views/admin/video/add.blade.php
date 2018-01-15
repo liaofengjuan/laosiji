@@ -51,13 +51,13 @@
                             var str = '<option value="">--请选择--</option>';
                             //当选择了父类，发送ajax查询子类
                             $.post('/admin/video/searchSon/'+pid,{'_token':'{{csrf_token()}}'},function(data){
-                                data = eval("("+data+")");//转换为json对象
+                                // data = eval("("+data+")");//转换为json对象
 
                                 for(var i=0;i<data.length;i++){
                                     str += '<option value='+data[i].id+'>'+data[i].title+'</option>';
                                 }
                                 $('#zi').html(str);
-                            });
+                            },'json');
                         })
                     </script>
                     <div class="am-form-group">
@@ -142,13 +142,13 @@
         var zi = $("select[name='zi']").val();
         var video_title = $('input[name="video_title"]').val();
         var vip = $('input[name="vip"]').val();
-        var stauts = $('input[name="stauts"]').val();
+        var status = $('input[name=status]:checked').val();
         var pic = $('input[name="pic"]').val();
         var play = $('input[name="play"]').val();
         var size = $('input[name="size"]').val();
         var info = $('input[name="info"]').val();
         //判断是否为空
-        if(!(zi!='' && video_title!='' && vip!='' && stauts!='' && pic!='' && play!='' && size!='' && info!='')){
+        if(!(zi!='' && video_title!='' && vip!='' && status!='' && pic!='' && play!='' && size!='' && info!='')){
             alert('不能提交空数据');
             return;
         }

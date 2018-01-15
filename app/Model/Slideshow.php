@@ -4,11 +4,10 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserInfo extends Model
+class Slideshow extends Model
 {
-    //模型属性设置
-    public $table = 'user_info';
+    public $table = 'slideshow';
+    public $timestamps = false;
     protected $dateFormat = 'U';
-
     
 }

@@ -6,12 +6,12 @@
     </div>
     <ol class="am-breadcrumb">
         <li><a href="#" class="am-icon-home">首页</a></li>
-        <li><a href="#">友情链接</a></li>
-        <li class="am-active">友情链接列表</li>
+        <li><a href="#">轮播图管理</a></li>
+        <li class="am-active">轮播图列表</li>
     </ol>
-    <div class="portlet-title">
+    <div class="portlet-title ">
         <div class="caption font-green bold">
-            <span class="am-icon-navicon"></span> 友情链接列表
+            <span class="am-icon-navicon"></span> 轮播图列表
         </div>
         <div class="tpl-portlet-input tpl-fz-ml">
             <div class="portlet-input input-small input-inline">
@@ -22,12 +22,12 @@
             </div>
         </div>
     </div>
-    <div class="tpl-block">
+    <div class="tpl-block l-height">
         <div class="am-g">
             <div class="am-u-sm-12 am-u-md-6">
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                        <a class="am-btn am-btn-default am-btn-success" role="button" href="{{url('admin/friend/create')}}" target="main"><span class="am-icon-plus"></span>新增友情链接</a>
+                        <a class="am-btn am-btn-default am-btn-success" role="button" href="{{url('admin/slideshow/create')}}" target="main"><span class="am-icon-plus"></span>新增轮播图</a>
                     </div>
                 </div>
             </div>
@@ -60,53 +60,41 @@
                        <thead>
                               <tr>
                                   <th>编号</th>
-                                  <th>链接logo</th>
-                                  <th>链接名称</th>
-                                  <th>链接地址</th>
-                                  <th>添加时间</th>
+                                  <th>电影名称</th>
+                                  <th>缩略图</th>
                                   <th>状态</th>
+                                  <th>创建时间</th>
                                   <th>操作</th>
                               </tr>
                           </thead>
                           <tbody>
-                          @foreach($data as $v)
+                            @foreach($data as $v)
                             <tr class="gradeX">
                                 <td>{{$v['id']}}</td>
-                                <td>{{$v->logo}}</td>
-                                <td>{{$v->title}}</td>
-                                <td>{{$v->path}}</td>
-                                <td>{{date('Y-m-d H:i:s',$v->create_at)}}</td>
-                                @if(($v->status)==0)
-                                <td>开启</td>
-                                @else
-                                <td>关闭</td>
-                                @endif
+                                <td>{{$v['title']}}</td>
                                 <td>
-                                    <div class="tpl-table-black-operation">
-                                        <class="am-btn-group am-btn-group-xs">
-                                        <form action="{{url('admin/friend/'.$v['id'].'/destroy')}}" method='post' style='display :inline;'>
-                                          {{ csrf_field() }}
-                                          {{ method_field('DELETE') }}
-                                          <button class='btn btn-waring btn-xs'><span class="am-icon-pencil-square-o"></span>删除</button>
-                                        </form>
-                                        <class="am-btn-group am-btn-group-xs">
-                                        <form action="{{url('admin/friend/'.$v['id'].'/edit')}}" method="GET" style='display:inline;'>
-                                          {{ csrf_field() }}
-                                          {{ method_field('PUT') }}
-                                          <button class='btn btn-info btn-xs'><span class="am-icon-pencil-square-o"></span>修改</button>
+                                    <div class="img-wrap" style="width:100px;overflow:hidden;position:relative">
+                                        <img src="{{env('PATH_IMG').$v['pic']}}?imageView2/1/w/100/h/40/q/75|imageslim"  class="am-img-thumbnail">
+                                    </div>
+                                </td>
+                                @if($v['status']==0)
+                                <td align="center">开启</td>
+                                @else
+                                <td align="center">关闭</td>
+                                @endif
+                                <td>{{date('Y-m-d H:i:s',$v['create_at'])}}</td>
+                                <td>
+                                    <div class="am-btn-toolbar">
+                                        <div class="am-btn-group am-btn-group-xs">
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="{{url('/admin/slideshow/'.$v['id'].'/edit')}}" style="background:#fff"><span class="am-icon-pencil-square-o"></span> 编辑</a>
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  onclick="del({{$v['id']}},$(this))" style="background:#fff"><span class="am-icon-trash-o"></span> 删除</a>
+                                        </div>
                                     </div>
                                 </td>
                             </tr> 
-                            @endforeach 
+                            @endforeach
                           </tbody>               
                     </table>
-
-                    <div class="am-cf">
-                        
-                        <div class="am-fr">
-                            {!! $data->render() !!}
-                        </div>
-                    </div>
 
                     <hr>
 
@@ -117,5 +105,22 @@
     </div>
     <div class="tpl-alert"></div>
 </div>
+<script type="text/javascript">
+    function del(id,obj){
+        layer.confirm('确定要删除吗？', {
+          btn: ['确定','取消'] //按钮
+        },function(){
+            $.post("/admin/slideshow/"+id,{'_method':'delete','_token':'{{csrf_token()}}'},function(data){
+                if(data=='0'){
+                    layer.msg('恭喜删除成功', {icon: 1});
+                    obj.parent().parent().parent().parent().remove();
+                }else{
+                    layer.msg('抱歉删除失败');
+                }
+            })
+        })
+        
+    }
+</script>
     
 @endsection
