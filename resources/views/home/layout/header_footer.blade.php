@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <title>安徽慕界网络科技有限公司</title>
 <link href="/homes/css/whir_common.css" rel="stylesheet" type="text/css" />
 <link href="/homes/css/whir_homes.css" rel="stylesheet" type="text/css" />
+
 <script type="text/javascript" src="/homes/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/homes/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/homes/js/index_solid.js"></script>
 <script type="text/javascript" src="/homes/js/column.js"></script>
+
 <!--[if IE 6]>
 <script type="text/javascript" src="script/iepng.js"></script>
 <script type="text/javascript"> 
@@ -23,7 +26,7 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
 <div class="member">
 @if(session('user'))
   <div class="tuxiang">
-    <img src="/homes/images/hyimg.jpg" width="35" height="35" />
+    <img src="{{session('pic')}}" width="35" height="35" />
   </div>
   <div class="hyname">
     <ul id="xiala">
@@ -75,7 +78,7 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
        <div class="topnavmenu">
         <div class="nav">
           <ul>
-            <li><a href="/l" class="on">首页</a></li>
+            <li><a href="/" class="on">首页</a></li>
             <li><a href="#">中学时代</a></li>
             <li><a href="#">大学时代</a></li>
             <li><a href="#">高校慕课</a></li>

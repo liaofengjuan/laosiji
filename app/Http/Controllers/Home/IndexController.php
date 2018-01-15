@@ -31,7 +31,16 @@ class IndexController extends Controller
                 $arr[$v->title][] = $val->videoinfo;
             }
         }
+
+        //取出头像路径
+        // $pic = '';
+        // if(session('user'))
+        // {
+        //     $user = User::where('username',session('user'))->first();
+        //     $pic = $user -> userinfo -> pic;
+        // }
         //引入前台页面
+        // return view('home.index',['data' => $arr,'pic' => $pic]);
         return view('home.index',['data' => $arr]);
     }
 
@@ -39,6 +48,7 @@ class IndexController extends Controller
     public function signout(Request $request)
     {
         $request->session()->forget('user');
+        $request->session()->forget('pic');
         return back();
     }
     

@@ -39,6 +39,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'adminLogin']
 	Route::post('/video/searchSon/{pid}','VideoController@searchSon');//查询子类的信息
 	Route::resource('/video','VideoController');
 
+
 	//友情链接
 	Route::post('/friend/uploadImg','FriendController@uploadImg');//上传图片
 	Route::resource('/friend','FriendController');
@@ -77,12 +78,28 @@ Route::group(['namespace'=>'Home'],function()
 	Route::group(['middleware' => 'loginStatus'],function(){
 		//个人中心首页
 		Route::get('/center/self',"UsersController@index");
+		//修改用户详情数据
+		Route::post('/center/self/update_info',"UsersController@update_info");
 		//账户安全页
 		Route::get('/center/self/pass',"UsersController@psw");
-		//
+		//执行修改密码
+		Route::post('/center/self/pass/do_update','UsersController@do_update');
+		//上传头像页面
+		Route::get('/center/self/sc','UsersController@shangchuan');
+		//执行上传图片
+		Route::post('/center/self/uploadimg','UsersController@uploadImg');
+		//将路径存入数据库
+		Route::post('/center/self/insert_img','UsersController@insert_img');
+		//引入我的视频页面
+		Route::get('/center/video/index','VideoController@index');
+		//引入上传视频页面
+		//？？ Route::get('/center/video/upload','VideoController@v_upload');
+		//引入观看历史页面
+		Route::get('/center/video/history','VideoController@v_history');
 	});
 
 	//视频列表页
-	Route::get('/list','ListController@index');
+	Route::get('/video/list','ListController@index');
+	//视频播放页
+	Route::get('/video/videoplay','VideoplayController@index');
 });
-

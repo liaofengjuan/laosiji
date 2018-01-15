@@ -66,7 +66,7 @@
 
 /***个人中心***/
 .subbox{ width:1100px; display:block; margin:15px auto;}
-.left180{ width:180px; display:block; overflow:hidden; background:#f2f2f2; float:left;}
+.left180{ width:180px; height:600px;display:block; overflow:hidden; background:#f2f2f2; float:left;}
 .grtx{ width:145px; height:185px; margin:15px auto 0px;}
 .grimg{ width:145px; height:161px; background:#fff;}
 .grimg img { width:137px; height:153px; padding:4px;}
