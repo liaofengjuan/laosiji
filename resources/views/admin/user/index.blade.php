@@ -76,18 +76,18 @@
                                 <td>{{$v['id']}}</td>
                                 <td>{{$v->username}}</td>
                                 <td>{{$v->phone}}</td>
-                                <td>{{$v->userinfo->email}}</td>
-                                @if(($v->userinfo->authority)==0)
+                                <td>{{($v->userinfo)['email']}}</td>
+                                @if((($v->userinfo)['authority'])==0)
                                 <td>普通</td>
-                                @elseif(($v->userinfo->authority)==1)
+                                @elseif((($v->userinfo)['authority'])==1)
                                 <td>vip</td>
                                 @endif
-                                @if(($v->userinfo->status)==0)
+                                @if((($v->userinfo)['status'])==0)
                                 <td>正常</td>
                                 @else
                                 <td>禁言</td>
                                 @endif
-                                <td>@if($v->userinfo->vip_time-time()>0) {{ceil(($v->userinfo->vip_time-time())/3600)}}h @else 0 @endif</td>
+                                <td>@if(($v->userinfo)['vip_time']-time()>0) {{ceil((($v->userinfo)['vip_time']-time())/3600)}}h @else 0 @endif</td>
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
