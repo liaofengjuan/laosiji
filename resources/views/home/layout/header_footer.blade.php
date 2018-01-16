@@ -26,7 +26,7 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
 <div class="member">
 @if(session('user'))
   <div class="tuxiang">
-    <img src="{{session('pic')}}" width="35" height="35" />
+    <img src="{{session('pic')}}" onerror="javascript:this.src='/homes/images/my_moren.jpg'" width="35" height="35" />
   </div>
   <div class="hyname">
     <ul id="xiala">

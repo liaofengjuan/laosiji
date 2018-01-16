@@ -98,13 +98,16 @@ Route::group(['namespace'=>'Home'],function()
 		//引入我的视频页面
 		Route::get('/center/video/index','VideoController@index');
 		//引入上传视频页面
-		//？？ Route::get('/center/video/upload','VideoController@v_upload');
+		Route::get('/center/video/upload','VideoController@v_upload');
+		//获取子类
+		Route::post('/center/video/getSon/{pid}','VideoController@getSon');
 		//引入观看历史页面
 		Route::get('/center/video/history','VideoController@v_history');
+		Route::resource('/center/video','VideoController');
 	});
 
 	//视频列表页
 	Route::get('/video/list','ListController@index');
 	//视频播放页
-	Route::get('/video/videoplay','VideoplayController@index');
+	Route::get('/video/videoplay/{play_id}','VideoplayController@index');
 });

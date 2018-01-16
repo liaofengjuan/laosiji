@@ -69,9 +69,9 @@
       //验证是否为空
       if(!jq3(this).val())
       {
-        jq3('.f_black').eq(1).html("邮箱不能为空！");
-        jq3('.f_black').eq(1).css('color','red');
-        ok1 = false;
+        // jq3('.f_black').eq(1).html("邮箱不能为空！");
+        // jq3('.f_black').eq(1).css('color','red');
+        ok1 = true;
         return;
       }
       //验证邮箱格式
@@ -93,9 +93,9 @@
     //验证是否为空
     if(!jq3(this).val())
     {
-      jq3('.f_black').eq(0).html("年龄不能为空！");
-      jq3('.f_black').eq(0).css('color','red');
-      ok2 = false;
+      // jq3('.f_black').eq(0).html("年龄不能为空！");
+      // jq3('.f_black').eq(0).css('color','red');
+      ok2 = true;
       return;
     }
     //验证年龄
