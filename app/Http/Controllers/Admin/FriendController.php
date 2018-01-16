@@ -101,7 +101,7 @@ class FriendController extends Controller
     public function edit($id)
     {
         $data = FriendLink::where('id',$id)->first();
-        return view('admin.friend.edit',['data'=>$data,'id'=>$id]);
+        return view('admin.friend.edit',['data'=>$data]);
     }
 
     /**
@@ -113,7 +113,16 @@ class FriendController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // 接受修改的数据
+        $data = $request -> except(['_token','_method']);
+        $res = FriendLink::where('id',$id)->update($data);
+        if($res){
+            // echo '<script>alert("修改成功");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+            echo 0;//成功
+        }else{
+            //echo '<script>alert("修改失败");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+            echo 1 ;
+        }
     }
 
     /**
@@ -124,13 +133,11 @@ class FriendController extends Controller
      */
     public function destroy($id)
     {
-        // $data = FriendLink::where('id',$id)->delete();
-        // if($data){
-        //     echo '1';
-        // }else{
-        //     echo '2';
-        // }
-    }
-
-    
+        $data = FriendLink::where('id',$id)->delete();
+        if($data){
+            echo 0;//成功
+        }else{
+            echo 1;
+        }
+    }   
 }

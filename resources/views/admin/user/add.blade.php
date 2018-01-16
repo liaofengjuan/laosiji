@@ -22,12 +22,19 @@
 
     </div>
     <div class="tpl-block ">
-
         <div class="am-g tpl-amazeui-form">
-
-
             <div class="am-u-sm-12 am-u-md-9">
                 <form class="am-form am-form-horizontal" >
+                    <div class="am-form-group">
+                        <label class="am-u-sm-3 am-form-label">头像</label>
+                        <div class="am-u-sm-9">
+                            <div class="img-wrap" style="width:100px;overflow:hidden;position:relative">
+                                <img src="" onerror="javascript:this.src='/admins/img/mo.png'" id="myimg" class="am-img-thumbnail">
+                                <input type="file" value="" name="pic" id="pic" style="position:  absolute;top: 0;width:  100px;height:  83px;opacity:  0;" >
+                                <input type="hidden" value="" name="logo" id="logo">
+                            </div>
+                        </div>
+                    </div>
                     <div class="am-form-group">
                         <label for="username" class="am-u-sm-3 am-form-label">用户名</label>
                         <div class="am-u-sm-9">
