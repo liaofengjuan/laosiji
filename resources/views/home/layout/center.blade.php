@@ -6,7 +6,7 @@
   <div class="left180">
     <div class="grtx">
       <!-- <div class="grimg"><img src="{{$data->userinfo->pic or '/homes/images/my_moren.jpg'}}" /></div> -->
-      <div class="grimg"><img src="{{session('pic')}}" /></div>
+      <div class="grimg"><img src="{{session('pic')}}" onerror="javascript:this.src='/homes/images/my_moren.jpg'" /></div>
       <div class="grname"><a href="#">{{session('user')}}</a></div>
     </div>  
 
@@ -32,7 +32,7 @@
       <li id="dianli3"><a onclick="return click_a('divOne_3','div_three')" style="cursor:pointer;"><em id="div_three">视频管理</em></a></li>
       <div class="menubox"  id="divOne_3" style="display:none;">
         <p><a href="/center/video/index" >我的视频</a></p>
-        <p><a href="#" >上传视频</a></p>
+        <p><a href="/center/video/upload" >上传视频</a></p>
         <p><a href="/center/video/history" >观看记录</a></p>
       </div>
     </ul>

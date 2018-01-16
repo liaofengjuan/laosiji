@@ -1,6 +1,6 @@
 // JavaScript Document  ѶõƬ CSS
 
-function $(id) { return document.getElementById(id); }
+function caonima(id) { return document.getElementById(id); }
 
 function addLoadEvent(func){
 	var oldonload = window.onload;
@@ -55,8 +55,8 @@ function moveElement(elementID,final_x,final_y,interval) {
 }
 
 function classNormal(iFocusBtnID,iFocusTxID){
-	var iFocusBtns= $(iFocusBtnID).getElementsByTagName('li');
-	var iFocusTxs = $(iFocusTxID).getElementsByTagName('li');
+	var iFocusBtns= caonima(iFocusBtnID).getElementsByTagName('li');
+	var iFocusTxs = caonima(iFocusTxID).getElementsByTagName('li');
 	for(var i=0; i<iFocusBtns.length; i++) {
 		iFocusBtns[i].className='normal';
 		iFocusTxs[i].className='normal';
@@ -64,17 +64,17 @@ function classNormal(iFocusBtnID,iFocusTxID){
 }
 
 function classCurrent(iFocusBtnID,iFocusTxID,n){
-	var iFocusBtns= $(iFocusBtnID).getElementsByTagName('li');
-	var iFocusTxs = $(iFocusTxID).getElementsByTagName('li');
+	var iFocusBtns= caonima(iFocusBtnID).getElementsByTagName('li');
+	var iFocusTxs = caonima(iFocusTxID).getElementsByTagName('li');
 	iFocusBtns[n].className='current';
 	iFocusTxs[n].className='current';
 }
 
 function iFocusChange() {
-	if(!$('ifocus')) return false;
-	$('ifocus').onmouseover = function(){atuokey = true};
-	$('ifocus').onmouseout = function(){atuokey = false};
-	var iFocusBtns = $('ifocus_btn').getElementsByTagName('li');
+	if(!caonima('ifocus')) return false;
+	caonima('ifocus').onmouseover = function(){atuokey = true};
+	caonima('ifocus').onmouseout = function(){atuokey = false};
+	var iFocusBtns = caonima('ifocus_btn').getElementsByTagName('li');
 	var listLength = iFocusBtns.length;
 	iFocusBtns[0].onmouseover = function() {
 		moveElement('ifocus_piclist',0,0,5);
@@ -114,9 +114,9 @@ function iFocusChange() {
 setInterval('autoiFocus()',5000);
 var atuokey = false;
 function autoiFocus() {
-	if(!$('ifocus')) return false;
+	if(!caonima('ifocus')) return false;
 	if(atuokey) return false;
-	var focusBtnList = $('ifocus_btn').getElementsByTagName('li');
+	var focusBtnList = caonima('ifocus_btn').getElementsByTagName('li');
 	var listLength = focusBtnList.length;
 	for(var i=0; i<listLength; i++) {
 		if (focusBtnList[i].className == 'current') var currentNum = i;

@@ -18,14 +18,14 @@ class UsersController extends Controller
     {
     	//查询用户详细信息
     	$res = User::where('username',session('user'))->first();
-        return view('home.user_center.index',['data' => $res]);
+        return view('home.user_center.self.index',['data' => $res]);
     }
 
 
     //引入个人中心账户安全页
     public function psw()
     {
-        return view('home.user_center.pass');
+        return view('home.user_center.self.pass');
     }
 
 
@@ -50,7 +50,7 @@ class UsersController extends Controller
     //引入上传头像页面
     public function shangchuan()
     {
-        return view('home.user_center.sc');
+        return view('home.user_center.self.sc');
     }
 
 

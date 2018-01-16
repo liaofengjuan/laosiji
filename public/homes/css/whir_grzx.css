@@ -577,7 +577,7 @@
 .input4{border:1px solid #dadada; color:#dadada; line-height:25px;}
 .input5{ width:100px; height:20px; border:1px solid #dadada; color:#dadada; line-height:20px;}
 .input6{ width:175px; height:23px; line-height:23px; border:1px solid #dedede; border-right:0px; float:left; color:#b3b3b3; padding-left:10px;}
-.input7{ width:190px; height:20px; border:1px solid #dadada; color:#dadada; line-height:20px;}
+.input7{ width:190px; height:20px; border:1px solid #dadada; color:#666; line-height:20px;}
 .input8{ width:131px; height:28px; background:#ffa100; color:#fff; line-height:28px; border:1px solid #dc8c03; cursor:pointer;}
 .input9{ width:52px; height:24px; background:#f0f0f0; border:1px solid #c1c1c1; line-height:24px;}
 .input10{ width:96px; height:28px; background:#fe981c; color:#fff; line-height:28px; border:0px; font-size:12px; float:right; cursor:pointer;}
@@ -611,4 +611,8 @@
 .page1 .btngo{ width:25px; height:20px; color:#686868;  border:0px; cursor:pointer;}
 .table-info td{height: 40px;line-height: 40px;padding: 0;}
 .mmqiangr{padding: 0;margin:0;list-style: none;}
-.mmqiangr li{margin-top:10px;margin-left:12px;width:52px;height: 18px;font-size:12px;background: #ccc;color:#fff;float:left;text-align: center;line-height: 18px}
+.mmqiangr li{margin-top:10px;margin-left:12px;width:52px;height: 18px;font-size:12px;background: #ccc;float:left;text-align: center;line-height: 18px}
+.myfenye li{float:left;width:30px;height:30px;line-height: 30px;border:1px solid #3af;text-align: center;margin:5px;color:blue;font-size:16px;}
+.myfenye .active{color:#fff;border-color:#fff;background-color: #3cf}
+.myfenye a{display:block;width:30px;height:30px;}
+.myfenye .disabled{border:1px solid #ccc;color:#ccc;}
