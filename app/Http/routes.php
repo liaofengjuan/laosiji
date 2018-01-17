@@ -10,6 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
+
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	Route::get('/login','LoginController@index');//加载登录页
 	Route::post('/login','LoginController@login');//执行登录
@@ -58,6 +60,8 @@ Route::group(['namespace'=>'Home'],function()
 
 	//前台首页
 	Route::get('/',"IndexController@index");
+	//前台--换一组
+	Route::get('/changeGroup',"IndexController@changeGroup");
 	//执行注销
 	Route::get('/signout',"IndexController@signout");
 
@@ -106,8 +110,8 @@ Route::group(['namespace'=>'Home'],function()
 		Route::resource('/center/video','VideoController');
 	});
 
-	//视频列表页
-	Route::get('/video/list','ListController@index');
+	//视频列表页--隐式控制器
+	Route::controller('/video/list','ListController');
 	//视频播放页
-	Route::get('/video/videoplay/{play_id}','VideoplayController@index');
+	Route::controller('/video/play','VideoplayController');
 });

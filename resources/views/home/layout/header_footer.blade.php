@@ -6,11 +6,13 @@
 <title>安徽慕界网络科技有限公司</title>
 <link href="/homes/css/whir_common.css" rel="stylesheet" type="text/css" />
 <link href="/homes/css/whir_homes.css" rel="stylesheet" type="text/css" />
-
+<link rel="stylesheet" href="/homes/css/style.css">
+@section('sc')
 <script type="text/javascript" src="/homes/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/homes/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/homes/js/index_solid.js"></script>
 <script type="text/javascript" src="/homes/js/column.js"></script>
+@show
 
 <!--[if IE 6]>
 <script type="text/javascript" src="script/iepng.js"></script>
@@ -79,14 +81,9 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
         <div class="nav">
           <ul>
             <li><a href="/" class="on">首页</a></li>
-            <li><a href="#">中学时代</a></li>
-            <li><a href="#">大学时代</a></li>
-            <li><a href="#">高校慕课</a></li>
-            <li><a href="#">职业培训</a></li>
-            <li><a href="#">企业培训</a></li>
-            <li><a href="#">综合视频</a></li>
-            <li><a href="#">课件超时</a></li>
-            <li><a href="#">翻转课堂</a></li>
+            @foreach($fatherType as $v)
+            <li><a href="#">{{$v['title']}}</a></li>
+            @endforeach
           </ul>
         </div>
         <div class="question">
@@ -115,7 +112,7 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
         <div id="demo" style="width:1017px; height:49px; overflow:hidden;">
           <table border=0 align=center cellpadding=0 cellspacing=0 cellspace=0 >
             <tr>
-              <td valign=top  id=marquePic1><table width='100%' border='0' cellspacing='0'>
+              <td valign=top  id='marquePic1'><table width='100%' border='0' cellspacing='0'>
                   <tr>
                     <td align=center><a href="#" target="_blank"><img src="/homes/images/link1.jpg" /></a></td>
                     <td align=center><a href="#" target="_blank"><img src="/homes/images/link2.jpg" /></a></td>
@@ -126,7 +123,7 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
                     <td align=center><a href="#" target="_blank"><img src="/homes/images/link7.jpg" /></a></td>
                   </tr>
                 </table></td>
-              <td id=marquePic2 valign=top></td>
+              <td id="marquePic2 valign=top"></td>
             </tr>
           </table>
         </div>

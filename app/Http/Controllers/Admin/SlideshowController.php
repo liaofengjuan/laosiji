@@ -45,7 +45,7 @@ class SlideshowController extends Controller
         //通过title查找视频表中的电影的id，确定vid
         $res = VideoInfo::where('video_title',$data['title'])->first();
         $data['vid'] = $res['id'];
-        $data['create_at'] = time();
+        $data['created_at'] = time();
         $res = Slideshow::insert($data);
         // return 12;
         if($res){

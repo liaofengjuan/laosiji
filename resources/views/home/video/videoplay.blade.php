@@ -18,7 +18,8 @@
         })
       </script>
       <div id="video" style="width:856px;height:519px;">
-        <video src="{{$data->play}}"></video>
+        <!-- <video src="{{env('PATH_IMG').$data['play']}}"></video> -->
+        <video src="http://p2duy5ziy.bkt.clouddn.com/4f1651b5951913ef9c21d3d640f1002b.wmv"></video>
         <!-- <video src="/homes/videojs/a.mp4"></video> -->
       </div>
 

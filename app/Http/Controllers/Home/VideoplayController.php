@@ -10,7 +10,7 @@ use App\Model\VideoInfo;
 
 class VideoplayController extends Controller
 {
-   public function index($play_id)
+   public function getIndex($play_id)
    {
    		$res = VideoInfo::where('id',$play_id)->first();
         return view('home.video.videoplay',['data' => $res]);

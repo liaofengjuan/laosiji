@@ -139,14 +139,14 @@
 <script type="text/javascript">
     //判断是否为空
     $('button[type=button]').click(function(){
-        var zi = $("select[name='zi']").val();
-        var video_title = $('input[name="video_title"]').val();
-        var vip = $('input[name="vip"]').val();
+        var zi = $("select[name=zi]").val();
+        var video_title = $('input[name=video_title]').val();
+        var vip = $('input[name=vip]:checked').val();
         var status = $('input[name=status]:checked').val();
-        var pic = $('input[name="pic"]').val();
-        var play = $('input[name="play"]').val();
-        var size = $('input[name="size"]').val();
-        var info = $('input[name="info"]').val();
+        var pic = $('input[name=pic]').val();
+        var play = $('input[name=play]').val();
+        var size = $('input[name=size]').val();
+        var info = $('input[name=info]').val();
         //判断是否为空
         if(!(zi!='' && video_title!='' && vip!='' && status!='' && pic!='' && play!='' && size!='' && info!='')){
             alert('不能提交空数据');

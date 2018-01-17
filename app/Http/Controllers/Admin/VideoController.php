@@ -92,7 +92,7 @@ class VideoController extends Controller
         //将文件新名和图片新名存入数组中
         $data['pic'] = $picName;
         $data['play'] = $playName;
-        $data['create_at'] = time();
+        $data['created_at'] = time();
         $data['tid'] = $request->input('zi');
         //获取用户的id
         $username = session('user');
