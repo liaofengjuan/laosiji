@@ -190,7 +190,7 @@
         //判断执行登录情况
         switch(msg){
           case '1':  //手机未注册
-            layer.confirm('该手机还未注册，是否去注册？', {
+            layer.confirm('该账号还未注册，是否去注册？', {
               btn: ['确定','取消'] //按钮
             }, function(){
               window.location.href = "/register";
