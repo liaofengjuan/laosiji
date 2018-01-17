@@ -13,12 +13,21 @@ use App\Model\User;
 class VideoController extends Controller
 {
     //引入我的视频页面
-    public function index()
-    {
+    public function index(Request $request)
+    {   
         //查询我上传的视频
+        $all = $request->all();
         $uid = User::where('username',session('user'))->value('id');
-        $res = VideoInfo::where('uid',$uid)->paginate(2);
-        return view('home.user_center.video.myVideo',['data' => $res]);
+        $video = VideoInfo::where('uid',$uid);
+        //获取搜索条件
+        $video_name = $request->input('video_name');
+        if($video_name!='')
+        {
+            $video = $video -> where('video_title','like','%'.$video_name.'%');
+        }
+        
+        $data = $video -> paginate(2);
+        return view('home.user_center.video.myVideo',['data' => $data,'tiaojian' => $all]);
     }
 
 
@@ -33,8 +42,21 @@ class VideoController extends Controller
 
     //引入观看记录页面
     public function v_history()
-    {
-        return view('home.user_center.video.history');
+    { 
+        $vid = User::where('username',session('user'))
+            ->first()
+            ->history()
+            ->orderBy('created_at','desc')
+            ->take(10)
+            ->lists('vid');
+
+        $arr = [];
+        foreach($vid as $v)
+        {
+            $arr[] = VideoInfo::where('id',$v)->first();
+        }
+
+        return view('home.user_center.video.history',['data'=>$arr]);
     }
 
 
@@ -71,7 +93,7 @@ class VideoController extends Controller
         //将文件新名和图片新名存入数组中
         $data['pic'] = $picName;
         $data['play'] = $playName;
-        $data['create_at'] = time();
+        $data['created_at'] = time();
         $data['tid'] = $request->input('zi');
         //获取用户的id
         $username = session('user');
@@ -113,8 +135,14 @@ class VideoController extends Controller
 
 
     //执行删除视频
-    public function destroy(Request $request,$id)
+    public function destroy($id)
     {
-        
+        //执行删除
+        $res = VideoInfo::where('id',$id)->delete();
+        if($res){
+            return 2; //成功
+        }else{
+            return 3; //失败
+        }
     }
 }

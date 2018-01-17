@@ -1,9 +1,7 @@
 @extends('home.layout.header_footer')
 @section('content')
 <link href="/homes/css/whir_styles.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="/homes/videojs/jsmodern.min.css">
-<script src="/homes/videojs/jquery.min.js"></script>
-<script src="/homes/videojs/jsmodern.min.js"></script>
+
 <!--container-->
 <div class="player_container">
   <div class="mod_crumbs"> <a href="#" target="_blank"title="首页">首页</a>&gt; <a href="javascript:;" target="_blank" title="大学时代">大学时代</a> </div>
@@ -12,16 +10,9 @@
   <div class="mod_player_section cf" id="mod_inner">
     <div class="mod_player" id="mod_player">
 
-      <script>
-        $(function () {
-          jsModern.video("#video");
-        })
-      </script>
-      <div id="video" style="width:856px;height:519px;">
-        <video src="{{$data->play}}"></video>
-        <!-- <video src="/homes/videojs/a.mp4"></video> -->
+      <div class="main-wrap">
+        <video src="{{env('PATH_IMG').$data->play}}" poster="{{env('PATH_IMG').$data->pic}}" autoplay controls loop></video>
       </div>
-
 
     </div>
     <div class="mod_video_album_section mod_video_album_section_v3" id="fullplaylist">
