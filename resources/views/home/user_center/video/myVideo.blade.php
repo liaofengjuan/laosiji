@@ -14,8 +14,8 @@
     </div>
     <div class="biji">
       <div class="bijicz">
-        <div class="bjsc"><img src="/homes/images/grzx/scicon.jpg" /><a href="/center/video/upload">上传视频</a></div>
-        <div class="bjsc"><img src="/homes/images/grzx/bjsc.jpg" /><a href="#">批量删除</a></div>
+        <div class="bjsc"><img src="/homes/images/grzx/scicon.jpg" /><a href="/center/video/vupload">上传视频</a></div>
+        <div class="bjsc"><img src="/homes/images/grzx/bjsc.jpg" /><a href="#" onclick="deleSeltedRecords()">批量删除</a></div>
         <div class="bjpage">
         </div>
       </div>
@@ -33,10 +33,10 @@
     <ul class="wdsplist">
     @foreach($data as $v)
       <li> <span class="checkbox">
-        <input type="checkbox" class="input12 chckBox" />
+        <input name="chckBox" value="{{$v->id}}" type="checkbox" class="input12" />
         </span>
         <div class="wdsp"><a href="#"><img src="{{env('PATH_IMG').$v->pic.'?imageView2/1/w/146/h/87/q/75|imageslim'}}" /></a><span class="gktime">{{$v->size}}</span></div>
-        <div class="wddate"><span><a target="_blank" href="/video/videoplay/{{$v->id}}">{{$v->video_title}}</a></span><span>{{date('Y-m-d H:i:s',$v->created_at)}}</span></div>
+        <div class="wddate"><span><a target="_blank" href="/video/play/index/{{$v->id}}">{{$v->video_title}}</a></span><span>{{date('Y-m-d H:i:s',$v->created_at)}}</span></div>
         <div class="spfb">已发布</div>
         <div class="wddp"><span><img src="/homes/images/grzx/wdgk.jpg" /><a href="#">1333</a></span><span><img src="/homes/images/grzx/wddp.jpg" /><a href="#">1333</a></span></div>
         <div class="wdcz">
@@ -88,6 +88,47 @@
       for(var index =0 ; index<num ; index++){  
         chckBox[index].checked = false;  
       }  
+    }  
+  } 
+
+  function deleSeltedRecords(){  
+    var chckBox = document.getElementsByName("chckBox");  
+    var num = chckBox.length;  
+    var ids = new Array();  
+    // console.log(chckBox);
+    for(var index =0 ; index<num ; index++){  
+        if(chckBox[index].checked){  
+            // ids += chckBox[index].value + ","; 
+            ids.push(chckBox[index].value);               
+        }  
+    }  
+    // console.log(ids);
+    if(ids!=""){  
+        if(window.confirm("确定删除所选记录？")){  
+            jq6.ajax( {  
+                type : "post",
+                headers: {
+                    'X-CSRF-TOKEN': jq6('meta[name="csrf-token"]').attr('content')
+                },
+                url : '/center/video/deletes', //要自行删除的action  
+                data:{'arr':ids},
+                // dataType : 'json',  
+                success : function(data) {
+                    if(data == '2')
+                    {
+                      alert("删除成功！");  
+                    }else if(data == '3'){
+                      alert("删除失败！");  
+                    }
+                    
+                },  
+                error : function(data) {  
+                    alert("系统错误，删除失败");  
+                }  
+            });  
+        }  
+    }else{  
+        alert("请选择要删除的记录");  
     }  
   }  
 </script>

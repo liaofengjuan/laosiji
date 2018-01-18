@@ -38,7 +38,7 @@
 <div class="soubg">
 	<div class="sou">
         <span class="fr">
-        	<span class="fl">你好，请<a href="Login.html">登录</a>&nbsp; <a href="/register" style="color:#ff4e00;">免费注册</a></span>
+        	<span class="fl">你好，请<a href="#">登录</a>&nbsp; <a href="/register" style="color:#ff4e00;">免费注册</a></span>
             <span class="fl">|&nbsp;关注我们：</span>
             <span class="s_sh"><a href="#" class="sh1">新浪</a><a href="#" class="sh2">微信</a></span>
             <span class="fr">|&nbsp;<a href="#">手机版&nbsp;<img src="/homes/login_register/images/s_tel.png" align="absmiddle" /></a></span>
@@ -49,7 +49,7 @@
 <!--Begin Login Begin-->
 <div class="log_bg">	
     <div class="top">
-        <div class="logo"><a href="Index.html"><img src="/homes/login_register/images/logo.png" /></a></div>
+        <div class="logo"><a href="#"><img src="/homes/login_register/images/logo.png" /></a></div>
     </div>
 	<div class="login">
     	<div class="log_img" style="margin-top:0"><img src="/homes/login_register/images/l_img.png" width="611" height="425" /></div>
@@ -186,7 +186,7 @@
       $('.l_llla').trigger('blur');
       if(ok1 && ok2)
       {
-        $.post('/do_login',{user:user,pass:pass,code:code,'_token':'{{csrf_token()}}'},function(msg){
+        $.post('/login/dologin',{user:user,pass:pass,code:code,'_token':'{{csrf_token()}}'},function(msg){
         //判断执行登录情况
         switch(msg){
           case '1':  //手机未注册
@@ -254,7 +254,7 @@
       var p_test;
       $.ajax({
         type: "POST",
-        url: "/test_phone",
+        url: "/login/testphone",
         async: false,
         data: "phone="+phone+"&_token={{csrf_token()}}",
         success: function(msg){
@@ -325,7 +325,7 @@
        }
 
        //发送ajax,发送短信验证码
-       $.post('/alidayu',{phone:res,_token:"{{csrf_token()}}"},function(msg){
+       $.post('/login/alidayu',{phone:res,_token:"{{csrf_token()}}"},function(msg){
        });
     });
 
@@ -344,7 +344,7 @@
       if(p_code && phone && res_code)
       {
         //执行登录
-        $.post('/phone_login',{phone:phone,p_code:p_code,code:res_code,_token:'{{csrf_token()}}'},function(msg){
+        $.post('/login/phonelogin',{phone:phone,p_code:p_code,code:res_code,_token:'{{csrf_token()}}'},function(msg){
           switch(msg)
           {
             case '1': //手机号未注册

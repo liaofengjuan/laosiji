@@ -39,7 +39,7 @@
 <div class="soubg">
 	<div class="sou">
         <span class="fr">
-        	<span class="fl">你好，请<a href="Login.html">登录</a>&nbsp; <a href="Regist.html" style="color:#ff4e00;">免费注册</a></span>
+        	<span class="fl">你好，请<a href="#">登录</a>&nbsp; <a href="#" style="color:#ff4e00;">免费注册</a></span>
             <span class="fl">|&nbsp;关注我们：</span>
             <span class="s_sh"><a href="#" class="sh1">新浪</a><a href="#" class="sh2">微信</a></span>
             <span class="fr">|&nbsp;<a href="#">手机版&nbsp;<img src="/homes/login_register/images/s_tel.png" align="absmiddle" /></a></span>
@@ -198,7 +198,7 @@
         var pass = $('.l_pwd').val();
         var code = $('.djbd12').val();
 
-        $.post('/do_register',{'phone':phone,'pass':pass,code:code,'_token':'{{ csrf_token() }}'},function(msg){
+        $.post('/register/doregister',{'phone':phone,'pass':pass,code:code,'_token':'{{ csrf_token() }}'},function(msg){
           // console.log(msg);
           switch(msg){
             case '2': //该手机号已被注册

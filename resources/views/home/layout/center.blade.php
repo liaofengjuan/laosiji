@@ -1,4 +1,6 @@
 @extends('home.layout.header_footer')
+@section('style')
+@endsection
 @section('content')
 <link href="/homes/css/whir_grzx.css" rel="stylesheet" type="text/css" />
 <div class="subbox">
@@ -14,8 +16,9 @@
       <li id="dianli1"><a onclick="return click_a('divOne_1','div_one')" style="cursor:pointer;"><em id="div_one">个人资料</em></a></li>
       <div class="menubox"  id="divOne_1" style="display:none;">
         <p><a href="/center/self" >信息完善</a></p>
-        <p><a href="/center/self/sc" >修改头像</a></p>
-        <p><a href="/center/self/pass" >账户安全</a></p>
+        <p><a href="/center/self/shangchuan" >修改头像</a></p>
+        <p><a href="/center/self/psw" >账户安全</a></p>
+        <p><a href="/center/self/vip" >开通vip</a></p>
       </div>
     </ul>
     
@@ -32,8 +35,8 @@
       <li id="dianli3"><a onclick="return click_a('divOne_3','div_three')" style="cursor:pointer;"><em id="div_three">视频管理</em></a></li>
       <div class="menubox"  id="divOne_3" style="display:none;">
         <p><a href="/center/video/index" >我的视频</a></p>
-        <p><a href="/center/video/upload" >上传视频</a></p>
-        <p><a href="/center/video/history" >观看记录</a></p>
+        <p><a href="/center/video/vupload" >上传视频</a></p>
+        <p><a href="/center/video/vhistory" >观看记录</a></p>
       </div>
     </ul>
 

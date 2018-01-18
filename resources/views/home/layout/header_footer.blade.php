@@ -6,7 +6,9 @@
 <title>安徽慕界网络科技有限公司</title>
 <link href="/homes/css/whir_common.css" rel="stylesheet" type="text/css" />
 <link href="/homes/css/whir_homes.css" rel="stylesheet" type="text/css" />
+@section('style')
 <link rel="stylesheet" href="/homes/css/style.css">
+@show
 @section('sc')
 <script type="text/javascript" src="/homes/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/homes/js/jquery.SuperSlide.2.1.1.js"></script>

@@ -44,7 +44,7 @@
 }
 </style>
 <div class="right840">
- <div class="title6"><h1><a href="/center/self">信息完善</a></h1><h1><a href="#" class="on">修改头像</a></h1><h1><a href="/center/self/pass">账户安全</a></h1></div>
+ <div class="title6"><h1><a href="/center/self">信息完善</a></h1><h1><a href="#" class="on">修改头像</a></h1><h1><a href="/center/self/psw">账户安全</a></h1></div>
 <div class="con4">
 	<form class="banner-upload">
 	<canvas id="cvs" width="200" height="200"></canvas>
@@ -193,7 +193,7 @@ function readFile(){
 	//将图片地址加入数据库
 	function insert_img(path)
 	{
-		jq1.post('/center/self/insert_img',{path:path,_token:'{{csrf_token()}}'},function(msg){
+		jq1.post('/center/self/insertimg',{path:path,_token:'{{csrf_token()}}'},function(msg){
             switch(msg)
             {               
                 case '2':

@@ -87,7 +87,7 @@
         var pid = jq5(this).val();//获取父id
         var str = '<option value="">--请选择--</option>';
         //当选择了父类，发送ajax查询子类
-        jq5.post('/center/video/getSon/'+pid,{'_token':'{{csrf_token()}}'},function(data){
+        jq5.post('/center/video/getson/'+pid,{'_token':'{{csrf_token()}}'},function(data){
             // data = eval("("+data+")");//转换为json对象
 
             for(var i=0;i<data.length;i++){

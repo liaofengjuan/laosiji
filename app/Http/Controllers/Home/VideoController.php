@@ -9,11 +9,12 @@ use App\Http\Controllers\Controller;
 use App\Model\VideoType;
 use App\Model\VideoInfo;
 use App\Model\User;
+use App\Model\History;
 
 class VideoController extends Controller
 {
     //引入我的视频页面
-    public function index(Request $request)
+    public function getIndex(Request $request)
     {   
         //查询我上传的视频
         $all = $request->all();
@@ -32,7 +33,7 @@ class VideoController extends Controller
 
 
     //引入上传视频页面
-    public function v_upload()
+    public function getVupload()
     {
         //查出所有父级分类
         $father = VideoType::where('pid',0)->get();
@@ -41,7 +42,7 @@ class VideoController extends Controller
 
 
     //引入观看记录页面
-    public function v_history()
+    public function getVhistory()
     { 
         $vid = User::where('username',session('user'))
             ->first()
@@ -55,13 +56,12 @@ class VideoController extends Controller
         {
             $arr[] = VideoInfo::where('id',$v)->first();
         }
-
         return view('home.user_center.video.history',['data'=>$arr]);
     }
 
 
     //获取子类
-    public function getSon($pid)
+    public function postGetson($pid)
     {
         //通过pid查询子类
         $res = VideoType::where('pid',$pid)->get();
@@ -127,6 +127,8 @@ class VideoController extends Controller
         $data['tid'] = $request -> input('zi');
         $res = VideoInfo::where('id',$id)->update($data);
         if($res){
+            //删除浏览记录表中的该视频
+            History::where('vid',$id)->delete();
             return 2;//成功
         }else{
             return 3;//失败
@@ -143,6 +145,22 @@ class VideoController extends Controller
             return 2; //成功
         }else{
             return 3; //失败
+        }
+    }
+
+
+    //执行批量删除视频
+    public function postDeletes(Request $request)
+    {
+        $data = $request->input('arr');
+        $res = VideoInfo::whereIn('id',$data)->delete();
+        if($res)
+        {
+            //删除浏览记录表中的该视频
+            History::whereIn('vid',$data)->delete();
+            echo 2; //成功
+        }else{
+            echo 3; //失败
         }
     }
 }

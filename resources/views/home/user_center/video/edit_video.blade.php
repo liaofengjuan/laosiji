@@ -72,7 +72,7 @@
  <script type="text/javascript">
  	var jq5 = $.noConflict(true);
   var pid1 = jq5('#fu').val();
-  jq5.post('/center/video/getSon/'+pid1,{'_token':'{{csrf_token()}}'},function(data){
+  jq5.post('/center/video/getson/'+pid1,{'_token':'{{csrf_token()}}'},function(data){
             // data = eval("("+data+")");//转换为json对象
 
             var str1 = '<option value="">--请选择--</option>';
@@ -91,7 +91,7 @@
         var pid = jq5(this).val();
         var str = '<option value="">--请选择--</option>';
         //当选择了父类，发送ajax查询子类
-        jq5.post('/center/video/getSon/'+pid,{'_token':'{{csrf_token()}}'},function(data){
+        jq5.post('/center/video/getson/'+pid,{'_token':'{{csrf_token()}}'},function(data){
             // data = eval("("+data+")");//转换为json对象
             for(var i=0;i<data.length;i++){
                 str += '<option value='+data[i].id+'>'+data[i].title+'</option>';

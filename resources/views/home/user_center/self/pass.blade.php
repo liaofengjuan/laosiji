@@ -1,7 +1,7 @@
 @extends('home.layout.center')
 @section('right')
   <div class="right840">
- <div class="title6"><h1><a href="/center/self">信息完善</a></h1><h1><a href="/center/self/sc">修改头像</a></h1><h1><a href="#" class="on">账户安全</a></h1></div>
+ <div class="title6"><h1><a href="/center/self">信息完善</a></h1><h1><a href="/center/self/shangchuan">修改头像</a></h1><h1><a href="#" class="on">账户安全</a></h1></div>
  <div class="display">
  <table width="840" height="400" align="center" cellspacing="0" cellpadding="0" class="tab">
  <tr><td colspan="2"><font class="f_black">您可以修改您的账户密码。下次登录请使用新密码</font></td></tr>
@@ -149,7 +149,7 @@
 			var oldPass = jq('#yuanmm24').val();
 			var newPass = jq('.passwd33').val();
 			//发送ajax
-			jq.post('/center/self/pass/do_update',{oldPass:oldPass,newPass:newPass,_token:"{{csrf_token()}}"},function(msg){
+			jq.post('/center/self/doupdate',{oldPass:oldPass,newPass:newPass,_token:"{{csrf_token()}}"},function(msg){
 				switch(msg)
 				{
 					case '2':  //旧密码错误
