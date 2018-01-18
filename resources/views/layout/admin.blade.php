@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="/admins/css/amazeui.min.css" />
     <link rel="stylesheet" href="/admins/css/admin.css">
     <link rel="stylesheet" href="/admins/css/app.css">
+    @section('link')
+    @show
    
 
     
@@ -69,7 +71,7 @@
 
 
         <div class="tpl-left-nav tpl-left-nav-hover l-height" >
-            <!--<div class="tpl-sidebar-user-panel">
+            <div class="tpl-sidebar-user-panel">
                 <div class="tpl-user-panel-slide-toggleable" style="text-align: center;">
                     <div class="tpl-user-panel-profile-picture">
                         <img src="/admins/img/user04.png" alt="">
@@ -80,12 +82,12 @@
                     </span>
                     
                 </div>
-            </div>-->
+            </div>
 
             <div class="tpl-left-nav-list">
                 <ul class="tpl-left-nav-menu">
                     <li class="tpl-left-nav-item">
-                        <a href="index.html" class="nav-link active">
+                        <a href="{{url('/admin')}}" class="nav-link active">
                             <i class="am-icon-home"></i>
                             <span>首页</span>
                         </a>
@@ -234,9 +236,10 @@
                         </a>
                         <ul class="tpl-left-nav-sub-menu">
                             <li>
-                                <a href="table-font-list.html">
+                                <a href="/admin/config">
                                     <i class="am-icon-angle-right"></i>
-                                    <span>网站配置</span>
+                                    <span>配置信息</span>
+                                     <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
                                 </a>
                             </li>
                         </ul>

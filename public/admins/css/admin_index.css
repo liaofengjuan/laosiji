@@ -1,0 +1,11 @@
+#main{ font-size:12px;}
+#main span.time{ font-size:24px; color:#528dc5; width:100%; padding-bottom:10px; float:left}
+div.sec{ width:100%; background: no-repeat 0 15px; padding:0 0 0 15px; line-height:45px; float:left}
+.left{ float:left}
+#main div a{ float:left}
+#main span.num{  font-size:30px; color:#538ec6; font-family:"Georgia","Tahoma","Arial";}
+.left{ float:left}
+
+div.main-con{ width:100%; float:left; padding:10px 0 0 20px; line-height:36px;}
+
+div.main-order{ line-height:30px; padding:10px 0 0 0;}

@@ -55,6 +55,8 @@ class ListController extends Controller
         //获取父类和子类的title
         $fatherTitle = $request -> input('fatherTitle');
         $sonTitle = $request -> input('sonTitle');
+        //判断情况
+        
         //查询盖子类下面的所有的电影
         $movies = VideoType::where('title',$title)->first()->videoinfo;
         dd($movies);
