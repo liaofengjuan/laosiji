@@ -32,7 +32,7 @@
           <div class="slider"><!--主体结构，请用此类名调用插件，此类名可自定义-->
             <ul>
               @foreach($data_slideshow as $v)
-              <li><a href="{{url('/video/videoplay/'.$v['vid'])}}"><img src="{{env('PATH_IMG').$v['pic'].'?imageView2/1/w/800/h/450/q/75|imageslim'}}" alt='' /></a></li>
+              <li><a href="{{url('/video/play/index/'.$v['vid'])}}"><img src="{{env('PATH_IMG').$v['pic'].'?imageView2/1/w/800/h/450/q/75|imageslim'}}" alt='' /></a></li>
               @endforeach
             </ul>
           </div>
@@ -74,7 +74,7 @@
       <div class="clear"></div>
       <div class="orilist">
         <div class="topvideo">
-          <a href="{{url('/video/videoplay/'.$onlyMovies[0]['id'])}}"> 
+          <a href="{{url('/video/play/index/'.$onlyMovies[0]['id'])}}"> 
             <img src="{{env('PATH_IMG').$onlyMovies[0]->pic.'?imageView2/1/w/419/h/333/q/75|imageslim'}}" onerror="javascript:this.src='/homes/images/pic3.jpg'"/>
             <div class="titleinfo">
               <h1>{{$onlyMovies[0]->video_title}}</h1>
@@ -92,7 +92,7 @@
         </div>
         <div class="splist">
           <div class="myvideo mb15">
-            <a href="{{url('/video/videoplay/'.$onlyMovies[1]['id'])}}">
+            <a href="{{url('/video/play/index/'.$onlyMovies[1]['id'])}}">
               <div class="myvideoimg">
                 <img src="{{env('PATH_IMG').$onlyMovies[1]->pic.'?imageView2/1/w/212/h/118/q/75|imageslim'}}" onerror="javascript:this.src='/homes/images/my.jpg'"/>
                 <h3>{{$onlyMovies[1]['video_title']}}</h3>
@@ -106,7 +106,7 @@
             </a>
           </div>
           <div class="myvideo ml20 mb15">
-            <a href="{{url('/video/videoplay/'.$onlyMovies[2]['id'])}}">
+            <a href="{{url('/video/play/index/'.$onlyMovies[2]['id'])}}">
               <div class="myvideoimg">
                 <img src="{{env('PATH_IMG').$onlyMovies[2]->pic.'?imageView2/1/w/212/h/118/q/75|imageslim'}}" onerror="javascript:this.src='/homes/images/my.jpg'"/>
                 <h3>{{$onlyMovies[2]['video_title']}}</h3>
@@ -119,7 +119,7 @@
             </a>
           </div>
           <div class="myvideo">
-            <a href="{{url('/video/videoplay/'.$onlyMovies[3]['id'])}}">
+            <a href="{{url('/video/play/index/'.$onlyMovies[3]['id'])}}">
               <div class="myvideoimg">
                 <img src="{{env('PATH_IMG').$onlyMovies[3]->pic.'?imageView2/1/w/212/h/118/q/75|imageslim'}}" onerror="javascript:this.src='/homes/images/my.jpg'"/>
                 <h3>{{$onlyMovies[3]['video_title']}}</h3>
@@ -132,7 +132,7 @@
             </a>
           </div>
           <div class="myvideo ml20">
-            <a href="{{url('/video/videoplay/'.$onlyMovies[4]['id'])}}">
+            <a href="{{url('/video/play/index/'.$onlyMovies[4]['id'])}}">
               <div class="myvideoimg">
                 <img src="{{env('PATH_IMG').$onlyMovies[4]->pic.'?imageView2/1/w/212/h/118/q/75|imageslim'}}" onerror="javascript:this.src='/homes/images/my.jpg'"/>
                 <h3>{{$onlyMovies[4]->video_title}}</h3>
@@ -157,7 +157,7 @@
         <ul class="list">
           @foreach($hot as $k=>$v)
           @if($k<3)
-            <li><span class="dig">{{$k+1}}</span><a href="{{url('/video/videoplay/'.$v['id'])}}">{{$v['video_title']}}</a></li>
+            <li><span class="dig">{{$k+1}}</span><a href="{{url('/video/play/index/'.$v['id'])}}">{{$v['video_title']}}</a></li>
           @else
             <li><span class="dig1">{{$k+1}}</span><a href="{{env('PATH_IMG').$v['play'].'/'.$v['id']}}}}">{{$v['video_title']}}</a></li>
           @endif
@@ -181,14 +181,14 @@
     <div class="hd">
       <h1>{{$k}}</h1>
   	  <div class="change">
-        <a href="javascript:;" >more >>></a>
+        <a href="{{url('/video/list/index/'.$k)}}" >more >>></a>
       </div>
     </div>
     <div class="bd">
       <ul class="picList">
         @foreach($v as $detail)
         <li>
-          <a href="{{url('/video/videoplay/'.$detail['id'])}}" target="_blank">
+          <a href="{{url('/video/play/index/'.$detail['id'])}}" target="_blank">
             <div class="pic">
               <img src="{{env('PATH_IMG').$detail['pic'].'?imageView2/1/w/221/h/194/q/75|imageslim'}}" onerror="javascript:this.src='/homes/images/pic4.jpg"/>   
             </div>

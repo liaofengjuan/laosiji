@@ -86,13 +86,7 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
             @endforeach
           </ul>
         </div>
-        <div class="question">
-          <ul>
-            <li class="li5"><a href="#">我要开班</a></li>
-            <li class="li6"><a href="#">我要提问</a></li>
-            <li class="li7"><a href="#">我要问答</a></li>
-          </ul>
-        </div>
+        
       </div>
     </div>
   </div>
