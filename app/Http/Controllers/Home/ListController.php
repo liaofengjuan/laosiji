@@ -35,16 +35,18 @@ class ListController extends Controller
     public function postLson(Request $request)
     {
         //获取子类的title
-        $title = $request -> input('title');
-        //查询盖子类下面的所有的电影
-        $movies = VideoType::where('title',$title)->first()->videoinfo;
+        $sid = $request -> input('sid');
+        $movies = VideoInfo::where('tid',$sid)
+                            ->where('status',0)
+                            ->where('check',1)
+                            ->orderBy('clicks')
+                            ->get();
         if($movies){
             return json_encode($movies);
         }else{
             return 1;//没有数据
         }
-        
-
+ 
     }
 
     /**

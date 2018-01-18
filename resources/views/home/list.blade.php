@@ -22,10 +22,10 @@
 <div class="address">
   <h1>按类型</h1>
   <h2 class='h22'>
-    <a href="javascript:;" class="myon">全部</a>
+    <a href="javascript:;" class="myon" onclick="sonClick(0,$(this))">全部</a>
     @if($sonType)
     @foreach($sonType as $v)
-    <a href="javascript:;">{{$v['title']}}</a>
+    <a href="javascript:;" onclick="sonClick({{$v['id']}},$(this))">{{$v['title']}}</a>
     @endforeach
     @endif
   </h2>
@@ -33,64 +33,99 @@
 <div class="address">
   <h1>按资费</h1>
   <h2 class='h23'>
-    <a href="javascript:;" class="myon">全部</a>
-    <a href="javascript:;" >免费</a>
-    <a href="javascript:;" >VIP</a>
+    <a href="javascript:;" class="myon" onclick="vipClick(0,$(this))">全部</a>
+    <a href="javascript:;" onclick="vipClick(1,$(this))">免费</a>
+    <a href="javascript:;" onclick="vipClick(2,$(this))">VIP</a>
   </h2>
 </div>
 <script type="text/javascript">
+
+  //定义全局变量
+  var datas = '';//用于接收ajax返回的数据
+  var pageSize = '';//页大小
+  var url = '';//ajax发送的地址
+  var msg = '';//ajax要发送的数据
+
+  //更新收到的结果
+  function change(page,pageSize,data){
+    $('.splist').children().remove();
+    for(var i = (page-1)*pageSize;i<page*pageSize;i++){
+      $('.splist').append('<a href="/video/play/index/'+data[i].id+'"><div class="myvideo"><div class="myvideoimg"><img src="" class="imgPath'+i+'"/><h3>'+data[i].video_title+'</h3><span class="play1">播放</span><span class="time">'+data[i].size+'</span></div><div class="title3"><div class="playtime">'+data[i].clicks+'次播放</div></div></div></a>');
+    }
+
+    for(var j = (page-1)*pageSize;j<page*pageSize;j++){
+      $('.imgPath'+j).attr('src',"{{env('PATH_IMG')}}"+data[j].pic+'?imageView2/1/w/217/h/132/q/75|imageslim');
+    }
+  }
+
+  //点击页数让其跳转
+  function turn(k,obj){
+    $('.page .num a').removeClass('on');
+    obj.addClass('on');
+    change(k,pageSize,datas);
+  }
+
+  //发送ajax
+  function sendAjax(url,msg){
+    $.post(url,msg,function(data){
+      //移除上一次的内容
+      $('.splist').children().remove();
+      if(data!=1){
+        
+        var size = 3;//定义页大小
+        var maxPage = Math.ceil(data.length/size);//计算总页数
+        //判断总条数和页大小的关系
+        if(size>data.length){
+          size=data.length;
+        }
+        //更新页数
+        $('.page').replaceWith("<div class='page'><span class='num'></span></div>");
+        for(var k = 1;k<maxPage+1;k++){
+          $('.num').append("<a onclick='turn("+k+",$(this))'>"+k+"</a>");
+          if(k==1){
+            $('.num a').addClass('on');
+          }
+        }
+        //将ajax收到的数据存到全局变量中
+        datas = data;
+        pageSize = size;
+
+        //更新内容
+        change(1,pageSize,datas);   
+      }
+      
+    },'json')
+  }
+
   //查询子类中的相关电影
-  $('.address .h22 a').click(function(){
+  function sonClick(sid,obj){
     $('.address .h22 a').removeClass('myon');
-    $(this).addClass('myon');
-    var title = $(this).html();
+    obj.addClass('myon');
+    var title = obj.html();
     if(title=='全部'){
         //获取父类的title
         var ftitle = $('.address .h21 a[class=myon]').html();
         //跳转到父类下所有的电影
         window.location.href = '/video/list/index/'+ftitle;
     }
+    url = '/video/list/lson';
+    msg = {'sid':sid,'_token':'{{csrf_token()}}'};
     //发送ajax
-    $.post('/video/list/lson',{'title':title,'_token':'{{csrf_token()}}'},function(data){
-          $('.splist').children().remove();
-          if(data!=1){
-            for(i in data){
-              $('.splist').append('<a href="/video/play/index/'+data[i].id+'"><div class="myvideo"><div class="myvideoimg"><img src="" class="imgPath'+i+'"/><h3>'+data[i].video_title+'</h3><span class="play1">播放</span><span class="time">'+data[i].size+'</span></div><div class="title3"><div class="playtime">'+data[i].clicks+'次播放</div></div></div></a>');
-            }
+    sendAjax(url,msg);
+    
+  }
 
-           for(j in data){
-              $('.imgPath'+i).attr('src',"{{env('PATH_IMG')}}"+data[i].pic+'?imageView2/1/w/217/h/132/q/75|imageslim');
-           }
-            
-          }
-    },'json')
-  })
+  //查询是否是vip
+  // function vipClick(vid,obj){
+  //   //添加样式
+  //   $('.address .h23 a').removeClass('myon');
+  //   obj.addClass('myon');
 
-  //查询vip中的视频
-  $('.address .h23 a').click(function(){
-      //获取获取父类和子类
-      var fatherTitle = $('.address .h21 a[class=myon]').html();
-      var sonTitle = $('.address .h22 a[class=myon]').html();
-      $('.address .h23 a').removeClass('myon');
-      $(this).addClass('myon');
-      //发送ajax
-      $.post('/video/list/lvip',{'fatherTitle':fatherTitle,'sonTitle':sonTitle,'_token':'{{csrf_token()}}'},function(data){
-          $('.splist').children().remove();
-          if(data!=1){
-            for(i in data){
-              $('.splist').append('<a href="/video/play/index/'+data[i].id+'"><div class="myvideo"><div class="myvideoimg"><img src="" class="imgPath'+i+'"/><h3>'+data[i].video_title+'</h3><span class="play1">播放</span><span class="time">'+data[i].size+'</span></div><div class="title3"><div class="playtime">'+data[i].clicks+'次播放</div></div></div></a>');
-            }
-
-           for(j in data){
-              $('.imgPath'+i).attr('src',"{{env('PATH_IMG')}}"+data[i].pic+'?imageView2/1/w/217/h/132/q/75|imageslim');
-           }
-            
-          }
-    },'json')
+  // }
 
 
-
-  })
+  
+  
 </script>
 </div>
 <div class="kssearchbox">
@@ -123,15 +158,7 @@
 </script>
 <div class="wdss"><input type="text" class="input1" style="width:124px;height:23px;border:1px solid #e6e6e6;float:left;line-height:23px;color:#666666;padding-left:0px" /><image type="image" src="/homes/images/search.jpg"  class="btn1"></button></div>
 <span class="ssjg">共1200个筛选结果</span>
-<!-- <div class="page1">
-  <span class="num">
-    <font class="f_blue">1</font>/41
-  </span>
-  <span class="prev">上一页</span>
-  <span class="next">
-    <a href="#">下一页</a>
-  </span>
-</div> -->
+
 </div>
 
         
@@ -160,22 +187,6 @@
           
       </div>
       @endif
-	  <!-- <div class="page">
-      <span class="prev">上一页</span>
-      <span class="num">
-        <a href="#" class="on">1</a>
-       
-        <a href="#">8</a>
-        <a href="#">9</a>
-        <a href="#">10</a>
-      </span>
-      <span class="next">
-        <a href="#">下一页</a>
-      </span>
-      <em>217/5</em>转到
-      <input name="textfield" type="text" value="5" class="inputpage"/>
-        页
-      <input type="submit" name="Submit" value="GO" class="btngo"/>
-    </div> -->
+	  
 </div>
 @endsection
