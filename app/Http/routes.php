@@ -53,6 +53,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'adminLogin']
 	//网站配置
 	Route::resource('/config','ConfigController');
 
+	//广告表
+	Route::resource('/advertise','AdvertiseController');
+
 	//后台首页
 	Route::resource('/','IndexController');
 
