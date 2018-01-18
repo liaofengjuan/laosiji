@@ -57,7 +57,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'adminLogin']
 //前台路由组
 Route::group(['namespace'=>'Home'],function()
 {
-
 	//前台首页
 	Route::get('/',"IndexController@index");
 	//前台--换一组
@@ -65,48 +64,21 @@ Route::group(['namespace'=>'Home'],function()
 	//执行注销
 	Route::get('/signout',"IndexController@signout");
 
-	//登录页面
-	Route::get('/login',"LoginController@index");
+	//登录
+	Route::controller('/login','LoginController');
 	//创建验证码
 	Route::get('/create_code/{id}',"LoginController@create_code");
-	//执行登录
-	Route::post('/do_login',"LoginController@do_login");
-	//检测手机是否注册
-	Route::post('/test_phone',"LoginController@test_phone");
-	//发送手机验证码
-	Route::post('/alidayu',"LoginController@alidayu");
-	//执行短信验证登录
-	Route::post('/phone_login',"LoginController@phone_login");
 
-	//注册页面
-	Route::get('/register',"RegisterController@index");
-	//执行注册
-	Route::post('/do_register',"RegisterController@do_register");
+	//注册
+	Route::controller('/register','RegisterController');
 
 	//个人中心路由组
 	Route::group(['middleware' => 'loginStatus'],function(){
-		//个人中心首页
-		Route::get('/center/self',"UsersController@index");
-		//修改用户详情数据
-		Route::post('/center/self/update_info',"UsersController@update_info");
-		//账户安全页
-		Route::get('/center/self/pass',"UsersController@psw");
-		//执行修改密码
-		Route::post('/center/self/pass/do_update','UsersController@do_update');
-		//上传头像页面
-		Route::get('/center/self/sc','UsersController@shangchuan');
-		//执行上传图片
-		Route::post('/center/self/uploadimg','UsersController@uploadImg');
-		//将路径存入数据库
-		Route::post('/center/self/insert_img','UsersController@insert_img');
-		//引入我的视频页面
-		Route::get('/center/video/index','VideoController@index');
-		//引入上传视频页面
-		Route::get('/center/video/upload','VideoController@v_upload');
-		//获取子类
-		Route::post('/center/video/getSon/{pid}','VideoController@getSon');
-		//引入观看历史页面
-		Route::get('/center/video/history','VideoController@v_history');
+		//个人中心个人资料
+		Route::controller('/center/self',"UsersController");
+
+		//个人中心视频管理
+		Route::controller('/center/video','VideoController');
 		Route::resource('/center/video','VideoController');
 	});
 

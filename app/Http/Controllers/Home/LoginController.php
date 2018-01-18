@@ -16,7 +16,7 @@ use Gregwar\Captcha\PhraseBuilder;
 class LoginController extends Controller
 {
     //引入登录页面
-    public function index()
+    public function getIndex()
     {
     	//引入登录页面
         return view('home.login');
@@ -36,7 +36,7 @@ class LoginController extends Controller
 
 
     //执行登录
-    public function do_login(Request $request)
+    public function postDologin(Request $request)
     {	
     	//接收登录数据
     	$user = $request -> input('user');
@@ -79,7 +79,7 @@ class LoginController extends Controller
     }
 
     //检测手机是否注册(阿里短信)
-    public function test_phone(Request $request)
+    public function postTestphone(Request $request)
     {
         $phone = $request -> input('phone');
         //验证手机
@@ -91,7 +91,7 @@ class LoginController extends Controller
     }
 
     //阿里短信
-    public function alidayu(Request $request)
+    public function postAlidayu(Request $request)
     {
 
         //获取手机号
@@ -120,7 +120,7 @@ class LoginController extends Controller
 
 
     //执行短信验证登录
-    public function phone_login(Request $request)
+    public function postPhonelogin(Request $request)
     {
         $phone = $request -> input('phone');
         $code = $request -> input('code');

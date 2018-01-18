@@ -13,7 +13,7 @@ use DB;
 class RegisterController extends Controller
 {
     //注册页面
-    public function index()
+    public function getIndex()
     {
         //引入注册页面
         return view('home.register');
@@ -21,7 +21,7 @@ class RegisterController extends Controller
 
     
     //执行注册
-    public function do_register(Request $request)
+    public function postDoregister(Request $request)
     {
         //接受数据
         $phone = $request->input('phone');

@@ -4,8 +4,8 @@
   <div class="right840">
     <div class="title6">
       <h1><a href="#" class="on">信息完善</a></h1>
-      <h1><a href="/center/self/sc">修改图像</a></h1>
-      <h1><a href="/center/self/pass">账户安全</a></h1>
+      <h1><a href="/center/self/shangchuan">修改头像</a></h1>
+      <h1><a href="/center/self/psw">账户安全</a></h1>
     </div>
     <div class="display">
       <form id='formquan'>
@@ -22,9 +22,12 @@
           <td>&nbsp;&nbsp;&nbsp;<b>注册时间:</b></td>
           <td>&nbsp;&nbsp;&nbsp;{{$data->userinfo->created_at}} &nbsp;&nbsp;&nbsp;</td>
         </tr>
-        
         <tr>
-          <td>&nbsp;&nbsp;&nbsp;<b>年 龄:</b></td>
+          <td>&nbsp;&nbsp;&nbsp;<b>vip到期时间:</b></td>
+          <td>&nbsp;&nbsp;&nbsp;@if(($data->userinfo->vip_time-time()) > 0){{date('Y-m-d H:i:s',$data->userinfo->vip_time)}} @else 已到期 @endif&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&4;&nbsp;&nbsp;<b>年 龄:{{$data->userinfo->vip_time-time()}}</b></td>
           <td>&nbsp;&nbsp;&nbsp;
             <input type="text" style="color:#666" class="input1 yxzz34" value="{{$data->userinfo->age}}"  name="age"/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="f_black">请输入年龄</font></td>
@@ -123,7 +126,7 @@
             headers: {
             'X-CSRF-TOKEN': jq3('meta[name="csrf-token"]').attr('content')
         },
-            url: "/center/self/update_info",
+            url: "/center/self/updateinfo",
             data: formData,
             // dataType: 'JSON',
             cache: false,
