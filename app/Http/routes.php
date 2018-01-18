@@ -85,6 +85,9 @@ Route::group(['namespace'=>'Home'],function()
 		//个人中心视频管理
 		Route::controller('/center/video','VideoController');
 		Route::resource('/center/video','VideoController');
+
+		//回复模块
+		Route::controller('/reply','ReplyController');
 	});
 
 	//视频列表页--隐式控制器

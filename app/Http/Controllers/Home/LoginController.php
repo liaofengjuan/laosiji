@@ -69,7 +69,7 @@ class LoginController extends Controller
         {
             // dd($res->userinfo->pic);
             session(['user' => $res['username']]);
-    		session(['pic' => $res->userinfo->pic]);
+    		session(['pic' => $res->userinfo['pic']]);
     		echo 2; //登录成功
     		return;
     	}else{

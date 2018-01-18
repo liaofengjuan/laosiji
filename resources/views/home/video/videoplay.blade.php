@@ -1,6 +1,9 @@
 @extends('home.layout.header_footer')
+@section('sc')
+@endsection
 @section('content')
 <link href="/homes/css/whir_styles.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/homes/js/jquery-1.8.3.min.js"></script>
 
 <!--container-->
 <div class="player_container">
@@ -28,31 +31,7 @@
                 播放：12556次<br />
                 评论：1554次</div>
               </a> </li>
-            <li class="item"> <a class="item_link" href="#" title="台妹为何不嫁大陆男" > <span class="album_pic"> <img width="117px" height="65px" src="/homes/images/playimg.jpg" alt="台妹为何不嫁大陆男"> <span class="figure_mask"> <em class="mask_txt">01:06</em> </span> </span>
-              <div class="video_title"><strong>台妹为何不嫁大陆男</strong><br />
-                播放：12556次<br />
-                评论：1554次</div>
-              </a> </li>
-            <li class="item"> <a class="item_link" href="#" title="台妹为何不嫁大陆男" > <span class="album_pic"> <img width="117px" height="65px" src="/homes/images/playimg.jpg" alt="台妹为何不嫁大陆男"> <span class="figure_mask"> <em class="mask_txt">01:06</em> </span> </span>
-              <div class="video_title"><strong>台妹为何不嫁大陆男</strong><br />
-                播放：12556次<br />
-                评论：1554次</div>
-              </a> </li>
-            <li class="item"> <a class="item_link" href="#" title="台妹为何不嫁大陆男" > <span class="album_pic"> <img width="117px" height="65px" src="/homes/images/playimg.jpg" alt="台妹为何不嫁大陆男"> <span class="figure_mask"> <em class="mask_txt">01:06</em> </span> </span>
-              <div class="video_title"><strong>台妹为何不嫁大陆男</strong><br />
-                播放：12556次<br />
-                评论：1554次</div>
-              </a> </li>
-            <li class="item"> <a class="item_link" href="#" title="台妹为何不嫁大陆男" > <span class="album_pic"> <img width="117px" height="65px" src="/homes/images/playimg.jpg" alt="台妹为何不嫁大陆男"> <span class="figure_mask"> <em class="mask_txt">01:06</em> </span> </span>
-              <div class="video_title"><strong>台妹为何不嫁大陆男</strong><br />
-                播放：12556次<br />
-                评论：1554次</div>
-              </a> </li>
-            <li class="item"> <a class="item_link" href="#" title="台妹为何不嫁大陆男" > <span class="album_pic"> <img width="117px" height="65px" src="/homes/images/playimg.jpg" alt="台妹为何不嫁大陆男"> <span class="figure_mask"> <em class="mask_txt">01:06</em> </span> </span>
-              <div class="video_title"><strong>台妹为何不嫁大陆男</strong><br />
-                播放：12556次<br />
-                评论：1554次</div>
-              </a> </li>
+            
           </ul>
         </div>
       </div>
@@ -73,7 +52,7 @@
     <ul>
       <li>
         <div class="upname">
-          <div class="upnameimg"><img src="/homes/images/upname.jpg" width="61" height="60"/></div>
+          <div class="upnameimg"><img src="" width="61" height="60"/></div>
           <div class="upnamet">昵称:<a href="#">拍客现场</a><br />
             <img src="/homes/images/xbg.jpg" /></div>
         </div>
@@ -92,67 +71,57 @@
     <div class="left868">
       <!--留言板-->
       <div class="fbpl">
-        <div class="plr"><span class="pltx"><a href="#"><img src="/homes/images/upname.jpg" width="61" height="61" /></a></span><span class="plname"><a href="#">Star_moon66250919</a></span><span class="plnum">所有评论<a href="#"> 21</a></span></div>
-        <textarea name="textarea" class="input4"></textarea>
-        <input type="image" src="/homes/images/fbpl.jpg" style="margin-left:25px;" />
+        <div class="plr"><span class="pltx"><a href="#"><img src="{{session('pic')}}" width="61" height="61" /></a></span><span class="plname"><a href="#">{{session('user')}}</a></span><span class="plnum">所有评论<a href="#"> 21</a></span></div>
+        <textarea name="textarea" class="input4 txtinp"></textarea>
+        @if(session('user'))
+        <input class="tutih"  type="image" src="/homes/images/fbpl.jpg" style="margin-left:25px;" />
+        @else
+        <font color="red">&nbsp;&nbsp;&nbsp;&nbsp;登陆后才能回复！</font>
+        @endif
       </div>
       <!--留言列表-->
       <div class="lylist">
         <div class="title1" style="margin-top:0">
           <h1 style="padding-left:0">全部评论（21）</h1>
           <div class="plpage">
-            <div class="page1"><span class="num"><font class="f_blue">1</font>/41</span><span class="prev">上一页</span><span class="next"><a href="#">下一页</a></span> </div>
+            
           </div>
         </div>
         <ul class="pllist">
+          @foreach($comment as $v)
           <li>
-            <div class="lyimg"><a href="#"><img src="/homes/images/grzx/lyimg.jpg" /></a></div>
+            <div class="lyimg"><a href="#"><img src="{{$v->userinfo['pic']}}" /></a></div>
             <div class="lyinfo">
-              <div class="lyname"><span class="myname"><a href="#">huo_zhenying</a></span></div>
-              <div class="gxqm">为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多</div>
-              <div class="reque">36分钟前 来自iPad客户端 <span class="zhuanfa"><a href="#">转发</a><a href="#">回复</a></span></div>
+              <div class="lyname"><span class="myname"><a href="#">{{$v->user['username']}}</a></span></div>
+              <div class="gxqm">{{$v['content']}}{{$v->userinfo['username']}}</div>
+              <div class="reque">
+                <span class="zhuanfa zhhuifu">
+                  {{date('Y-m-d H:i:s',$v['created_at'])}}
+                  @if(session('user'))
+                  <a href="#">回复</a>
+                  @else
+                  <a href="#"></a>
+                  @endif
+                </span>
+                
+                <span class="yinchuif" style='display:none'>
+                <textarea name="" id="" cols="60" rows="2"></textarea>
+                <input style="margin-bottom:20px;width:50px;height:20px;cursor:pointer" type="button" value="回复" />
+                </span>
+
+              </div>
             </div>
           </li>
-          <li>
-            <div class="lyimg"><a href="#"><img src="/homes/images/grzx/lyimg.jpg" /></a></div>
+          @endforeach
+          <li style="background-color:pink">
+            <div class="lyimg"><a href="#"><img src="images/grzx/lyimg.jpg" /></a></div>
             <div class="lyinfo">
-              <div class="lyname"><span class="myname"><a href="#">huo_zhenying</a></span></div>
-              <div class="gxqm">为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多</div>
-              <div class="reque">36分钟前 来自iPad客户端 <span class="zhuanfa"><a href="#">转发</a><a href="#">回复</a></span></div>
+              <div class="lyname"><span class="myname"><a href="#">huo_zhenying 回复：</a></span></div>
+              <div class="gxqm">为什么不叫汪峰来更火 </div>
+              <div class="reque"> <span class="zhuanfa"><a href="#"></a><a href="#"></a></span></div>
             </div>
           </li>
-          <li>
-            <div class="lyimg"><a href="#"><img src="/homes/images/grzx/lyimg.jpg" /></a></div>
-            <div class="lyinfo">
-              <div class="lyname"><span class="myname"><a href="#">huo_zhenying</a></span></div>
-              <div class="gxqm">为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多</div>
-              <div class="reque">36分钟前 来自iPad客户端 <span class="zhuanfa"><a href="#">转发</a><a href="#">回复</a></span></div>
-            </div>
-          </li>
-          <li>
-            <div class="lyimg"><a href="#"><img src="/homes/images/grzx/lyimg.jpg" /></a></div>
-            <div class="lyinfo">
-              <div class="lyname"><span class="myname"><a href="#">huo_zhenying</a></span></div>
-              <div class="gxqm">为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多</div>
-              <div class="reque">36分钟前 来自iPad客户端 <span class="zhuanfa"><a href="#">转发</a><a href="#">回复</a></span></div>
-            </div>
-          </li>
-          <li>
-            <div class="lyimg"><a href="#"><img src="/homes/images/grzx/lyimg.jpg" /></a></div>
-            <div class="lyinfo">
-              <div class="lyname"><span class="myname"><a href="#">huo_zhenying</a></span></div>
-              <div class="gxqm">为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多</div>
-              <div class="reque">36分钟前 来自iPad客户端 <span class="zhuanfa"><a href="#">转发</a><a href="#">回复</a></span></div>
-            </div>
-          </li>
-          <li>
-            <div class="lyimg"><a href="#"><img src="/homes/images/grzx/lyimg.jpg" /></a></div>
-            <div class="lyinfo">
-              <div class="lyname"><span class="myname"><a href="#">huo_zhenying</a></span></div>
-              <div class="gxqm">为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多为什么不叫汪峰来更火 募捐的人更多</div>
-              <div class="reque">36分钟前 来自iPad客户端 <span class="zhuanfa"><a href="#">转发</a><a href="#">回复</a></span></div>
-            </div>
-          </li>
+          
         </ul>
         <div class="page"><span class="prev">上一页</span><span class="num"><a href="#" class="on">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a href="#">7</a><a href="#">8</a><a href="#">9</a><a href="#">10</a></span><span class="next"><a href="#">下一页</a></span><em>217/5</em>转到
           <input name="textfield" type="text" value="5" class="inputpage"/>
@@ -174,61 +143,56 @@
               <h2><a href="#">快闪撑同志！LES美女映像节现场结婚！！</a></h2>
               <span>12万次播放</span></div>
           </li>
-          <li>
-            <div class="tjimg"><img src="/homes/images/my.jpg" width="138" height="83" /><span class="bftime">02:10</span></div>
-            <div class="tjinfo">
-              <h2><a href="#">快闪撑同志！LES美女映像节现场结婚！！</a></h2>
-              <span>12万次播放</span></div>
-          </li>
-          <li>
-            <div class="tjimg"><img src="/homes/images/my.jpg" width="138" height="83" /><span class="bftime">02:10</span></div>
-            <div class="tjinfo">
-              <h2><a href="#">快闪撑同志！LES美女映像节现场结婚！！</a></h2>
-              <span>12万次播放</span></div>
-          </li>
-          <li>
-            <div class="tjimg"><img src="/homes/images/my.jpg" width="138" height="83" /><span class="bftime">02:10</span></div>
-            <div class="tjinfo">
-              <h2><a href="#">快闪撑同志！LES美女映像节现场结婚！！</a></h2>
-              <span>12万次播放</span></div>
-          </li>
-          <li>
-            <div class="tjimg"><img src="/homes/images/my.jpg" width="138" height="83" /><span class="bftime">02:10</span></div>
-            <div class="tjinfo">
-              <h2><a href="#">快闪撑同志！LES美女映像节现场结婚！！</a></h2>
-              <span>12万次播放</span></div>
-          </li>
-          <li>
-            <div class="tjimg"><img src="/homes/images/my.jpg" width="138" height="83" /><span class="bftime">02:10</span></div>
-            <div class="tjinfo">
-              <h2><a href="#">快闪撑同志！LES美女映像节现场结婚！！</a></h2>
-              <span>12万次播放</span></div>
-          </li>
-          <li>
-            <div class="tjimg"><img src="/homes/images/my.jpg" width="138" height="83" /><span class="bftime">02:10</span></div>
-            <div class="tjinfo">
-              <h2><a href="#">快闪撑同志！LES美女映像节现场结婚！！</a></h2>
-              <span>12万次播放</span></div>
-          </li>
-          <li>
-            <div class="tjimg"><img src="/homes/images/my.jpg" width="138" height="83" /><span class="bftime">02:10</span></div>
-            <div class="tjinfo">
-              <h2><a href="#">快闪撑同志！LES美女映像节现场结婚！！</a></h2>
-              <span>12万次播放</span></div>
-          </li>
-          <li>
-            <div class="tjimg"><img src="/homes/images/my.jpg" width="138" height="83" /><span class="bftime">02:10</span></div>
-            <div class="tjinfo">
-              <h2><a href="#">快闪撑同志！LES美女映像节现场结婚！！</a></h2>
-              <span>12万次播放</span></div>
-          </li>
+          
         </ul>
       </div>
     </div>
   </div>
 </div>
-<!-- <script type="text/javascript" src="/homes/js/jquery1.42.min.js"></script>
-<script type="text/javascript" src="/homes/js/jquery.SuperSlide.2.1.1.js"></script>
-<script type="text/javascript" src="/homes/js/index_solid.js"></script>
-<script type="text/javascript" src="/homes/js/column.js"></script> -->
+<script type="text/javascript">
+
+  //盖楼框
+  $('.pllist').on('click','.zhhuifu a',function(){
+     // $('.pllist .zhhuifu a').toggle(
+     //    function(){
+     //      $(this).text('取消回复');
+     //      $('.yinchuif').css('display','block');
+     //      return false;
+     //    },
+     //    function(){
+     //      $(this).text('回复');
+     //      $('.yinchuif').css('display','none');
+     //      return false;
+     //    }
+     //  );
+
+    if(this.css('display') == 'block')
+    {
+      $(this).text('取消回复');
+      return false;
+      // $(this).
+    }else if(this.css('display') == 'none'){
+      $(this).text('取消');
+      return false;
+    }
+  });
+  
+
+  //
+  $('.tutih').click(function(){
+    var cont = $('.txtinp').val();
+    console.log(cont);
+    $.post('/reply/addcomment',{cont:cont,vid:'{{$data["id"]}}',_token:'{{csrf_token()}}'},function(msg){
+      if(msg == '3')
+      {
+        alert('评论失败！');
+      }else if(msg == '2'){
+        $('.pllist').prepend('<li><div class="lyimg"><a href="#"><img src="'+'{{session("pic")}}'+'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+'{{session("user")}}'+'</a></span></div><div class="gxqm">'+cont+'</div><div class="reque"><span class="zhuanfa zhhuifu">asd<a href="#">回复</a></span><span class="yinchuif" style="display:none"><textarea name="" id="" cols="60" rows="2"></textarea><input style="margin-bottom:20px;width:50px;height:20px;cursor:pointer" type="button" value="回复" /></span></div></div></li>'
+          )
+      }
+    })
+  })
+</script>
+<li>
+            
 @endsection
