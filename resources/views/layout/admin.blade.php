@@ -191,13 +191,13 @@
                         </a>
                         <ul class="tpl-left-nav-sub-menu guanggao">
                             <li>
-                                <a href="table-font-list.html">
+                                <a href="{{url('./admin/advertise')}}">
                                     <i class="am-icon-angle-right"></i>
                                     <span>广告列表</span>
                                     <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
                                 </a>
 
-                                <a href="table-images-list.html">
+                                <a href="{{url('./admin/advertise/create')}}">
                                     <i class="am-icon-angle-right"></i>
                                     <span>添加广告</span>
                                 </a>

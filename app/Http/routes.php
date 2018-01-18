@@ -47,6 +47,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'adminLogin']
 	//轮播图
 	Route::resource('/slideshow','SlideshowController');
 
+	//广告表
+	Route::resource('/advertise','AdvertiseController');
 
 
 });
