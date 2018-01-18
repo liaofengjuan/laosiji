@@ -20,30 +20,30 @@
         </tr>
         <tr>
           <td>&nbsp;&nbsp;&nbsp;<b>注册时间:</b></td>
-          <td>&nbsp;&nbsp;&nbsp;{{$data->userinfo->created_at}} &nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;{{$data->userinfo['created_at']}} &nbsp;&nbsp;&nbsp;</td>
         </tr>
         <tr>
           <td>&nbsp;&nbsp;&nbsp;<b>vip到期时间:</b></td>
-          <td>&nbsp;&nbsp;&nbsp;@if(($data->userinfo->vip_time-time()) > 0){{date('Y-m-d H:i:s',$data->userinfo->vip_time)}} @else 已到期 @endif&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;@if(($data->userinfo['vip_time']-time()) > 0){{date('Y-m-d H:i:s',$data->userinfo['vip_time'])}} @else 已到期 @endif&nbsp;&nbsp;&nbsp;</td>
         </tr>
         <tr>
-          <td>&4;&nbsp;&nbsp;<b>年 龄:{{$data->userinfo->vip_time-time()}}</b></td>
+          <td>&nbsp;&nbsp;&nbsp;<b>年 龄:</b></td>
           <td>&nbsp;&nbsp;&nbsp;
-            <input type="text" style="color:#666" class="input1 yxzz34" value="{{$data->userinfo->age}}"  name="age"/>
+            <input type="text" style="color:#666" class="input1 yxzz34" value="{{$data->userinfo['age']}}"  name="age"/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="f_black">请输入年龄</font></td>
         </tr>
         <tr>
           <td>&nbsp;&nbsp;&nbsp;<b>邮 箱:</b></td>
           <td>&nbsp;&nbsp;&nbsp;
-            <input type="text" style="color:#666" class="input1 yxzz33" value="{{$data->userinfo->email}}"  name="email"/>
+            <input type="text" style="color:#666" class="input1 yxzz33" value="{{$data->userinfo['email']}}"  name="email"/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="" class="f_black">请输入邮箱</font></td>
         </tr>
         <tr>
           <td>&nbsp;&nbsp;&nbsp;<b>性别:</b></td>
           <td>&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="sex" value="m" @if($data->userinfo->sex == 'm') checked @endif />
+            <input type="radio" name="sex" value="m" @if($data->userinfo['sex'] == 'm') checked @endif />
             男
-            <input type="radio" name="sex" value="w"  @if($data->userinfo->sex == 'w') checked @endif />
+            <input type="radio" name="sex" value="w"  @if($data->userinfo['sex'] == 'w') checked @endif />
             女</td>
         </tr>
         

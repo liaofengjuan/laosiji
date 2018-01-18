@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Model\VideoInfo;
 use App\Model\User;
 use App\Model\History;
+use App\Model\Comment;
 
 class VideoplayController extends Controller
 {
@@ -33,8 +34,11 @@ class VideoplayController extends Controller
          }
       }
 
+      //查询评论
+      $com = Comment::where('vid',$play_id)->orderBy('created_at','desc')->get();
+      
 		//查询视频信息
 		$res = VideoInfo::where('id',$play_id)->first();
-      return view('home.video.videoplay',['data' => $res]);
+      return view('home.video.videoplay',['data' => $res,'comment' => $com]);
    }
 }
