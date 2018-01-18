@@ -44,6 +44,14 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'adminLogin']
 	Route::post('/friend/uploadImg','FriendController@uploadImg');//上传图片
 	Route::resource('/friend','FriendController');
 
+	//网站配置
+	Route::resource('config','ConfigController');
+	// Route::resource('system','Admins\SystemController');
+	// Route::post('/config/store','ConfigController@store');//上传图片
+
+	//后台首页
+	Route::resource('/index','IndexController');
+
 });
 
 

@@ -50,7 +50,7 @@ return [
         'qiniu' => [
             'driver'  => 'qiniu',
             'domains' => [
-<<
+            
                 'default'   => 'p2duy5ziy.bkt.clouddn.com', //你的七牛域名
                 'https'     => 'dn-yourdomain.qbox.me',         //你的HTTPS域名
                 'custom'    => 'static.abc.com',                //Useless 没啥用，请直接使用上面的 default 项
