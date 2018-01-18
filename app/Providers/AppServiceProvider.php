@@ -13,8 +13,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //电影主类
         $fatherType = \DB::table('video_type')->where('status',0)->where('pid',0)->get();
         view()->share('fatherType',$fatherType);
+
+        //友情链接
+        $friendLink = \DB::table('friend_link')->where('status',0)->get();
+        view()->share('friendLink',$friendLink);
+
     }
 
     /**

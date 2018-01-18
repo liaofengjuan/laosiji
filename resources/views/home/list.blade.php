@@ -12,9 +12,9 @@
     <a href="javascript:;" >全部</a>
     @foreach($fatherType as $v)
     @if($v['title']==$title)
-    <a href="{{url('/video/list/index/'.$v['title'])}}" class='myon'>{{$v['title']}}</a>
+    <a href="{{url('/video/list/index/'.$v['title'])}}" fatherId="{{$v['id']}}" class='myon'>{{$v['title']}}</a>
     @else
-    <a href="{{url('/video/list/index/'.$v['title'])}}" >{{$v['title']}}</a>
+    <a href="{{url('/video/list/index/'.$v['title'])}}" fatherId="{{$v['id']}}">{{$v['title']}}</a>
     @endif
     @endforeach
   </h2>
@@ -22,10 +22,10 @@
 <div class="address">
   <h1>按类型</h1>
   <h2 class='h22'>
-    <a href="javascript:;" class="myon" onclick="sonClick(0,$(this))">全部</a>
+    <a href="javascript:;" class="myon" onclick="sonClick($(this))">全部</a>
     @if($sonType)
     @foreach($sonType as $v)
-    <a href="javascript:;" onclick="sonClick({{$v['id']}},$(this))">{{$v['title']}}</a>
+    <a href="javascript:;" sonId="{{$v['id']}}" onclick="sonClick($(this))">{{$v['title']}}</a>
     @endforeach
     @endif
   </h2>
@@ -33,11 +33,19 @@
 <div class="address">
   <h1>按资费</h1>
   <h2 class='h23'>
-    <a href="javascript:;" class="myon" onclick="vipClick(0,$(this))">全部</a>
-    <a href="javascript:;" onclick="vipClick(1,$(this))">免费</a>
-    <a href="javascript:;" onclick="vipClick(2,$(this))">VIP</a>
+    <a href="javascript:;" class="myon" vipId='0' onclick="vipClick($(this))">全部</a>
+    <a href="javascript:;" vipId='1' onclick="vipClick($(this))">免费</a>
+    <a href="javascript:;" vipId='2' onclick="vipClick($(this))">VIP</a>
   </h2>
 </div>
+
+</div>
+<div class="kssearchbox">
+  <span class="sspx">排序条件</span>
+  <div class="SelectBox" onclick="orderByTime($(this))">最新</div>
+  <div class="SelectBox" onclick="orderByClick($(this))">最热</div>
+</div>
+
 <script type="text/javascript">
 
   //定义全局变量
@@ -97,72 +105,107 @@
     },'json')
   }
 
-  //查询子类中的相关电影
-  function sonClick(sid,obj){
-    $('.address .h22 a').removeClass('myon');
-    obj.addClass('myon');
-    var title = obj.html();
-    if(title=='全部'){
-        //获取父类的title
-        var ftitle = $('.address .h21 a[class=myon]').html();
-        //跳转到父类下所有的电影
-        window.location.href = '/video/list/index/'+ftitle;
+  //选择类型
+  function searchType(orders){
+    //获取是否为vip选项的值
+    var vid = $('.address .h23 a[class=myon]').attr('vipId');
+    //获取该父类和子类的id
+    var sid = $('.address .h22 a[class=myon]').attr('sonId');
+    var fid = $('.address .h21 a[class=myon]').attr('fatherId');
+    var msgf = '';
+    var msgs = '';
+    if(orders){
+      msgf = {'fid':fid,'orders':orders,'_token':'{{csrf_token()}}'};
+      msgs = {'sid':sid,'orders':orders,'_token':'{{csrf_token()}}'};
+    }else{
+      msgf = {'fid':fid,'_token':'{{csrf_token()}}'};
+      msgs = {'sid':sid,'_token':'{{csrf_token()}}'};
     }
-    url = '/video/list/lson';
-    msg = {'sid':sid,'_token':'{{csrf_token()}}'};
+    
+    
+    switch(vid){
+      case '0'://全部
+          //子类：全部all   是否vip：全部all
+          if(!sid){
+            url = '/video/list/aall';
+            msg = msgf;
+          }
+          //子类：有hav   是否vip：全部all
+          if(sid){
+            url = '/video/list/hall';
+            msg = msgs
+          }
+        break;
+      case '1'://免费
+          //子类:全部all     是否vip：免费free
+          if(!sid){
+            url = '/video/list/afree';
+            msg = msgf
+          }
+          //子类：有hav   是否vip：免费free
+          if(sid){
+            url = '/video/list/hfree';
+            msg = msgs
+          }
+        break;
+      case '2'://vip
+          //子类:全部all     是否vip：vip
+          if(!sid){
+            url = '/video/list/avip';
+            msg = msgf
+          }
+          //子类：有hav   是否vip：vip
+          if(sid){
+            url = '/video/list/hvip';
+            msg = msgs
+          }
+        break;
+    }
     //发送ajax
     sendAjax(url,msg);
+  }
+
+  //查询子类中的相关电影
+  function sonClick(obj){
+    $('.address .h22 a').removeClass('myon');
+    obj.addClass('myon');
+    searchType();
     
   }
 
-  //查询是否是vip
-  // function vipClick(vid,obj){
-  //   //添加样式
-  //   $('.address .h23 a').removeClass('myon');
-  //   obj.addClass('myon');
+  // 查询是否是vip
+  function vipClick(obj){
 
-  // }
+    //添加样式
+    $('.address .h23 a').removeClass('myon');
+    obj.addClass('myon');
+    searchType();
+  }
 
+  //排序
+  //排序鼠标移入效果
+  $('.kssearchbox .SelectBox').hover(function(){
+    $(this).css('cursor','pointer');
+  },function(){
+  })
+  //按时间排序
+  function orderByTime(obj){
+    $('.kssearchbox .SelectBox').removeClass('myon');
+    obj.addClass('myon');
+
+    searchType(1);//按时间排序
+  }
+  //按最热
+  function orderByClick(obj){
+    $('.kssearchbox .SelectBox').removeClass('myon');
+    obj.addClass('myon');
+
+    searchType();//按最热排序
+  }
 
   
-  
-</script>
-</div>
-<div class="kssearchbox">
-<span class="sspx">按排序</span>
-<div class="SelectBox">
- <span class="SelectText">请选择</span>
- <dl class="SelectList">
-     <dt><a href="javascript:void(0)">点击量</a></dt>
-     <dt><a href="javascript:void(0)">评论量</a></dt>
- </dl>
-</div>
-<script type="text/javascript">
-  $(".SelectBox").each(function(){
-		$(this).find(".SelectText").click(function(){
-			 var SelectListStatis = $(this).next(".SelectList").css("display");
-			 if(SelectListStatis == "none"){
-					$(this).next(".SelectList").show();
-				 }
-			 else{
-					$(this).next(".SelectList").hide();
-				 }
-		 });
-		 $(this).find(".SelectList").children("dt").click(function(){
-				 var Value = $(this).find("a").text();
-				 $(this).parents(".SelectList").prev(".SelectText").text(Value);
-				 $(this).parents(".SelectList").hide();
-			 });
-		 $(this).mouseleave(function(){ $(this).find(".SelectList").hide(); });
-	});
-</script>
-<div class="wdss"><input type="text" class="input1" style="width:124px;height:23px;border:1px solid #e6e6e6;float:left;line-height:23px;color:#666666;padding-left:0px" /><image type="image" src="/homes/images/search.jpg"  class="btn1"></button></div>
-<span class="ssjg">共1200个筛选结果</span>
-
-</div>
-
-        
-      <div class="splist"  style="width:auto;height:auto;">
+</script>       
+<div class="splist"  style="width:auto;height:auto;">
         @if($movies)
         @foreach($movies as $v)
           <div class="myvideo">

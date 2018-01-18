@@ -56,10 +56,10 @@
   </div>
   <!--专题栏目-->
   <div class="ztzl">
-    <div style="margin-bottom:10px;"><a href="#"><img src="/homes/images/zt1.jpg" /></a></div>
-    <div style="margin-bottom:10px;"><a href="#"><img src="/homes/images/zt2.jpg" /></a></div>
-    <div style="margin-bottom:10px;"><a href="#"><img src="/homes/images/zt3.jpg" /></a></div>
-    <div><a href="#"><img src="/homes/images/zt4.jpg" /></a></div>
+    <div style="margin-bottom:10px;"><a href="{{$advertise[0]->address}}"><img src="{{env('PATH_IMG').$advertise[0]->pic.'?imageView2/1/w/269/h/102/q/75|imageslim'}}" /></a></div>
+    <div style="margin-bottom:10px;"><a href="{{$advertise[1]->address}}"><img src="{{env('PATH_IMG').$advertise[1]->pic.'?imageView2/1/w/269/h/102/q/75|imageslim'}}" /></a></div>
+    <div style="margin-bottom:10px;"><a href="{{$advertise[2]->address}}"><img src="{{env('PATH_IMG').$advertise[2]->pic.'?imageView2/1/w/269/h/102/q/75|imageslim'}}" /></a></div>
+    <div><a href="{{$advertise[3]->address}}"><img src="{{env('PATH_IMG').$advertise[3]->pic.'?imageView2/1/w/269/h/102/q/75|imageslim'}}" /></a></div>
   </div>
 </div>
 

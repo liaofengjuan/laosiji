@@ -10,6 +10,7 @@ use App\Model\User;
 use App\Model\VideoType;
 use App\Model\VideoInfo;
 use App\Model\Slideshow;//使用轮播图模型
+use App\Model\Advertise;//使用广告模型
 
 class IndexController extends Controller
 {
@@ -70,9 +71,10 @@ class IndexController extends Controller
                                 ->take(5)
                                 ->get();
         
-        
+        //查询广告
+        $advertise = Advertise::where('status',0)->skip(0)->take(4)->get();
         //引入前台页面
-        return view('home.index',['data' => $arr,'data_slideshow'=>$data_slideshow,'hot'=>$hot,'onlyMovies'=>$onlyMovies]);
+        return view('home.index',['data' => $arr,'advertise' => $advertise,'data_slideshow'=>$data_slideshow,'hot'=>$hot,'onlyMovies'=>$onlyMovies]);
     }
 
     //执行注销
