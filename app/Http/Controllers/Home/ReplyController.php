@@ -81,9 +81,9 @@ class ReplyController extends Controller
         foreach($data as $k=>$v)
         {   
             $zi['time'] = date('Y-m-d H:i:s',$v->created_at);
-            $zi['content'] = $v->content;
-            $zi['pic'] = $v->userinfo->pic;
-            $zi['username'] = $v->user->username;
+            $zi['content'] = $v['content'];
+            $zi['pic'] = $v->userinfo['pic'];
+            $zi['username'] = $v->user['username'];
             $arr[] = $zi;
         }
         return $arr;
