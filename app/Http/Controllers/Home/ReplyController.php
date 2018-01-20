@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\User;
 use App\Model\Comment;
+use App\Model\Reply;
 
 class ReplyController extends Controller
 {
@@ -29,20 +30,63 @@ class ReplyController extends Controller
         $uid = User::where('username',session('user'))->value('id');
         // 执行添加
         $com = new Comment;
-        $com -> uid = $uid;
-        $com -> vid = $request->input('vid');
-        $com -> content = $request->input('cont');
-        $com -> created_at = time();
-        $res = $com -> save();
-
+        $id = $com -> insertGetId(['uid'=>$uid,'vid'=>$request->input('vid'),'content'=>$request->input('cont'),'created_at'=>time()]);
+        // dd($res);
         // $com = Comment::where('vid',$request->input('vid'))->orderBy('created_at','desc')->get();
-
+        $res = Comment::where('id',$id)->first();
         if($res)
         {
-            return 2; //成功
+            return $res; //成功
         }else{
             echo 3; //失败
         }
+    }
+
+    //添加评论
+    public function postInsreply(Request $request)
+    {
+        $user = User::where('username',session('user'))->first();
+        //获取评论数据
+        $comment_id = $request->input('comment_id');
+        $content = $request->input('content');
+        $reply = new Reply;
+        $reply -> comment_id = $comment_id;
+        $reply -> content = $content;
+        $reply -> uid = $user['id'];
+        $reply -> created_at = time();
+        $res = $reply -> save(); 
+
+        
+        if($res)
+        {
+            return $this->hqhf($comment_id);
+        }else{
+            echo 2; //失败
+        }
+    }
+
+    //获取评论下的子回复
+    public function postGreply(Request $request)
+    {
+        $comment_id = $request->input('comment_id');
+        return $this->hqhf($comment_id);
+    }
+
+    //回去回复相关信息
+    protected function hqhf($comment_id)
+    {
+        $arr = [];
+        $zi = [];
+        $data = Reply::where('comment_id',$comment_id)->orderBy('created_at','asc')->get();
+        foreach($data as $k=>$v)
+        {   
+            $zi['time'] = date('Y-m-d H:i:s',$v->created_at);
+            $zi['content'] = $v->content;
+            $zi['pic'] = $v->userinfo->pic;
+            $zi['username'] = $v->user->username;
+            $arr[] = $zi;
+        }
+        return $arr;
     }
 
     /**

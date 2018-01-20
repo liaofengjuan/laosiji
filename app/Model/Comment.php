@@ -21,4 +21,10 @@ class Comment extends Model
     {
         return $this->hasOne('App\Model\User','id','uid');
     }
+
+    //一对多
+    public function reply()
+    {
+        return $this->hasMany('App\Model\Reply','comment_id');
+    }
 }

@@ -35,10 +35,11 @@ class VideoplayController extends Controller
       }
 
       //查询评论
-      $com = Comment::where('vid',$play_id)->orderBy('created_at','desc')->get();
-      
+      $com = Comment::where('vid',$play_id)->orderBy('created_at','desc')->paginate(2);
+      //获取评论条数
+      $count = Comment::where('vid',$play_id)->orderBy('created_at','desc')->count();
 		//查询视频信息
 		$res = VideoInfo::where('id',$play_id)->first();
-      return view('home.video.videoplay',['data' => $res,'comment' => $com]);
+      return view('home.video.videoplay',['data' => $res,'count' => $count,'comment' => $com]);
    }
 }

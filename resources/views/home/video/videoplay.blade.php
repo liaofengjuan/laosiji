@@ -71,7 +71,7 @@
     <div class="left868">
       <!--留言板-->
       <div class="fbpl">
-        <div class="plr"><span class="pltx"><a href="#"><img src="{{session('pic')}}" width="61" height="61" /></a></span><span class="plname"><a href="#">{{session('user')}}</a></span><span class="plnum">所有评论<a href="#"> 21</a></span></div>
+        <div class="plr"><span class="pltx"><a href="#"><img src="{{session('pic')}}" width="61" height="61" /></a></span><span class="plname"><a href="#">{{session('user')}}</a></span><span class="plnum">所有评论<a href="#"> {{$count}}</a></span></div>
         <textarea name="textarea" class="input4 txtinp"></textarea>
         @if(session('user'))
         <input class="tutih"  type="image" src="/homes/images/fbpl.jpg" style="margin-left:25px;" />
@@ -82,37 +82,42 @@
       <!--留言列表-->
       <div class="lylist">
         <div class="title1" style="margin-top:0">
-          <h1 style="padding-left:0">全部评论（21）</h1>
+          <h1 style="padding-left:0">全部评论（{{$count}}）</h1>
           <div class="plpage">
             
           </div>
         </div>
         <ul class="pllist">
+          <!-- 回复 -->
           @foreach($comment as $v)
           <li>
             <div class="lyimg"><a href="#"><img src="{{$v->userinfo['pic']}}" /></a></div>
             <div class="lyinfo">
               <div class="lyname"><span class="myname"><a href="#">{{$v->user['username']}}</a></span></div>
-              <div class="gxqm">{{$v['content']}}{{$v->userinfo['username']}}</div>
+              <div class="gxqm">{{$v['content']}}</div>
               <div class="reque">
                 <span class="zhuanfa zhhuifu">
                   {{date('Y-m-d H:i:s',$v['created_at'])}}
                   @if(session('user'))
-                  <a href="#">回复</a>
+                  <a class="aaa1" href="#">回复</a>
                   @else
                   <a href="#"></a>
                   @endif
+                  <a class="aaa2" href="javascript:void(0);">展开回复</a>
                 </span>
                 
                 <span class="yinchuif" style='display:none'>
-                <textarea name="" id="" cols="60" rows="2"></textarea>
-                <input style="margin-bottom:20px;width:50px;height:20px;cursor:pointer" type="button" value="回复" />
+                <textarea class="neirhf" name="" id="" cols="60" rows="2"></textarea>
+                <input class="huifu44" style="margin-bottom:20px;width:50px;height:20px;cursor:pointer" type="button" value="回复" />
+                <input type="hidden" name="cunid" value="{{$v['id']}}">
                 </span>
 
               </div>
             </div>
           </li>
+          <span></span>
           @endforeach
+          <!-- 盖楼 -->
           <li style="background-color:pink">
             <div class="lyimg"><a href="#"><img src="images/grzx/lyimg.jpg" /></a></div>
             <div class="lyinfo">
@@ -123,11 +128,9 @@
           </li>
           
         </ul>
-        <div class="page"><span class="prev">上一页</span><span class="num"><a href="#" class="on">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a href="#">7</a><a href="#">8</a><a href="#">9</a><a href="#">10</a></span><span class="next"><a href="#">下一页</a></span><em>217/5</em>转到
-          <input name="textfield" type="text" value="5" class="inputpage"/>
-          页
-          <input type="submit" name="Submit" value="GO" class="btngo"/>
-        </div>
+        
+        <div class="myfenye">{!! $comment->render() !!}</div>
+
       </div>
     </div>
     <!--推荐视频-->
@@ -152,46 +155,98 @@
 <script type="text/javascript">
 
   //盖楼框
-  $('.pllist').on('click','.zhhuifu a',function(){
-     // $('.pllist .zhhuifu a').toggle(
-     //    function(){
-     //      $(this).text('取消回复');
-     //      $('.yinchuif').css('display','block');
-     //      return false;
-     //    },
-     //    function(){
-     //      $(this).text('回复');
-     //      $('.yinchuif').css('display','none');
-     //      return false;
-     //    }
-     //  );
-
-    if(this.css('display') == 'block')
+  $('.pllist').on('click','.zhhuifu .aaa1',function(){
+    if($(this).text() == '回复')
     {
       $(this).text('取消回复');
+      $(this).parent().next().css('display','block');
       return false;
-      // $(this).
-    }else if(this.css('display') == 'none'){
-      $(this).text('取消');
+    }else if($(this).text() == '取消回复'){
+      $(this).text('回复');
+      $(this).parent().next().css('display','none');
       return false;
     }
   });
   
 
-  //
+  //回复后动态添加回复内容
   $('.tutih').click(function(){
     var cont = $('.txtinp').val();
-    console.log(cont);
+    Date.prototype.Format = function (fmt) { //author: meizz 
+        var o = {
+            "M+": this.getMonth() + 1, //月份 
+            "d+": this.getDate(), //日 
+            "h+": this.getHours(), //小时 
+            "m+": this.getMinutes(), //分 
+            "s+": this.getSeconds(), //秒 
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+            "S": this.getMilliseconds() //毫秒 
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+
+    var t = new Date().Format("yyyy-MM-dd hh:mm:ss");
+    // console.log(t);
     $.post('/reply/addcomment',{cont:cont,vid:'{{$data["id"]}}',_token:'{{csrf_token()}}'},function(msg){
       if(msg == '3')
       {
         alert('评论失败！');
-      }else if(msg == '2'){
-        $('.pllist').prepend('<li><div class="lyimg"><a href="#"><img src="'+'{{session("pic")}}'+'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+'{{session("user")}}'+'</a></span></div><div class="gxqm">'+cont+'</div><div class="reque"><span class="zhuanfa zhhuifu">asd<a href="#">回复</a></span><span class="yinchuif" style="display:none"><textarea name="" id="" cols="60" rows="2"></textarea><input style="margin-bottom:20px;width:50px;height:20px;cursor:pointer" type="button" value="回复" /></span></div></div></li>'
+      }else if(msg){
+        // console.log(msg['content'])
+        $('.pllist').prepend('<li><div class="lyimg"><a href="#"><img src="'+'{{session("pic")}}'+'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+'{{session("user")}}'+'</a></span></div><div class="gxqm">'+msg['content']+'</div><div class="reque"><span class="zhuanfa zhhuifu">'+t+'<a class="aaa1" href="#">回复</a><a class="aaa2" href="#">展开回复</a></span><span class="yinchuif" style="display:none"><textarea class="neirhf" name="" id="" cols="60" rows="2"></textarea><input class="huifu44" style="margin-bottom:20px;width:50px;height:20px;cursor:pointer" type="button" value="回复" /><input type="hidden" name="cunid" value="'+msg['id']+'"></span></div></div></li>'
           )
       }
     })
   })
+  
+  //执行回复
+  $('.pllist').on('click','.huifu44',function(){
+    var content = $(this).prev().val();
+    var comment_id = $(this).next().val();
+    var th = $(this);
+    $.post('/reply/insreply',{comment_id:comment_id,content:content,_token:'{{csrf_token()}}'},function(data){
+
+      if(data == '2')
+      {
+        alert('回复失败!');
+        return;
+      }
+
+      tjhuifu(data,th);     
+    })
+
+  })
+
+  //显示回复/关闭回复
+  $('.pllist').on('click','.zhhuifu .aaa2',function(){
+    var th = $(this);
+    var comment_id = $(this).parent().next().children().eq(2).val();
+    if($(this).text() == '展开回复')
+    {
+      $(this).text('收起回复');
+      //发送ajax获取回复
+      $.post('/reply/greply',{comment_id:comment_id,_token:'{{csrf_token()}}'},function(data){
+        tjhuifu(data,th);
+      });
+      
+    }else if($(this).text() == '收起回复'){
+      $(this).text('展开回复');
+      th.parent().parent().parent().parent().next().empty();
+    }
+  })
+
+  // 获取该评论所有回复并添加
+  function tjhuifu(data,obj)
+  {
+      obj.parent().parent().parent().parent().next().empty();
+      for(var i=0;i<data.length;i++)
+      {
+        obj.parent().parent().parent().parent().next().prepend('<li style="background-color:pink"><div class="lyimg"><a href="#"><img src="'+data[i].pic+'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+data[i].username+' 回复：</a></span></div><div class="gxqm">'+data[i].content+'</div><div class="reque"> <span class="zhuanfa"><a href="#"></a><a href="#"></a>'+data[i].time+'</span></div></div></li>');
+      }
+  }
 </script>
 <li>
             
