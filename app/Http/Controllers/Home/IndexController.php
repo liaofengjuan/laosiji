@@ -80,7 +80,7 @@ class IndexController extends Controller
     {
         $request->session()->forget('user');
         $request->session()->forget('pic');
-        return back();
+        return redirect('/');
     }
 
     /**

@@ -26,12 +26,13 @@
             <h1>相关视频</h1>
           </div>
           <ul>
-            <li class="item"> <a class="item_link" href="#" title="台妹为何不嫁大陆男" > <span class="album_pic"> <img width="117px" height="65px" src="/homes/images/playimg.jpg" alt="台妹为何不嫁大陆男"> <span class="figure_mask"> <em class="mask_txt">01:06</em> </span> </span>
-              <div class="video_title"><strong>台妹为何不嫁大陆男</strong><br />
-                播放：12556次<br />
-                评论：1554次</div>
+            @foreach($xiangguan as $v)
+            <li class="item"> <a class="item_link" href="/video/play/index/{{$v['id']}}" title="{{$v['video_title']}}" > <span class="album_pic"> <img width="117px" height="65px" src="{{env('PATH_IMG').$v['pic']}}"> <span class="figure_mask"> <em class="mask_txt">{{$v['size']}}</em> </span> </span>
+              <div class="video_title"><strong>{{$v['video_title']}}</strong><br />
+                播放：{{$v['clicks']}}次<br />
+                </div>
               </a> </li>
-            
+            @endforeach
           </ul>
         </div>
       </div>
@@ -117,16 +118,6 @@
           </li>
           <span></span>
           @endforeach
-          <!-- 盖楼 -->
-          <li style="background-color:pink">
-            <div class="lyimg"><a href="#"><img src="images/grzx/lyimg.jpg" /></a></div>
-            <div class="lyinfo">
-              <div class="lyname"><span class="myname"><a href="#">huo_zhenying 回复：</a></span></div>
-              <div class="gxqm">为什么不叫汪峰来更火 </div>
-              <div class="reque"> <span class="zhuanfa"><a href="#"></a><a href="#"></a></span></div>
-            </div>
-          </li>
-          
         </ul>
         
         <div class="myfenye">{!! $comment->render() !!}</div>
@@ -140,13 +131,14 @@
       </div>
       <div class="tjlist">
         <ul>
+          @foreach($tuijian as $v)
           <li>
-            <div class="tjimg"><img src="/homes/images/my.jpg" width="138" height="83" /><span class="bftime">02:10</span></div>
+            <div class="tjimg"><img src="{{env('PATH_IMG').$v['pic']}}" width="138" height="83" /><span class="bftime">{{$v['size']}}</span></div>
             <div class="tjinfo">
-              <h2><a href="#">快闪撑同志！LES美女映像节现场结婚！！</a></h2>
-              <span>12万次播放</span></div>
+              <h2><a href="/video/play/index/{{$v['id']}}">{{$v['video_title']}}</a></h2>
+              <span>{{$v['clicks']}}次播放</span></div>
           </li>
-          
+          @endforeach
         </ul>
       </div>
     </div>
@@ -196,7 +188,7 @@
         alert('评论失败！');
       }else if(msg){
         // console.log(msg['content'])
-        $('.pllist').prepend('<li><div class="lyimg"><a href="#"><img src="'+'{{session("pic")}}'+'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+'{{session("user")}}'+'</a></span></div><div class="gxqm">'+msg['content']+'</div><div class="reque"><span class="zhuanfa zhhuifu">'+t+'<a class="aaa1" href="#">回复</a><a class="aaa2" href="#">展开回复</a></span><span class="yinchuif" style="display:none"><textarea class="neirhf" name="" id="" cols="60" rows="2"></textarea><input class="huifu44" style="margin-bottom:20px;width:50px;height:20px;cursor:pointer" type="button" value="回复" /><input type="hidden" name="cunid" value="'+msg['id']+'"></span></div></div></li>'
+        $('.pllist').prepend('<li><div class="lyimg"><a href="#"><img src="'+'{{session("pic")}}'+'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+'{{session("user")}}'+'</a></span></div><div class="gxqm">'+msg['content']+'</div><div class="reque"><span class="zhuanfa zhhuifu">'+t+'<a class="aaa1" href="#">回复</a><a class="aaa2" href="javascript:void(0);">展开回复</a></span><span class="yinchuif" style="display:none"><textarea class="neirhf" name="" id="" cols="60" rows="2"></textarea><input class="huifu44" style="margin-bottom:20px;width:50px;height:20px;cursor:pointer" type="button" value="回复" /><input type="hidden" name="cunid" value="'+msg['id']+'"></span></div></div></li><span></span>'
           )
       }
     })
