@@ -8,7 +8,7 @@
   <div class="left180">
     <div class="grtx">
       <!-- <div class="grimg"><img src="{{$data->userinfo->pic or '/homes/images/my_moren.jpg'}}" /></div> -->
-      <div class="grimg"><img src="{{session('pic')}}" onerror="javascript:this.src='/homes/images/my_moren.jpg'" /></div>
+      <div class="grimg"><img src="{{env('PATH_IMG').session('pic')}}" onerror="javascript:this.src='/homes/images/my_moren.jpg'" /></div>
       <div class="grname"><a href="#">{{session('user')}}</a></div>
     </div>  
 

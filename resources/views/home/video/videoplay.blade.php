@@ -7,8 +7,8 @@
 
 <!--container-->
 <div class="player_container">
-  <div class="mod_crumbs"> <a href="#" target="_blank"title="首页">首页</a>&gt; <a href="javascript:;" target="_blank" title="大学时代">大学时代</a> </div>
-  <h1 class="mod_player_title" title="大学时代">大学时代</h1>
+  <div class="mod_crumbs"> <a href="/" target="_blank" title="首页">首页</a>&gt;</div>
+  <h1 class="mod_player_title" title="{{$data['video_title']}}">{{$data['video_title']}}</h1>
   <!--视频播放及相关视频-->
   <div class="mod_player_section cf" id="mod_inner">
     <div class="mod_player" id="mod_player">
@@ -27,7 +27,7 @@
           </div>
           <ul>
             @foreach($xiangguan as $v)
-            <li class="item"> <a class="item_link" href="/video/play/index/{{$v['id']}}" title="{{$v['video_title']}}" > <span class="album_pic"> <img width="117px" height="65px" src="{{env('PATH_IMG').$v['pic']}}"> <span class="figure_mask"> <em class="mask_txt">{{$v['size']}}</em> </span> </span>
+            <li class="item"> <a class="item_link" href="/video/play/index/{{$v['id']}}" title="{{$v['video_title']}}" > <span class="album_pic"> <img width="117px" height="65px" src="{{env('PATH_IMG').$v['pic']}}" onerror="javascript:this.src='/homes/images/3.jpg'"> <span class="figure_mask"> <em class="mask_txt">{{$v['size']}}</em> </span> </span>
               <div class="video_title"><strong>{{$v['video_title']}}</strong><br />
                 播放：{{$v['clicks']}}次<br />
                 </div>
@@ -44,23 +44,22 @@
       <div class="bsPromo bsPromo2"></div>
       <a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div>
    
-    </span> <span class="cishu"><img src="/homes/images/gkcs.jpg" />&nbsp;&nbsp;4.245播放</span> <span style="float:right; margin-top:30px;">
-    <input type="image" src="/homes/images/zxpc.jpg" style="float:left; margin-right:10px;" />
-    <input type="image" src="/homes/images/xxbj.jpg" style="float:left;" />
+    </span> <span class="cishu"><img src="/homes/images/gkcs.jpg" />&nbsp;&nbsp;{{$data['clicks']}} 次播放</span> <span style="float:right; margin-top:30px;">
+    
     </span> </div>
   <!--视频简介-->
   <div class="playerjj">
     <ul>
       <li>
         <div class="upname">
-          <div class="upnameimg"><img src="" width="61" height="60"/></div>
-          <div class="upnamet">昵称:<a href="#">拍客现场</a><br />
-            <img src="/homes/images/xbg.jpg" /></div>
+          <div class="upnameimg"><img src="{{env('PATH_IMG').$data->userinfo['pic']}}" onerror="javascript:this.src='/homes/images/my_moren.jpg'" width="61" height="60"/></div>
+          <div class="upnamet">用户名:<a href="javacript:void(0);">{{$data->user['username']}}</a><br />
+            </div>
         </div>
         <div class="upinfo">
           <h1>视频简介:</h1>
-          <p>8月16日，一场名为“帆帆加油，生命接力”的演出在糖果星光现场举行，义演的票务收入将通过公证转交给主办方中华少年儿童慈善救助基金会，用于十二岁淋巴瘤患者岳帆的救助。8月16日，一场名为“帆帆加油，生命接力”的演出在糖果星光现场举行，义演的票务收入将通过公证转交给主办方中华少年儿童慈善救助基金会，用于十二岁淋巴瘤患者岳帆的救助。</p>
-          <span>9小时前 上传</span> </div>
+          <p>{{$data['info']}}</p>
+          <span>{{date('Y-m-d H:i:s',$data['created_at'])}} 上传</span> </div>
       </li>
     </ul>
   </div>
@@ -72,7 +71,7 @@
     <div class="left868">
       <!--留言板-->
       <div class="fbpl">
-        <div class="plr"><span class="pltx"><a href="#"><img src="{{session('pic')}}" width="61" height="61" /></a></span><span class="plname"><a href="#">{{session('user')}}</a></span><span class="plnum">所有评论<a href="#"> {{$count}}</a></span></div>
+        <div class="plr"><span class="pltx"><a href="#"><img src="{{env('PATH_IMG').session('pic')}}" width="61" height="61" /></a></span><span class="plname"><a href="#">{{session('user')}}</a></span><span class="plnum">所有评论<a href="#"> {{$count}}</a></span></div>
         <textarea name="textarea" class="input4 txtinp"></textarea>
         @if(session('user'))
         <input class="tutih"  type="image" src="/homes/images/fbpl.jpg" style="margin-left:25px;" />
@@ -92,7 +91,7 @@
           <!-- 回复 -->
           @foreach($comment as $v)
           <li>
-            <div class="lyimg"><a href="#"><img src="{{$v->userinfo['pic']}}" /></a></div>
+            <div class="lyimg"><a href="#"><img src="{{env('PATH_IMG').$data->userinfo['pic']}}"  onerror="javascript:this.src='/homes/images/my_moren.jpg'" /></a></div>
             <div class="lyinfo">
               <div class="lyname"><span class="myname"><a href="#">{{$v->user['username']}}</a></span></div>
               <div class="gxqm">{{$v['content']}}</div>
@@ -133,7 +132,7 @@
         <ul>
           @foreach($tuijian as $v)
           <li>
-            <div class="tjimg"><img src="{{env('PATH_IMG').$v['pic']}}" width="138" height="83" /><span class="bftime">{{$v['size']}}</span></div>
+            <div class="tjimg"><img src="{{env('PATH_IMG').$v['pic']}}" onerror="javascript:this.src='/homes/images/3.jpg'" width="138" height="83" /><span class="bftime">{{$v['size']}}</span></div>
             <div class="tjinfo">
               <h2><a href="/video/play/index/{{$v['id']}}">{{$v['video_title']}}</a></h2>
               <span>{{$v['clicks']}}次播放</span></div>
@@ -188,7 +187,7 @@
         alert('评论失败！');
       }else if(msg){
         // console.log(msg['content'])
-        $('.pllist').prepend('<li><div class="lyimg"><a href="#"><img src="'+'{{session("pic")}}'+'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+'{{session("user")}}'+'</a></span></div><div class="gxqm">'+msg['content']+'</div><div class="reque"><span class="zhuanfa zhhuifu">'+t+'<a class="aaa1" href="#">回复</a><a class="aaa2" href="javascript:void(0);">展开回复</a></span><span class="yinchuif" style="display:none"><textarea class="neirhf" name="" id="" cols="60" rows="2"></textarea><input class="huifu44" style="margin-bottom:20px;width:50px;height:20px;cursor:pointer" type="button" value="回复" /><input type="hidden" name="cunid" value="'+msg['id']+'"></span></div></div></li><span></span>'
+        $('.pllist').prepend('<li><div class="lyimg"><a href="#"><img src="'+'{{env("PATH_IMG")}}'+'{{session("pic")}}'+'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+'{{session("user")}}'+'</a></span></div><div class="gxqm">'+msg['content']+'</div><div class="reque"><span class="zhuanfa zhhuifu">'+t+'<a class="aaa1" href="#">回复</a><a class="aaa2" href="javascript:void(0);">展开回复</a></span><span class="yinchuif" style="display:none"><textarea class="neirhf" name="" id="" cols="60" rows="2"></textarea><input class="huifu44" style="margin-bottom:20px;width:50px;height:20px;cursor:pointer" type="button" value="回复" /><input type="hidden" name="cunid" value="'+msg['id']+'"></span></div></div></li><span></span>'
           )
       }
     })
@@ -206,8 +205,7 @@
         alert('回复失败!');
         return;
       }
-
-      tjhuifu(data,th);     
+        tjhuifu(data,th);     
     })
 
   })
@@ -236,7 +234,7 @@
       obj.parent().parent().parent().parent().next().empty();
       for(var i=0;i<data.length;i++)
       {
-        obj.parent().parent().parent().parent().next().prepend('<li style="background-color:pink"><div class="lyimg"><a href="#"><img src="'+data[i].pic+'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+data[i].username+' 回复：</a></span></div><div class="gxqm">'+data[i].content+'</div><div class="reque"> <span class="zhuanfa"><a href="#"></a><a href="#"></a>'+data[i].time+'</span></div></div></li>');
+        obj.parent().parent().parent().parent().next().prepend('<li style="background-color:pink"><div class="lyimg"><a href="#"><img src="'+'{{env("PATH_IMG")}}'+data[i].pic+'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+data[i].username+' 回复：</a></span></div><div class="gxqm">'+data[i].content+'</div><div class="reque"> <span class="zhuanfa"><a href="#"></a><a href="#"></a>'+data[i].time+'</span></div></div></li>');
       }
   }
 </script>
