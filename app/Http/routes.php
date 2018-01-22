@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	Route::get('/login','LoginController@index');//加载登录页
 	Route::post('/login','LoginController@login');//执行登录

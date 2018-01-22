@@ -132,6 +132,20 @@
   }
 
 
+    //判断链接地址的格式是否正确
+    var is_path = false;
+    var preg_path = /^http:\/\/.*$/;
+
+    $('input[name=address]').blur(function(){
+        if(preg_path.test($(this).val())){
+            $(this).next().html('');
+            is_path = true;
+        }else{
+             $(this).next().html('链接地址必须以http://开头');
+             $(this).next().css('color','red');
+        }
+    })
+
    //提交表单
  $('button[type=button]:eq(1)').click(function(){
       var title = $('input[name=title]').val();
@@ -139,6 +153,14 @@
       var address = $('input[name=address]').val();
       var status = $('input[name=status]:checked').val();
       var deadline = $('input[name=deadline]:checked').val();
+
+      //判断链接地址是否正确
+      if(!is_path){
+          $(this).next().html('链接地址必须以http://开头');
+          $(this).next().css('color','red'); 
+          return;
+      }
+      //判断内容不能为空
       if(!(title!='' && pic!='' && address!='' )){
         alert('不能提交空数据');
         return;

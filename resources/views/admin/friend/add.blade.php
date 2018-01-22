@@ -38,6 +38,7 @@
                             <label for="path" class="am-u-sm-3 am-form-label">链接地址</label>
                             <div class="am-u-sm-9">
                                 <input type="text" name="path" id="path" value="" placeholder="请输入链接地址">
+                                <small></small>
                             </div>
                             
                         </div>
@@ -122,12 +123,34 @@
         });
     }
 
+    var is_path = false;
+    var preg_path = /^http:\/\/.*$/;
+
+    $('input[name=path]').blur(function(){
+        if(preg_path.test($(this).val())){
+            $(this).next().html('');
+            is_path = true;
+        }else{
+             $(this).next().html('链接地址必须以http://开头');
+             $(this).next().css('color','red');
+        }
+    })
+
     $('button[type=submit]').click(function(){
         //获取form表单的值
         var title = $('input[name=title]').val();
         var path = $('input[name=path]').val();
         var logo = $('input[name=logo]').val();
         var status = $('input[name=status]:checked').val();
+        //判断链接地址是否正确
+        if(!is_path){
+            $(this).next().html('链接地址必须以http://开头');
+            $(this).next().css('color','red'); 
+            return;
+        }
+
+        
+       
         //判断是否提交了空数据
         if(title.length!=0 && path.length!=0 && logo.length!=0){
             $.ajax({
