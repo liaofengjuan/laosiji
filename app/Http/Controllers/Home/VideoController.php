@@ -14,7 +14,7 @@ use App\Model\History;
 class VideoController extends Controller
 {
     //引入我的视频页面
-    public function getIndex(Request $request)
+    public function index(Request $request)
     {   
         //查询我上传的视频
         $all = $request->all();
@@ -33,7 +33,7 @@ class VideoController extends Controller
 
 
     //引入上传视频页面
-    public function getVupload()
+    public function vupload()
     {
         //查出所有父级分类
         $father = VideoType::where('pid',0)->get();
@@ -42,7 +42,7 @@ class VideoController extends Controller
 
 
     //引入观看记录页面
-    public function getVhistory()
+    public function vhistory()
     { 
         $vid = User::where('username',session('user'))
             ->first()
@@ -61,7 +61,7 @@ class VideoController extends Controller
 
 
     //获取子类
-    public function postGetson($pid)
+    public function getson($pid)
     {
         //通过pid查询子类
         $res = VideoType::where('pid',$pid)->get();
@@ -142,6 +142,8 @@ class VideoController extends Controller
         //执行删除
         $res = VideoInfo::where('id',$id)->delete();
         if($res){
+            //删除历史记录的视频
+            History::where('vid',$id)->delete();
             return 2; //成功
         }else{
             return 3; //失败
@@ -150,7 +152,7 @@ class VideoController extends Controller
 
 
     //执行批量删除视频
-    public function postDeletes(Request $request)
+    public function deletes(Request $request)
     {
         $data = $request->input('arr');
         $res = VideoInfo::whereIn('id',$data)->delete();

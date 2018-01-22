@@ -66,6 +66,7 @@
           if(data=='2')
           {
               alert('恭喜，删除成功');
+              location.reload(true);
           }else if(data=='3'){
               alert('抱歉，删除失败');
               return false;
@@ -116,7 +117,8 @@
                 success : function(data) {
                     if(data == '2')
                     {
-                      alert("删除成功！");  
+                      alert("删除成功！"); 
+                      location.reload(true);
                     }else if(data == '3'){
                       alert("删除失败！");  
                     }

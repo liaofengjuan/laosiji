@@ -22,4 +22,10 @@ class Reply extends Model
     {
         return $this->hasOne('App\Model\UserInfo','uid','uid');
     }
+
+    //一对一
+    public function comment()
+    {
+        return $this->hasOne('App\Model\Comment','id','comment_id');
+    }
 }

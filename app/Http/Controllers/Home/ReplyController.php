@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Model\User;
 use App\Model\Comment;
 use App\Model\Reply;
+use App\Model\VideoInfo;
 
 class ReplyController extends Controller
 {
@@ -87,6 +88,22 @@ class ReplyController extends Controller
             $arr[] = $zi;
         }
         return $arr;
+    }
+
+    //执行点赞
+    public function postGoods(Request $request)
+    {   
+        //获取视频id
+        $id = $request -> input('id');
+        $res = VideoInfo::where('id',$id)->first();
+        $res -> good = $res['good'] + 1;
+        $r = $res -> save();
+        if($r)
+        {
+            return $res['good'];
+        }else{
+            echo 'cuo';
+        }
     }
 
     /**

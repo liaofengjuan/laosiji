@@ -86,13 +86,22 @@ Route::group(['namespace'=>'Home'],function()
 		Route::controller('/center/self',"UsersController");
 
 		//个人中心视频管理
-		Route::controller('/center/video','VideoController');
+		Route::get('/center/video/index','VideoController@index');
+		Route::get('/center/video/vupload','VideoController@vupload');
+		Route::get('/center/video/vhistory','VideoController@vhistory');
+		Route::post('/center/video/getson/{pid}','VideoController@getson');
+		Route::post('/center/video/deletes','VideoController@deletes');
 		Route::resource('/center/video','VideoController');
 
-		//回复模块
-		Route::controller('/reply','ReplyController');
+		//个人中心回复管理
+		Route::controller('/center/comment','CommentController');
+
+		
 	});
 
+	//回复功能
+	Route::controller('/reply','ReplyController');
+	
 	//视频列表页--隐式控制器
 	Route::controller('/video/list','ListController');
 	//视频播放页
