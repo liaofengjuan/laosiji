@@ -80,7 +80,7 @@ span.gksj{ font-size:14px; color:#666666;}
 .play{ width:36px; height:27px; position:absolute; left:10px; bottom:98px;}
 .play a{ display:block; width:36px; height:27px; background:url(../images/play.png) no-repeat; text-indent:-9999px;}
 
-.splist{ width:449px; height:332px; float:right;}
+.splist{ width:449px; height:332px; float:left;}
 .myvideo{ width:212px; height:158px; border:1px solid #e6e6e6; float:left;}
 .myvideoimg{ width:212px; height:118px; position:relative;}
 .myvideoimg h3{ width:205px; height:27px; line-height:27px; padding-left:7px; background:url(../images/timebg.png) repeat; position:absolute; bottom:0px; left:0;}

@@ -8,7 +8,7 @@
   <div class="left180">
     <div class="grtx">
       <!-- <div class="grimg"><img src="{{$data->userinfo->pic or '/homes/images/my_moren.jpg'}}" /></div> -->
-      <div class="grimg"><img src="{{env('PATH_IMG').session('pic')}}" onerror="javascript:this.src='/homes/images/my_moren.jpg'" /></div>
+      <div class="grimg"><img src="{{url(env('PATH_IMG').session('pic'))}}" onerror="javascript:this.src='/homes/images/my_moren.jpg'" /></div>
       <div class="grname"><a href="#">{{session('user')}}</a></div>
     </div>  
 
@@ -21,16 +21,7 @@
         <p><a href="/center/self/vip" >开通vip</a></p>
       </div>
     </ul>
-    
- 	<!-- <ul class="menu2 menu1">
-      <li><a onclick="return click_a('divOne_2','div_two')" style="cursor:pointer;"><em id="div_two">班级管理</em></a></li>
-      <div class="menubox"  id="divOne_2" style="display:none;">
-        <p><a href="班级-发布资料.html" >班级资料</a></p>
-        <p><a href="班级公告.html" >班级公告</a></p>
-        <p><a href="#" >班级学生</a></p>
-      </div>
-    </ul> -->
-
+   
     <ul class="menu3 menu1">
       <li id="dianli3"><a onclick="return click_a('divOne_3','div_three')" style="cursor:pointer;"><em id="div_three">视频管理</em></a></li>
       <div class="menubox"  id="divOne_3" style="display:none;">

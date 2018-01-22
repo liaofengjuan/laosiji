@@ -72,9 +72,9 @@
             if(data.length>0){
               for(var i=0;i<data.length;i++){
                 if(data[i].status=='0'){
-                  mythis.parent().parent().after("<tr class='zi clone'><td align='center' >"+data[i].id+"</td><td align='center' >"+data[i].title+"</td><td align='center' >开启</td><td align='center'  ><a href='/admin/videoType/'"+data[i].id+"'/edit'>修改</a><span class='gray'>&nbsp;|&nbsp;</span><a  onclick='del($(this))'>删除</a></td><td align='center'></td></tr>");
+                  mythis.parent().parent().after("<tr class='zi clone'><td align='center' >"+data[i].id+"</td><td align='center' >"+data[i].title+"</td><td align='center' >开启</td><td align='center'  ><a href='/admin/videoType/"+data[i].id+"/edit'>修改</a><span class='gray'>&nbsp;|&nbsp;</span><a  onclick='del($(this))'>删除</a></td><td align='center'></td></tr>");
                 }else{
-                  mythis.parent().parent().after("<tr class='zi clone'><td align='center' >"+data[i].id+"</td><td align='center' >"+data[i].title+"</td><td align='center' >关闭</td><td align='center'  ><a href='/admin/videoType/'"+data[i].id+"'/edit'>修改</a><span class='gray'>&nbsp;|&nbsp;</span><a  onclick='del($(this))'>删除</a></td><td align='center'></td></tr>");
+                  mythis.parent().parent().after("<tr class='zi clone'><td align='center' >"+data[i].id+"</td><td align='center' >"+data[i].title+"</td><td align='center' >关闭</td><td align='center'  ><a href='/admin/videoType/"+data[i].id+"/edit'>修改</a><span class='gray'>&nbsp;|&nbsp;</span><a  onclick='del($(this))'>删除</a></td><td align='center'></td></tr>");
                 }
                 
                 

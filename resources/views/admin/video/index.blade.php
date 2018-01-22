@@ -13,14 +13,7 @@
         <div class="caption font-green bold">
             <span class="am-icon-navicon"></span> 视频列表
         </div>
-        <div class="tpl-portlet-input tpl-fz-ml">
-            <div class="portlet-input input-small input-inline">
-                <div class="input-icon right">
-                    <i class="am-icon-search"></i>
-                    <input type="text" class="form-control form-control-solid" placeholder="搜索..."> 
-                </div>
-            </div>
-        </div>
+        
     </div>
     <div class="tpl-block">
         <div class="am-g">
@@ -36,7 +29,7 @@
                     <div class="am-form-group">
                         <select data-am-selected="{btnSize: 'sm'}" name="search_type">
                           <option value="0">搜索条件</option>
-                          <option value="1">用户名</option>
+                          <option value="1">视频名称</option>
                         </select>
                     </div>
                 </div>

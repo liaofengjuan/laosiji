@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	Route::get('/login','LoginController@index');//加载登录页
 	Route::post('/login','LoginController@login');//执行登录
@@ -53,6 +52,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'adminLogin']
 	//网站配置
 	Route::resource('/config','ConfigController');
 
+	//广告表
+	Route::resource('/advertise','AdvertiseController');
+
 	//后台首页
 	Route::resource('/','IndexController');
 
@@ -64,8 +66,9 @@ Route::group(['namespace'=>'Home'],function()
 {
 	//前台首页
 	Route::get('/',"IndexController@index");
-	//前台--换一组
-	Route::get('/changeGroup',"IndexController@changeGroup");
+	//前台--搜索
+	Route::post('search',"IndexController@search");
+
 	//执行注销
 	Route::get('/signout',"IndexController@signout");
 

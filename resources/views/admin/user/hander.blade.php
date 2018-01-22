@@ -13,14 +13,6 @@
         <div class="caption font-green bold">
             <span class="am-icon-navicon"></span> 用户列表
         </div>
-        <div class="tpl-portlet-input tpl-fz-ml">
-            <div class="portlet-input input-small input-inline">
-                <div class="input-icon right">
-                    <i class="am-icon-search"></i>
-                    <input type="text" class="form-control form-control-solid" placeholder="搜索..."> 
-                </div>
-            </div>
-        </div>
     </div>
     <div class="tpl-block">
         <div class="am-g">
@@ -34,7 +26,7 @@
             <form action="/admin/user/hander" method="get">
             <div class="am-u-sm-12 am-u-md-3">
                 <div class="am-form-group">
-                    <select data-am-selected="{btnSize: 'sm'}" name="search_type">
+                    <select name="search_type" data-am-selected="{btnSize:'sm'}">
                       <option value="0">搜索条件</option>
                       <option value="1">用户名</option>
                       <option value="2">手机号</option>

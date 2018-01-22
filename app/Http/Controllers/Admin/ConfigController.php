@@ -48,40 +48,8 @@ class ConfigController extends Controller
         $jieguo->description = $res['description'];
         $jieguo->copyright = $res['copyright'];
         $jieguo->status = $res['status'];
-       
-       //检测是否有文件logo
-        if($request->hasFile('logo')){
-            $logo = $request->file('logo');
-
-            // 获取文件的目录
-             // $url = public_path().'/uploads/'.date('Ymd');
-            $url = '/uploads/'.date('Ymd');
-
-             // 获取文件名字
-             $name = 'img'.date('YmdHis').rand(10000,99999);
-             $houzhui = $logo->getClientOriginalExtension('logo');
-             // dd($name);
-             $filename = $name.'.'.$houzhui;
-             // dd($filename);
-
-             // 执行上传到指定目录，并且重新命名
-            $data = $logo->move(public_path().$url,$filename);
-
-            // 将文件的完整路径赋值给要更新的变量，数据库中的logo
-            $jieguo->logo = $url.'/'.$filename;
-
-            // dd($jieguo->logo);
-
-            if($data){
-                // echo "<script>alert('上传成功');</script>";
-            }else{
-                echo "<script>alert('上传失败');</script>";
-
-            }
-        }
-
-
-
+        $jieguo->logo = $res['logo'];
+        //执行修改
         $final = $jieguo->save();
         if($final){
             echo "<script>alert('恭喜，修改成功！');location.href='/admin/config'</script>";

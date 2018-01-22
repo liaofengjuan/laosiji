@@ -100,17 +100,17 @@
                         </a>
                         <ul class="tpl-left-nav-sub-menu yonghu">
                             <li>
-                                <a href="{{url('admin/user')}}" target='main'>
+                                <a href="{{url('admin/user')}}" >
                                     <i class="am-icon-angle-right"></i>
                                     <span>浏览前台用户</span>
                                     <i class="tpl-left-nav-content-ico am-fr am-margin-right"></i>
                                 </a>
-                                <a href="{{url('admin/user/hander')}}" target='main'>
+                                <a href="{{url('admin/user/hander')}}">
                                     <i class="am-icon-angle-right"></i>
                                     <span>浏览管理员用户</span>
                                     <i class="tpl-left-nav-content-ico am-fr am-margin-right"></i>
                                 </a>
-                                <a href="{{url('admin/user/create')}}" target="main">
+                                <a href="{{url('admin/user/create')}}" >
                                     <i class="am-icon-angle-right"></i>
                                     <span>添加管理员</span>
                                     <i class="tpl-left-nav-content-ico am-fr am-margin-right"></i>
@@ -193,13 +193,13 @@
                         </a>
                         <ul class="tpl-left-nav-sub-menu guanggao">
                             <li>
-                                <a href="table-font-list.html">
+                                <a href="{{url('./admin/advertise')}}">
                                     <i class="am-icon-angle-right"></i>
                                     <span>广告列表</span>
                                     <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
                                 </a>
 
-                                <a href="table-images-list.html">
+                                <a href="{{url('./admin/advertise/create')}}">
                                     <i class="am-icon-angle-right"></i>
                                     <span>添加广告</span>
                                 </a>
@@ -234,7 +234,7 @@
                             <span>网站配置</span>
                             <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
                         </a>
-                        <ul class="tpl-left-nav-sub-menu">
+                        <ul class="tpl-left-nav-sub-menu config1">
                             <li>
                                 <a href="/admin/config">
                                     <i class="am-icon-angle-right"></i>
@@ -279,6 +279,12 @@
        if(preg_video1.test(path)){
            $('.shiguan').css('display','block');
        }
+       //广告/admin/advertise
+       var preg_advertise = /^\/admin\/advertise.*$/;
+       
+       if(preg_advertise.test(path)){
+           $('.guanggao').css('display','block');
+       }
        //友情链接
        var preg_friend = /^\/admin\/friend.*$/;
        
@@ -289,6 +295,13 @@
        var preg_slideshow = /^\/admin\/slideshow.*$/;
        if(preg_slideshow.test(path)){
            $('.slideshow').css('display','block');
+       }
+
+       //广告/admin/config
+       var preg_config = /^\/admin\/config.*$/;
+       
+       if(preg_config.test(path)){
+           $('.config1').css('display','block');
        }
     
     //执行退出

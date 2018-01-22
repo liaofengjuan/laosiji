@@ -6,12 +6,12 @@
     </div>
     <ol class="am-breadcrumb">
         <li><a href="#" class="am-icon-home">首页</a></li>
-        <li><a href="#">轮播图管理</a></li>
-        <li class="am-active">轮播图列表</li>
+        <li><a href="#">广告管理</a></li>
+        <li class="am-active">广告列表</li>
     </ol>
     <div class="portlet-title ">
         <div class="caption font-green bold">
-            <span class="am-icon-navicon"></span> 轮播图列表
+            <span class="am-icon-navicon"></span> 广告列表
         </div>
         
     </div>
@@ -20,11 +20,10 @@
             <div class="am-u-sm-12 am-u-md-6">
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                        <a class="am-btn am-btn-default am-btn-success" role="button" href="{{url('admin/slideshow/create')}}" target="main"><span class="am-icon-plus"></span>新增轮播图</a>
+                        <a class="am-btn am-btn-default am-btn-success" role="button" href="{{url('admin/advertise/create')}}" target="main"><span class="am-icon-plus"></span>新增广告</a>
                     </div>
                 </div>
             </div>
-            
             
         </div>
         <div class="am-g">
@@ -34,14 +33,15 @@
                        <thead>
                               <tr>
                                   <th>编号</th>
-                                  <th>电影名称</th>
-                                  <th>缩略图</th>
-                                  <th>状态</th>
-                                  <th>创建时间</th>
+                                  <th>标题</th>
+                                  <th>广告图</th>
+                                  <th>广告状态</th>
+                                  <th>广告期限</th>
+                                  <th>发布时间</th>
                                   <th>操作</th>
                               </tr>
-                          </thead>
-                          <tbody>
+                        </thead>
+                        <tbody>
                             @foreach($data as $v)
                             <tr class="gradeX">
                                 <td>{{$v['id']}}</td>
@@ -52,22 +52,23 @@
                                     </div>
                                 </td>
                                 @if($v['status']==0)
-                                <td align="center">开启</td>
+                                <td>开启</td>
                                 @else
-                                <td align="center">关闭</td>
+                                <td>关闭</td>
                                 @endif
-                                <td>{{date('Y-m-d H:i:s',$v['create_at'])}}</td>
+                                <td>{{($v['deadline']-time())>0?ceil(($v['deadline']-time())/3600).'h':0}}</td>
+                                <td>{{$v['created_at']}}</td>
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
-                                            <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="{{url('/admin/slideshow/'.$v['id'].'/edit')}}" style="background:#fff"><span class="am-icon-pencil-square-o"></span> 编辑</a>
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="{{url('/admin/advertise/'.$v['id'].'/edit')}}" style="background:#fff"><span class="am-icon-pencil-square-o"></span> 编辑</a>
                                             <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"  onclick="del({{$v['id']}},$(this))" style="background:#fff"><span class="am-icon-trash-o"></span> 删除</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr> 
                             @endforeach
-                          </tbody>               
+                          </tbody>             
                     </table>
 
                     <hr>
@@ -84,7 +85,7 @@
         layer.confirm('确定要删除吗？', {
           btn: ['确定','取消'] //按钮
         },function(){
-            $.post("/admin/slideshow/"+id,{'_method':'delete','_token':'{{csrf_token()}}'},function(data){
+            $.post("/admin/advertise/"+id,{'_method':'delete','_token':'{{csrf_token()}}'},function(data){
                 if(data=='0'){
                     layer.msg('恭喜删除成功', {icon: 1});
                     obj.parent().parent().parent().parent().remove();

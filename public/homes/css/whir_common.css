@@ -102,10 +102,10 @@ a:hover {color:#2f9def; text-decoration:none;}
 .linkpic{ width:1135px; height:49px; line-height:49px; margin:0px auto; overflow:hidden;}
 .linkpic h1{ width:118px; height:49px; background:#0296e3; color:#fff; font-size:18px; font-weight:normal; text-align:center; float:left; font-family:"微软雅黑";}
 .picshow{ width:1017px; height:49px; float:left;}
-.linktext{ width:1135px; height:40px; margin:35px auto 0px;}
+.linktext{ width:1135px; height:40px; margin:35px auto 0px;line-height: 40px}
 .linktext h1{ width:70px; height:40px; font-size:14px; color:#6c6c6c; float:left; font-family:"微软雅黑";}
-.textlink{ width:1065px; height:40px; float:left;}
-.textlink a{ padding:0px 3px; line-height:20px; font-size:12px;}
+.textlink{ width:1065px; height:40px; float:left;line-height: 40px}
+.textlink a{ padding:0px 5px; line-height:20px; font-size:12px;}
 .copyright{ width:1190px; margin:25px auto 0px;}
 .Navigation{ text-align:center; line-height:20px;}
 .Navigation a{ color:#666666; padding:0px 5px;}

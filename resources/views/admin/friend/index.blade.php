@@ -76,7 +76,6 @@
                                 <div class="img-wrap" style="width:100px;overflow:hidden;position:relative">
                                     <img src="{{env('PATH_IMG').$v['logo']}}?imageView2/1/w/100/h/40/q/75|imageslim"  class="am-img-thumbnail">
                                 </div>
-                                </div>
                               </td>
                                 <td>{{$v->title}}</td>
                                 <td>{{$v->path}}</td>

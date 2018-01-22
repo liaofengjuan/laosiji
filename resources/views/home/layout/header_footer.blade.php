@@ -2,8 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="{{$webConfig['keywords']}}" />
+<meta name="description" content="{{$webConfig['description']}}" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>安徽慕界网络科技有限公司</title>
+<title>{{$webConfig['webname']}}</title>
 <link href="/homes/css/whir_common.css" rel="stylesheet" type="text/css" />
 <link href="/homes/css/whir_homes.css" rel="stylesheet" type="text/css" />
 @section('style')
@@ -58,11 +60,7 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
 @endif
 <!--快捷导航-->
 <div class="kjnav">
-<ul>
-<li class="navli1"><a href="#">APP下载</a></li>
-<li class="navli2"><a href="#">收藏我们</a></li>
-<li class="navli3"><a href="#">新手引导</a></li>
-</ul>
+
 </div>
 </div>
 </div>
@@ -71,10 +69,25 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
     <div class="topmain">
       <div class="searchbox">
         <div class="so_so">
-          <div class="logo"><a href="#" title="目课网"><img src="/homes/images/logo.jpg" / alt="目课网"></a></div>
+          <div class="logo"><a href="#" title="光线视频网"><img src="{{env('PATH_IMG').$webConfig['logo']}}" / alt="光线视频网"></a></div>
           <div class="mk_so">
-            <input type="text" class="input"  name=""/>
-            <input type="image" src="/homes/images/btn.jpg" class="btn" />
+            <form action="{{url('/search')}}" method="post">
+              {{csrf_field()}}
+              <input type="text" class="input"  name="search" value="" />
+              <!-- <input type="image" src="/homes/images/btn.jpg" class="btn" /> -->
+              <button type="submit" style="border:0.1px solid #fff"><img src="/homes/images/btn.jpg"></button>
+            </form>
+            <script type="text/javascript">
+              $('button[type=submit]:eq(0)').click(function(){
+                //获取搜索内容，若为空，则不能提交
+                var search = $('input[name=search]').val();
+                if(search.length<1){
+                  alert('请输入搜索内容');
+                  return false;
+                }
+                return true;
+              })
+            </script>
           </div>
         </div>
       </div>
@@ -84,7 +97,7 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
           <ul>
             <li><a href="/" class="on">首页</a></li>
             @foreach($fatherType as $v)
-            <li><a href="#">{{$v['title']}}</a></li>
+            <li><a href="{{url('/video/list/index/'.$v['title'])}}">{{$v['title']}}</a></li>
             @endforeach
           </ul>
         </div>
@@ -110,32 +123,28 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
             <tr>
               <td valign=top  id='marquePic1'><table width='100%' border='0' cellspacing='0'>
                   <tr>
-                    <td align=center><a href="#" target="_blank"><img src="/homes/images/link1.jpg" /></a></td>
-                    <td align=center><a href="#" target="_blank"><img src="/homes/images/link2.jpg" /></a></td>
-                    <td align=center><a href="#" target="_blank"><img src="/homes/images/link3.jpg" /></a></td>
-                    <td align=center><a href="#" target="_blank"><img src="/homes/images/link4.jpg" /></a></td>
-                    <td align=center><a href="#" target="_blank"><img src="/homes/images/link5.jpg" /></a></td>
-                    <td align=center><a href="#" target="_blank"><img src="/homes/images/link6.jpg" /></a></td>
-                    <td align=center><a href="#" target="_blank"><img src="/homes/images/link7.jpg" /></a></td>
+                    @foreach($friendLink as $v)
+                    <td align="center" ><a href="{{$v['path']}}" target="_blank"><img src="{{env('PATH_IMG').$v['logo'].'?imageView2/2/w/115/h/49/q/75|imageslim'}}" /></a></td>
+                    @endforeach
                   </tr>
                 </table></td>
-              <td id="marquePic2 valign=top"></td>
+                <td id='marquePic2' valign='top'></td>
             </tr>
           </table>
         </div>
-        <script type="text/javascript">
-var speed=50 
-marquePic2.innerHTML=marquePic1.innerHTML 
-function Marquee(){ 
-if(demo.scrollLeft>=marquePic1.scrollWidth){ 
-demo.scrollLeft=0 
-}else{ 
-demo.scrollLeft++ 
-} 
-} 
-var MyMar=setInterval(Marquee,speed) 
-demo.onmouseover=function() {clearInterval(MyMar)} 
-demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)} 
+<script type="text/javascript">
+    var speed=50 
+    marquePic2.innerHTML=marquePic1.innerHTML 
+    function Marquee(){ 
+    if(demo.scrollLeft>=marquePic1.scrollWidth){ 
+    demo.scrollLeft=0 
+    }else{ 
+    demo.scrollLeft++ 
+    } 
+    } 
+    var MyMar=setInterval(Marquee,speed) 
+    demo.onmouseover=function() {clearInterval(MyMar)} 
+    demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)} 
 </script>
       </div>
     </div>
@@ -143,14 +152,25 @@ demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)}
     <!--合作伙伴-->
     <div class="linktext">
       <h1>合作伙伴</h1>
-      <div class="textlink"><a href="#" target="_blank">毒霸网址大全</a> | <a href="#" target="_blank">搜狗网址导航</a> |<a href="#" target="_blank"> 2345影视</a> | <a href="#" target="_blank">hao123</a> | <a href="#" target="_blank">搜狗搜索</a> |<a href="#" target="_blank"> 搜库</a> | <a href="#" target="_blank">必应</a> | <a href="#" target="_blank">豆瓣</a> | <a href="#" target="_blank">易迅网</a> |<a href="#" target="_blank"> 猫扑</a> | <a href="#" target="_blank">百度贴吧</a> |<a href="#" target="_blank"> 新浪微博</a> |<a href="#" target="_blank"> 果壳网</a> | <a href="#" target="_blank">人民数字</a> | <a href="#" target="_blank">114啦影视</a> | <a href="#" target="_blank">太平洋时尚网</a> | <a href="#" target="_blank">健康卫视</a> | <a href="#" target="_blank">海报网</a> | <a href="#" target="_blank">电影网</a> | <a href="#" target="_blank">178游戏网</a> | <a href="#" target="_blank">刷机精灵</a> | <a href="#" target="_blank">智能电视网</a> | <a href="#" target="_blank">奇珀市场</a> | <a href="#" target="_blank">电视家</a></div>
+      <div class="textlink">
+        @foreach($friendLink as $v)
+        <a href="{{$v['path']}}" target="_blank">{{$v['title']}}</a>
+        @endforeach  
+      </div>
     </div>
   </div>
   <div class="copyright">
-    <div class="Navigation"><a href="#">关于目课</a><a href="#">合作伙伴</a><a href="#">营销中心</a><a href="#">廉正举报</a><a href="#">联系客服</a><a href="#">开放平台</a><a href="#">诚征英才</a><a href="#">联系我们</a><a href="#">网站地图</a><a href="#">法律声明</a></div>
-    <div class="copy">Copyright © 2014 MYCLASS.C0M. All Rights Reserved. Designed by:<a href="http://www.wanhu.cn">Wanhu</a><br />
-      目课网 版权所有 目课网经营许可证<br />
-      <font class="f_red">当前在线人数：<b>154588</b> 人</font></div>
+    <div class="Navigation">
+      <a href="#">合作伙伴</a>
+      <a href="#">联系客服</a>
+      <a href="#">开放平台</a>
+      <a href="#">诚征英才</a>
+      <a href="#">联系我们</a>
+      <a href="#">网站地图</a>
+      <a href="#">法律声明</a></div>
+    <div class="copy">{{$webConfig['copyright']}}<br />
+      老司机视频网 版权所有 老司机视频网经营许可证<br />
+    </div>
   </div>
 </div>
 </body>
