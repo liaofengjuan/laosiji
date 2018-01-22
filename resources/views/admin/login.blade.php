@@ -50,7 +50,7 @@
             </form>
         </div>
     </div>
-    <p class="admin_copyright"><a tabindex="5" href="#" target="_blank">进入前台</a> &copy; 2016 Powered by <a href="#" target="_blank">你的大名</a></p>
+    <p class="admin_copyright"><a tabindex="5" href="{{url('/')}}" target="_blank">进入前台</a></p>
 </div>
 <script src="/admins/js/jquery.min.js"></script>
 <script type="text/javascript">
