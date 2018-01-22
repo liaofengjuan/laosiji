@@ -1,0 +1,13 @@
+.body{width:100%;color:#999;font-size: 14px}
+.body a{text-decoration: none}
+.body .center{clear:both;width:960px;margin:0 auto;margin-top:50px;}
+.body .center .left{width:220px;float:left;}
+.body .center .left a img{width:217px;height:160px;}
+.body .center .right{width:720px; height:200px;float:right;padding-top:10px;font-size: 12px;}
+.right h2{height:26px;display:inline;font:400 20px "Microsoft yahei";}
+.right h2 a{color:#3a3a3a;}
+.right .infoA{height:20px;line-height:20px;}
+.right .infoA span{display: block;float: left;width:500px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;}
+.right .infoA a{display: block;float: right;color:#3a3a3a;}
+.right .infoB{clear:both;margin-top:15px;}
+.right .infoB a{display:inline-block;width:98px;height:30px;line-height:30px;color:#3a3a3a;font-size: 14px;background: url(../images/btn.png) no-repeat 0px -191px;padding-left: 37px;box-sizing:border-box;color:#fff;}

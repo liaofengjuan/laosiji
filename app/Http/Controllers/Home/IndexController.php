@@ -86,24 +86,26 @@ class IndexController extends Controller
     }
 
     /**
-     * 换一组
+     * 搜索
      */
-    public function changeGroup(Request $request)
+    public function search(Request $request)
     {
-        //获取父类的名称
-        $title = $request->input('title');
-        //通过父类的名称查询该父类下所有的子类
-        $id = VideoType::where('title',$title)->first()->id;
-        $sonTypeIds = VideoType::where('pid',$id)->where('status',0)->lists('id');
-        //查询该父类下所有的电影，并按照点击量排序，取5条
-        $movies = VideoInfo::whereIn('tid',$sonTypeIds)
-                                    ->where('status',0)
-                                    ->where('check',1)
-                                    ->orderBy('clicks','desc')
-                                    ->skip(0)
-                                    ->take(5)
-                                    ->get();
-
+        //获取要搜索的内容
+        $content = $request ->input('search');
+        //查询数据库
+        $res = VideoInfo::where('video_title','like','%'.$content.'%')
+                        ->where('status',0)
+                        ->where('check',1)
+                        ->get();
+        if(count($res)>0){
+            //查到结果，放入视图中
+            return view('home.search',['data'=>$res,'content'=>$content]);
+        }else{
+            echo "<script>alert('未查到相关信息，请重新搜索');window.location.href='".$_SERVER['HTTP_REFERER']."'</script>";
+            return;
+        }
     }
+
+
     
 }

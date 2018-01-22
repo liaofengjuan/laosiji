@@ -69,8 +69,23 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
         <div class="so_so">
           <div class="logo"><a href="#" title="目课网"><img src="/homes/images/logo.jpg" / alt="目课网"></a></div>
           <div class="mk_so">
-            <input type="text" class="input"  name=""/>
-            <input type="image" src="/homes/images/btn.jpg" class="btn" />
+            <form action="{{url('/search')}}" method="post">
+              {{csrf_field()}}
+              <input type="text" class="input"  name="search" value="" />
+              <!-- <input type="image" src="/homes/images/btn.jpg" class="btn" /> -->
+              <button type="submit" style="border:0.1px solid #fff"><img src="/homes/images/btn.jpg"></button>
+            </form>
+            <script type="text/javascript">
+              $('button[type=submit]:eq(0)').click(function(){
+                //获取搜索内容，若为空，则不能提交
+                var search = $('input[name=search]').val();
+                if(search.length<1){
+                  alert('请输入搜索内容');
+                  return false;
+                }
+                return true;
+              })
+            </script>
           </div>
         </div>
       </div>

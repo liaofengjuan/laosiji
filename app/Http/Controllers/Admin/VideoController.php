@@ -31,7 +31,7 @@ class VideoController extends Controller
             $video = $video->where('video_title','like','%'.$search_content.'%');
         }
         $video = $video->where('check',1);
-        $data = $video->paginate(1);
+        $data = $video->paginate(10);
         $arr = array();
         foreach($data as $k=>$v){
             $stype = VideoType::where('id',$v['tid'])->first();//查询该电影的子类
@@ -41,16 +41,6 @@ class VideoController extends Controller
         }
         return view('admin.video.index',['arr'=>$arr,'data'=>$data,'request'=>$requestall]);
         
-        //查询所有视频
-        // $data = VideoInfo::where('check',1)->paginate(1);
-        // $arr = array();
-        // foreach($data as $k=>$v){
-        //     $stype = VideoType::where('id',$v['tid'])->first();//查询该电影的子类
-        //     $ftype = VideoType::where('id',$stype['pid'])->first();//查询该电影的父类
-        //     $v['type'] = $ftype['title'].'/'.$stype['title'];//拼接视频类型
-        //     $arr[$k]=$v;//将信息赋值给$arr
-        // }
-        // return view('admin.video.index',['arr'=>$arr,'data'=>$data]);
     }
 
     /**

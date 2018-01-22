@@ -67,8 +67,9 @@ Route::group(['namespace'=>'Home'],function()
 {
 	//前台首页
 	Route::get('/',"IndexController@index");
-	//前台--换一组
-	Route::get('/changeGroup',"IndexController@changeGroup");
+	//前台--搜索
+	Route::post('search',"IndexController@search");
+
 	//执行注销
 	Route::get('/signout',"IndexController@signout");
 
