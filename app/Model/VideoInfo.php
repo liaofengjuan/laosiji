@@ -24,4 +24,15 @@ class VideoInfo extends Model
         return $this->hasOne('App\Model\Slideshow','vid');
     }
 
+    //一对一
+    public function user()
+    {
+        return $this->hasOne('App\Model\User','id','uid');
+    }
+
+     //一对一
+    public function userinfo()
+    {
+        return $this->hasOne('App\Model\UserInfo','uid','uid');
+    }
 }

@@ -172,7 +172,7 @@ function readFile(){
                 // jq1('#logo').val(data.fileName);
                 if(data.message == '2')
                 {
-                	insert_img(data.filePath);
+                	insert_img(data.fileName);
                 }else{
                 	layer.alert('上传失败！', {
                       icon: 2,

@@ -34,11 +34,20 @@ class VideoplayController extends Controller
          }
       }
 
+
       //查询评论
-      $com = Comment::where('vid',$play_id)->orderBy('created_at','desc')->get();
-      
+      $com = Comment::where('vid',$play_id)->orderBy('created_at','desc')->paginate(2);
+      //获取评论条数
+      $count = Comment::where('vid',$play_id)->orderBy('created_at','desc')->count();
 		//查询视频信息
 		$res = VideoInfo::where('id',$play_id)->first();
-      return view('home.video.videoplay',['data' => $res,'comment' => $com]);
+
+      //查询相关视频
+      $xiangguan = VideoInfo::where('tid',$res['tid'])->orderBy('clicks','desc')->take(10)->get();
+
+      //推荐视频
+      $tuijian = VideoInfo::orderBy('clicks','desc')->take(5)->get();
+
+      return view('home.video.videoplay',['data' => $res,'count' => $count,'comment' => $com,'xiangguan' => $xiangguan,'tuijian' => $tuijian]);
    }
 }
