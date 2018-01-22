@@ -77,7 +77,7 @@ class VideoController extends Controller
         $playExtension = $play->getClientOriginalExtension();
         $playName = md5(date('YmdHis',time())).'.'.$playExtension;
         $playPath = $play->getRealPath();
-        $disk->put($playName,fopen($playPath,'r+'));
+       $disk->put($playName,fopen($playPath,'r+'));
 
         //将文件新名和图片新名存入数组中
         $data['pic'] = $picName;
