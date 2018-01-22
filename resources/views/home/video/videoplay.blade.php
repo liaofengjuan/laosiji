@@ -47,7 +47,7 @@
     </div>
   </div>
   <!--点赞-->
-  <div class="agree"> <span class="dzsc"><a href="#" class="dianz">80</a><a href="#" class="kdsc">收藏</a></span> <span class="fenx">
+  <div class="agree"> <span class="dzsc"><a onclick="dianzz({{$data['id']}})" href="javascript:void(0);" class="dianz">{{$data['good']}}</a></span> <span class="fenx">
     <div class="bshare-custom icon-medium">
       <div class="bsPromo bsPromo2"></div>
       <a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div>
@@ -153,6 +153,20 @@
 </div>
 <script type="text/javascript">
 
+  //点赞
+  function dianzz(vid)
+  {
+    $.post('/reply/goods',{id:vid,_token:'{{csrf_token()}}'},function(data){
+      if(data == 'cuo')
+      {
+        alert('点赞失败!');
+      }else{
+        $('.dianz').text(data);
+        alert('点赞成功！');
+      }
+    })
+  }
+
   //盖楼框
   $('.pllist').on('click','.zhhuifu .aaa1',function(){
     if($(this).text() == '回复')
@@ -195,7 +209,7 @@
         alert('评论失败！');
       }else if(msg){
         // console.log(msg['content'])
-        $('.pllist').prepend('<li><div class="lyimg"><a href="#"><img src="'+'{{env("PATH_IMG")}}'+'{{session("pic")}}'+'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+'{{session("user")}}'+'</a></span></div><div class="gxqm">'+msg['content']+'</div><div class="reque"><span class="zhuanfa zhhuifu">'+t+'<a class="aaa1" href="#">回复</a><a class="aaa2" href="javascript:void(0);">展开回复</a></span><span class="yinchuif" style="display:none"><textarea class="neirhf" name="" id="" cols="60" rows="2"></textarea><input class="huifu44" style="margin-bottom:20px;width:50px;height:20px;cursor:pointer" type="button" value="回复" /><input type="hidden" name="cunid" value="'+msg['id']+'"></span></div></div></li><span></span>'
+        $('.pllist').prepend('<li><div class="lyimg"><a href="#"><img src="'+'{{env("PATH_IMG")}}'+'{{session("pic")}}'+'" onerror="javascript:this.src=\''+'/homes/images/my_moren.jpg'+'\'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+'{{session("user")}}'+'</a></span></div><div class="gxqm">'+msg['content']+'</div><div class="reque"><span class="zhuanfa zhhuifu">'+t+'<a class="aaa1" href="#">回复</a><a class="aaa2" href="javascript:void(0);">展开回复</a></span><span class="yinchuif" style="display:none"><textarea class="neirhf" name="" id="" cols="60" rows="2"></textarea><input class="huifu44" style="margin-bottom:20px;width:50px;height:20px;cursor:pointer" type="button" value="回复" /><input type="hidden" name="cunid" value="'+msg['id']+'"></span></div></div></li><span></span>'
           )
       }
     })
@@ -242,7 +256,7 @@
       obj.parent().parent().parent().parent().next().empty();
       for(var i=0;i<data.length;i++)
       {
-        obj.parent().parent().parent().parent().next().prepend('<li style="background-color:pink"><div class="lyimg"><a href="#"><img src="'+'{{env("PATH_IMG")}}'+data[i].pic+'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+data[i].username+' 回复：</a></span></div><div class="gxqm">'+data[i].content+'</div><div class="reque"> <span class="zhuanfa"><a href="#"></a><a href="#"></a>'+data[i].time+'</span></div></div></li>');
+        obj.parent().parent().parent().parent().next().prepend('<li style="background-color:pink"><div class="lyimg"><a href="#"><img src="'+'{{env("PATH_IMG")}}'+data[i].pic+'"  onerror="javascript:this.src=\''+'/homes/images/my_moren.jpg'+'\'" /></a></div><div class="lyinfo"><div class="lyname"><span class="myname"><a href="#">'+data[i].username+' 回复：</a></span></div><div class="gxqm">'+data[i].content+'</div><div class="reque"> <span class="zhuanfa"><a href="#"></a><a href="#"></a>'+data[i].time+'</span></div></div></li>');
       }
   }
 </script>
