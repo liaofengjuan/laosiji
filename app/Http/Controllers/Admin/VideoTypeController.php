@@ -118,11 +118,13 @@ class VideoTypeController extends Controller
     {
         //判断该类有没有子类
         $type = VideoType::find($id);
+        //若删除的类别是主类，判断是否还有子类
         if($type['pid']==0){
-            $res = VideoType::where('pid',$id);
-            if($res){
+            $res = VideoType::where('pid',$id)->get();
+            if(count($res)>0){
                 return '1';
             }
+
         }
         $res = VideoType::find($id)->delete();
         if($res){

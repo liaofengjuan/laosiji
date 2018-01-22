@@ -2,8 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="{{$webConfig['keywords']}}" />
+<meta name="description" content="{{$webConfig['description']}}" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>安徽慕界网络科技有限公司</title>
+<title>{{$webConfig['webname']}}</title>
 <link href="/homes/css/whir_common.css" rel="stylesheet" type="text/css" />
 <link href="/homes/css/whir_homes.css" rel="stylesheet" type="text/css" />
 @section('style')
@@ -67,7 +69,7 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
     <div class="topmain">
       <div class="searchbox">
         <div class="so_so">
-          <div class="logo"><a href="#" title="目课网"><img src="/homes/images/logo.jpg" / alt="目课网"></a></div>
+          <div class="logo"><a href="#" title="光线视频网"><img src="{{env('PATH_IMG').$webConfig['logo']}}" / alt="光线视频网"></a></div>
           <div class="mk_so">
             <form action="{{url('/search')}}" method="post">
               {{csrf_field()}}
@@ -166,7 +168,7 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
       <a href="#">联系我们</a>
       <a href="#">网站地图</a>
       <a href="#">法律声明</a></div>
-    <div class="copy">Copyright © 2014 MYCLASS.C0M. All Rights Reserved<br />
+    <div class="copy">{{$webConfig['copyright']}}<br />
       老司机视频网 版权所有 老司机视频网经营许可证<br />
     </div>
   </div>

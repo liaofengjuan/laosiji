@@ -21,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
         $friendLink = \DB::table('friend_link')->where('status',0)->get();
         view()->share('friendLink',$friendLink);
 
+        //网站配置
+        $webConfig = \DB::table('config')->first();
+        view()->share('webConfig',$webConfig);
     }
 
     /**
