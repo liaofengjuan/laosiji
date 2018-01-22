@@ -13,10 +13,18 @@
   <div class="mod_player_section cf" id="mod_inner">
     <div class="mod_player" id="mod_player">
 
-
-      <div class="main-wrap">
-        <video src="{{env('PATH_IMG').$data->play}}" poster="{{env('PATH_IMG').$data->pic}}" autoplay controls loop></video>
-      </div>
+    @if($vip == '2')
+    <div class="main-wrap">
+      <a href="/center/self/vip">
+        <video src="" poster="/homes/images/jxvip.png" autoplay controls loop></video>
+      </a>
+    </div>
+    @else
+    <div class="main-wrap">
+      <video src="{{env('PATH_IMG').$data['play']}}" poster="{{env('PATH_IMG').$data->pic}}" autoplay controls loop></video>
+    </div>
+    @endif
+     
 
     </div>
     <div class="mod_video_album_section mod_video_album_section_v3" id="fullplaylist">
@@ -71,7 +79,7 @@
     <div class="left868">
       <!--留言板-->
       <div class="fbpl">
-        <div class="plr"><span class="pltx"><a href="#"><img src="{{env('PATH_IMG').session('pic')}}" width="61" height="61" /></a></span><span class="plname"><a href="#">{{session('user')}}</a></span><span class="plnum">所有评论<a href="#"> {{$count}}</a></span></div>
+        <div class="plr"><span class="pltx"><a href="#"><img src="{{env('PATH_IMG').session('pic')}}" onerror="javascript:this.src='/homes/images/my_moren.jpg'" width="61" height="61" /></a></span><span class="plname"><a href="#">{{session('user')}}</a></span><span class="plnum">所有评论<a href="#"> {{$count}}</a></span></div>
         <textarea name="textarea" class="input4 txtinp"></textarea>
         @if(session('user'))
         <input class="tutih"  type="image" src="/homes/images/fbpl.jpg" style="margin-left:25px;" />
@@ -91,7 +99,7 @@
           <!-- 回复 -->
           @foreach($comment as $v)
           <li>
-            <div class="lyimg"><a href="#"><img src="{{env('PATH_IMG').$data->userinfo['pic']}}"  onerror="javascript:this.src='/homes/images/my_moren.jpg'" /></a></div>
+            <div class="lyimg"><a href="#"><img src="{{env('PATH_IMG').$data->userinfo['pic']}}" onerror="javascript:this.src='/homes/images/my_moren.jpg'" /></a></div>
             <div class="lyinfo">
               <div class="lyname"><span class="myname"><a href="#">{{$v->user['username']}}</a></span></div>
               <div class="gxqm">{{$v['content']}}</div>

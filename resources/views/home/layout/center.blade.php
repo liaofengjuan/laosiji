@@ -41,11 +41,10 @@
     </ul>
 
 	<ul class="menu4 menu1">
-      <li><a onclick="return click_a('divOne_4','div_four')" style="cursor:pointer;"><em id="div_four">班级管理</em></a></li>
+      <li id="dianli4"><a onclick="return click_a('divOne_4','div_four')" style="cursor:pointer;"><em id="div_four">评论管理</em></a></li>
       <div class="menubox"  id="divOne_4" style="display:none;">
-        <p><a href="班级-发布资料.html" >班级资料</a></p>
-        <p><a href="班级公告.html" >班级公告</a></p>
-        <p><a href="#" >班级学生</a></p>
+        <p><a href="/center/comment/index" >评论管理</a></p>
+        <p><a href="/center/comment/replyy" >回复管理</a></p>
       </div>
     </ul>
 
@@ -54,6 +53,7 @@
         var path = window.location.pathname;
         var preg_path_self = /^\/center\/self.*$/;
         var preg_path_video = /^\/center\/video.*$/;
+        var preg_path_comment = /^\/center\/comment.*$/;
         
         if(preg_path_self.test(path))
         { 
@@ -65,6 +65,12 @@
         { 
           document.getElementById('divOne_3').style.display = 'block';
           document.getElementById('dianli3').setAttribute('class','on');
+        }
+
+        if(preg_path_comment.test(path))
+        { 
+          document.getElementById('divOne_4').style.display = 'block';
+          document.getElementById('dianli4').setAttribute('class','on');
         }
 
         

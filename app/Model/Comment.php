@@ -22,6 +22,12 @@ class Comment extends Model
         return $this->hasOne('App\Model\User','id','uid');
     }
 
+    //一对一
+    public function videoinfo()
+    {
+        return $this->hasOne('App\Model\VideoInfo','id','vid');
+    }
+
     //一对多
     public function reply()
     {
