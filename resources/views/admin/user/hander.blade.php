@@ -26,7 +26,7 @@
             <form action="/admin/user/hander" method="get">
             <div class="am-u-sm-12 am-u-md-3">
                 <div class="am-form-group">
-                    <select name="search_type" data-am-selected="{btnSize:'sm'}">
+                    <select name="search_type" class="myselect">
                       <option value="0">搜索条件</option>
                       <option value="1">用户名</option>
                       <option value="2">手机号</option>

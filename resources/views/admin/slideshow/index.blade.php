@@ -56,7 +56,7 @@
                                 @else
                                 <td align="center">关闭</td>
                                 @endif
-                                <td>{{date('Y-m-d H:i:s',$v['create_at'])}}</td>
+                                <td>{{date('Y-m-d H:i:s',$v['created_at'])}}</td>
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
@@ -91,6 +91,7 @@
                 }else{
                     layer.msg('抱歉删除失败');
                 }
+                
             })
         })
         

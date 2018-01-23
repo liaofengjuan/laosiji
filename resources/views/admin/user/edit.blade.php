@@ -33,6 +33,7 @@
                         <label class="am-radio-inline" style="margin-left:50px"><input type="radio" value="0" name="status" {{$status==0?'checked':''}}> 正常</label>
                         <label class="am-radio-inline" style="margin-left:150px"><input type="radio" value="1" name="status" {{$status==1?'checked':''}}> 禁言</label>
                     </div>
+                    @if($data['authority']!=2)
                     <div class="am-form-group" style="margin-top:50px">
                         <span class="am-u-sm-3 am-form-label">vip自动续费</span>
                         <label class="am-radio-inline" style="margin-left:30px"><input type="radio" value="1" name="vip" > 一个月</label>
@@ -40,6 +41,7 @@
                         <label class="am-radio-inline" style="margin-left:50px"><input type="radio" value="6" name="vip"> 六个月</label>
                         <label class="am-radio-inline" style="margin-left:50px"><input type="radio" value="12" name="vip"> 一年</label>
                     </div>
+                    @endif
                     <div class="am-form-group" style="margin-top:50px">
                         <div class="am-u-sm-9 am-u-sm-push-3">
                             <button type="button" class="am-btn am-btn-warning am-round" style="width:430px;letter-spacing:100px;padding-left:100px" >提交</button>

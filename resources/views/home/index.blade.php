@@ -1,7 +1,7 @@
 @extends('home.layout.header_footer')
 @section('content')
 <!--公告-->
-<div class="notice">
+<!-- <div class="notice">
   <h1>公告栏：</h1>
   <div class="txtMarquee-left">
     <div class="bd">
@@ -19,7 +19,7 @@
   <script type="text/javascript">
 		jQuery(".txtMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",vis:2,interTime:50});
 		</script>
-</div>
+</div> -->
 <!--专题and图片切换-->
 <div class="clear"></div>
 <div class="topics">

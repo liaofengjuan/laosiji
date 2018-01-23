@@ -28,6 +28,9 @@ a:hover {
 .l-height{
     min-height:90vh;
 }
+.myselect{
+    font-size: 1.4rem;width:200px;height:32px;color: #444;
+}
 /*自定义结束*/
 
 .am-breadcrumb {

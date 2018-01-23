@@ -13,14 +13,6 @@
         <div class="caption font-green bold">
             <span class="am-icon-navicon"></span> 友情链接列表
         </div>
-        <div class="tpl-portlet-input tpl-fz-ml">
-            <div class="portlet-input input-small input-inline">
-                <div class="input-icon right">
-                    <i class="am-icon-search"></i>
-                    <input type="text" class="form-control form-control-solid" placeholder="搜索..."> 
-                </div>
-            </div>
-        </div>
     </div>
     <div class="tpl-block">
         <div class="am-g">
@@ -31,27 +23,7 @@
                     </div>
                 </div>
             </div>
-            <div class="am-u-sm-12 am-u-md-3">
-                <div class="am-form-group">
-                    <select data-am-selected="{btnSize: 'sm'}">
-                      <option value="option1">所有类别</option>
-                      <option value="option2">IT业界</option>
-                      <option value="option3">数码产品</option>
-                      <option value="option3">笔记本电脑</option>
-                      <option value="option3">平板电脑</option>
-                      <option value="option3">只能手机</option>
-                      <option value="option3">超极本</option>
-                    </select>
-                </div>
-            </div>
-            <div class="am-u-sm-12 am-u-md-3">
-                <div class="am-input-group am-input-group-sm">
-                    <input type="text" class="am-form-field">
-                    <span class="am-input-group-btn">
-                    <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search" type="button"></button>
-                  </span>
-                </div>
-            </div>
+            
         </div>
         <div class="am-g">
             <div class="am-u-sm-12">
@@ -79,7 +51,7 @@
                               </td>
                                 <td>{{$v->title}}</td>
                                 <td>{{$v->path}}</td>
-                                <td>{{date('Y-m-d H:i:s',$v->create_at)}}</td>
+                                <td>{{$v->created_at}}</td>
                                 @if(($v->status)==0)
                                 <td>开启</td>
                                 @else
@@ -119,15 +91,19 @@
 <script type="text/javascript">
    //执行删除
     function del(id,obj){
-        $.post('/admin/friend/'+id,{'_token':"{{csrf_token()}}",'_method':'delete'},function(data){
-            if(data=='0'){
-                alert('恭喜，删除成功');
-                obj.parent().parent().parent().parent().remove();
-            }else{
-                alert('抱歉，删除失败');
-                return false;
-            }
+        layer.confirm('确定要删除吗？', {
+          btn: ['确定','取消'] //按钮
+        },function(){
+            $.post("/admin/friend/"+id,{'_method':'delete','_token':'{{csrf_token()}}'},function(data){
+                if(data=='0'){
+                    layer.msg('恭喜删除成功', {icon: 1});
+                    obj.parent().parent().parent().parent().remove();
+                }else{
+                    layer.msg('抱歉删除失败', {icon: 5});
+                }
+            })
         })
+      
     }
 </script>
     

@@ -99,9 +99,9 @@ class IndexController extends Controller
                         ->get();
         if(count($res)>0){
             //查到结果，放入视图中
-            return view('home.search',['data'=>$res,'content'=>$content]);
+            return view('home.search',['data'=>$res]);
         }else{
-            echo "<script>alert('未查到相关信息，请重新搜索');window.location.href='".$_SERVER['HTTP_REFERER']."'</script>";
+            echo "<script>alert('未查到相关信息，请重新搜索');history.back();</script>";
             return;
         }
     }

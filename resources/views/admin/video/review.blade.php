@@ -60,13 +60,13 @@
                                 <td>关闭</td>
                                 @endif
                                 <td>{{$v['clicks']}}</td>
-                                <td>{{date('Y-m-d H:i:s',$v['create_at'])}}</td>
+                                <td>{{date('Y-m-d H:i:s',$v['created_at'])}}</td>
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
                                             <a class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="pass({{$v['id']}},$(this))" style="background:#fff"><span class="am-icon-pencil-square-o"></span> 通过</a>
                                             <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="del({{$v['id']}},$(this))" style="background:#fff"><span class="am-icon-trash-o"></span> 删除</a>
-                                            <a class="am-btn am-btn-default am-btn-xs am-text-success" href="javascript:;" style="background:#fff"><span class="am-icon-video-camera" ></span> 查看视频</a>
+                                            <a class="am-btn am-btn-default am-btn-xs am-text-success" href="{{url('/video/play/index/'.$v['id'])}}" style="background:#fff"><span class="am-icon-video-camera" ></span> 查看视频</a>
 
                                         </div>
                                     </div>

@@ -67,7 +67,7 @@
                             <div class="img-wrap" style="width:100px;overflow:hidden;position:relative">
                                 <img src="{{env('PATH_IMG').$res['logo']}}" onerror="javascript:this.src='/admins/img/upload_icon.jpg'" id="myimg" class="am-img-thumbnail">
                                 <input type="file" value="" name="pic" id="pic" style="position:  absolute;top: 0;width:  100px;height:  83px;opacity:  0;" >
-                                <input type="hidden" value="" name="logo" id="logo">
+                                <input type="hidden" value="{{$res['logo']}}" name="logo" id="logo">
                             </div>
                         </div>
                         

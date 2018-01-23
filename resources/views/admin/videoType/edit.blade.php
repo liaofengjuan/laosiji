@@ -61,6 +61,7 @@
         //判断不能为空
        if(title.length==0){
             alert('不能提交空数据');
+
             return false;
        }
        //发送ajax

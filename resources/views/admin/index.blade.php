@@ -3,11 +3,11 @@
     <link rel="stylesheet" type="text/css" href="/admins/css/admin_index.css">
 @endsection
 @section('content')
-<div class="tpl-portlet-components" >
+<div class="tpl-portlet-components" style="min-height:100vh">
     <div class="tpl-content-page-title am-icon-home" >
         首页
     </div>
-    <p class="am-text-xxl am-text-secondary am-text-center">欢迎进入老司机视频网后台</p>
+    <p class="am-text-xxl am-text-secondary am-text-center">欢迎进入光线视频网后台</p>
     <hr/>
     <table width="99%" border="0" cellspacing="0" cellpadding="0" id="main">
       <tr>
@@ -28,7 +28,7 @@
             PHP版本：5.2.5<br/>
             MYSQL版本：5.0.45-community-nt<br/>
             魔术引用：开启 (建议开启)<br/>
-            使用域名：www.laosiji.com <br/>
+            使用域名：www.yangguang.com <br/>
             </div>
         </td>
       </tr>

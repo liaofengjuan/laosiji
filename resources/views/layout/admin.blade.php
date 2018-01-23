@@ -29,7 +29,7 @@
     <header class="am-topbar am-topbar-inverse admin-header">
         <div class="am-topbar-brand">
             <a href="javascript:;" class="tpl-logo">
-                <img src="/admins/img/logo.png" alt="">
+                <img src="{{env('PATH_IMG').$webConfig['logo'].'?imageView2/1/w/180/h/75/q/75|imageslim'}}" alt="">
             </a>
         </div>
         <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
@@ -46,7 +46,7 @@
                 
                 <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen" class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
 
-                <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
+                <!-- <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                     <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
                         <span class="tpl-header-list-user-nick">{{session('user')}}</span><span class="tpl-header-list-user-ico"> <img src="" onerror="javascript:this.src='/admins/img/user01.png'"></span>
                     </a>
@@ -55,7 +55,7 @@
                         <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
                         <li><a href="javascript:;" onclick="signout()"><span class="am-icon-power-off"></span> 退出</a></li>
                     </ul>
-                </li>
+                </li> -->
                 <li><a href="javascript:;" class="tpl-header-list-link" onclick="signout()" ><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span>安全退出</a></li>
             </ul>
         </div>
