@@ -47,6 +47,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'adminLogin']
 
 
 	//轮播图
+	Route::post('/slideshow/searchVideo/{sid}','SlideshowController@searchVideo');//查询子类中的电影
 	Route::resource('/slideshow','SlideshowController');
 
 	//网站配置

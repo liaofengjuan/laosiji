@@ -69,16 +69,16 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
     <div class="topmain">
       <div class="searchbox">
         <div class="so_so">
-          <div class="logo"><a href="#" title="光线视频网"><img src="{{env('PATH_IMG').$webConfig['logo']}}" / alt="光线视频网"></a></div>
+          <div class="logo"><a href="#" title="光线视频网"><img src="{{env('PATH_IMG').$webConfig['logo'].'?imageView2/1/w/220/h/90/q/75|imageslim'}}" alt="光线视频网"></a></div>
           <div class="mk_so">
             <form action="{{url('/search')}}" method="post">
               {{csrf_field()}}
               <input type="text" class="input"  name="search" value="" />
               <!-- <input type="image" src="/homes/images/btn.jpg" class="btn" /> -->
-              <button type="submit" style="border:0.1px solid #fff"><img src="/homes/images/btn.jpg"></button>
+              <button type="submit" class="searchSubmit" style="border:0.1px solid #fff"><img src="/homes/images/btn.jpg"></button>
             </form>
             <script type="text/javascript">
-              $('button[type=submit]:eq(0)').click(function(){
+              $('.searchSubmit').click(function(){
                 //获取搜索内容，若为空，则不能提交
                 var search = $('input[name=search]').val();
                 if(search.length<1){

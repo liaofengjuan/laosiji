@@ -97,7 +97,6 @@
         layer.confirm('确定要删除吗？', {
           btn: ['确定','取消'] //按钮
         },function(){
-          
           var id = obj.parent().parent().find('td:eq(0)').html();
 
           $.post("/admin/videoType/"+id,{'_method':'delete','_token':'{{csrf_token()}}'},function(data){
@@ -112,6 +111,10 @@
                       break;
                   case '2':
                       layer.msg('删除失败', {icon: 5});
+                      return false;
+                      break;
+                  case '3':
+                      layer.msg('该子类中还有电影，不允许删除', {icon: 5});
                       return false;
                       break;
                   default:

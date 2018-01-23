@@ -27,7 +27,7 @@
             <form action="/admin/video" method="get">
                 <div class="am-u-sm-12 am-u-md-3">
                     <div class="am-form-group">
-                        <select data-am-selected="{btnSize: 'sm'}" name="search_type">
+                        <select class="myselect" name="search_type">
                           <option value="0">搜索条件</option>
                           <option value="1">视频名称</option>
                         </select>
@@ -80,7 +80,7 @@
                                 <td>{{$v['clicks']}}</td>
                                 <td>{{$v['good']}}</td>
                                 <td>{{count($v->comment)}}</td>
-                                <td>{{date('Y-m-d H:i:s',$v['create_at'])}}</td>
+                                <td>{{date('Y-m-d H:i:s',$v->created_at)}}</td>
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
@@ -118,7 +118,7 @@
 <script type="text/javascript">
     //加载编辑页面
     function edit(id){
-        window.location.href = "/admin/video/2/edit";
+        window.location.href = "/admin/video/"+id+"/edit";
     }
     //执行删除
     function del(id,obj){

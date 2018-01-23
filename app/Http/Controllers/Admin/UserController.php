@@ -143,6 +143,9 @@ class UserController extends Controller
                 $vip_time = 60*60*24*30*$vip+time();
             }
             $userinfo->vip_time = $vip_time; 
+            $user = User::where('id',$id)->first();
+            $user->authority = 1;
+            $user->save();
         }
         $res = $userinfo -> save();
         if($res!=false){
@@ -228,7 +231,7 @@ class UserController extends Controller
             }
         }
         $user = $user->where('authority','2');
-        $data = $user->paginate(1);
+        $data = $user->paginate(5);
         return view('admin.user.hander',['data'=>$data,'request'=>$requestall]);
         // $data = User::where('authority','2')->paginate(3);
         

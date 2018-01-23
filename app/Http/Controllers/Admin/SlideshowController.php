@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Model\Slideshow;
 use App\Model\VideoInfo;
+use App\Model\VideoType;
 
 class SlideshowController extends Controller
 {
@@ -30,7 +31,9 @@ class SlideshowController extends Controller
      */
     public function create()
     {
-        return view('admin.slideshow.add');
+        //查询分类表
+        $data = VideoType::where('pid',0)->get();
+        return view('admin.slideshow.add',['data'=>$data]);
     }
 
     /**
@@ -42,9 +45,9 @@ class SlideshowController extends Controller
     public function store(Request $request)
     {
         $data = $request -> except(['_token']);
-        //通过title查找视频表中的电影的id，确定vid
-        $res = VideoInfo::where('video_title',$data['title'])->first();
-        $data['vid'] = $res['id'];
+        //通过视频id找到视频名称
+        $result = VideoInfo::where('id',$data['vid'])->first();
+        $data['title'] = $result['video_title'];
         $data['created_at'] = time();
         $res = Slideshow::insert($data);
         // return 12;
@@ -105,11 +108,24 @@ class SlideshowController extends Controller
      */
     public function destroy($id)
     {
-        $res = VideoInfo::where('id',$id)->delete();
+        $res = Slideshow::where('id',$id)->delete();
         if($res){
             return 0;//删除成功
         }else{
             return 1;
+        }
+
+    }
+
+    /**
+     * 搜索指定子类中的电影
+     */
+    public function searchVideo($sid)
+    {
+        //通过sid查询子类中的电影
+        $res = VideoInfo::where('tid',$sid)->get();
+        if($res){
+            return json_encode($res);
         }
     }
 }

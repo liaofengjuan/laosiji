@@ -3,7 +3,7 @@
     <link rel="stylesheet" type="text/css" href="/admins/css/admin_index.css">
 @endsection
 @section('content')
-<div class="tpl-portlet-components" >
+<div class="tpl-portlet-components" style="min-height:100vh">
     <div class="tpl-content-page-title am-icon-home" >
         首页
     </div>

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Model\VideoType;//使用模型
+use App\Model\VideoInfo;//使用模型
 
 
 class VideoTypeController extends Controller
@@ -125,7 +126,15 @@ class VideoTypeController extends Controller
                 return '1';
             }
 
+        }else{
+            //判断子类中是否有电影，若有，则不允许删除
+            $res2 = VideoInfo::where('tid',$id)->get();
+            if(count($res2)>0){
+                return '3';
+            }
+
         }
+
         $res = VideoType::find($id)->delete();
         if($res){
             return "0";
