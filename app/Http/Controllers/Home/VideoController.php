@@ -44,19 +44,20 @@ class VideoController extends Controller
     //引入观看记录页面
     public function vhistory()
     { 
-        $vid = User::where('username',session('user'))
+        $histo = User::where('username',session('user'))
             ->first()
             ->history()
             ->orderBy('created_at','desc')
             ->take(10)
-            ->lists('vid');
-
+            // ->lists('histo');
+            ->get();
+        
         $arr = [];
-        foreach($vid as $v)
+        foreach($histo as $v)
         {
-            $arr[] = VideoInfo::where('id',$v)->first();
+            $arr[] = VideoInfo::where('id',$v['vid'])->first();
         }
-        return view('home.user_center.video.history',['data'=>$arr]);
+        return view('home.user_center.video.history',['data'=>$arr,'history'=>$histo]);
     }
 
 

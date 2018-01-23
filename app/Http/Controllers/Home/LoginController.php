@@ -70,6 +70,17 @@ class LoginController extends Controller
             // dd($res->userinfo->pic);
             session(['user' => $res['username']]);
     		session(['pic' => $res->userinfo['pic']]);
+            $vtime = $res->userinfo['vip_time'] - time();
+            if($vtime > 0)
+            {
+                session(['vip' => '6']); //是vip
+                $res -> authority = 1;
+                $res -> save();
+            }else{
+                session(['vip' => '4']); //不是vip
+                $res -> authority = 0;
+                $res -> save();
+            }
     		echo 2; //登录成功
     		return;
     	}else{
@@ -145,6 +156,18 @@ class LoginController extends Controller
             return;
         }
         session(['user' => $res_p['username']]);
+        session(['pic' => $res_p->userinfo['pic']]);
+        $vtime = $res_p->userinfo['vip_time'] - time();
+        if($vtime > 0)
+        {
+            session(['vip' => '6']); //是vip
+            $res_p -> authority = 1;
+            $res_p -> save();
+        }else{
+            session(['vip' => '4']); //不是vip
+            $res_p -> authority = 0;
+            $res_p -> save();
+        }
         echo 4; //登录成功
     }
 }

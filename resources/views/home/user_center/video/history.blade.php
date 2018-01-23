@@ -10,12 +10,12 @@
     </div>
     <div class="display">
       <ul>
-        @foreach($data as $v)
+        @foreach($data as $k=>$v)
         <li class="gkvideo">
           <div class="gkvideoimg"><img src="{{env('PATH_IMG').$v['pic'].'?imageView2/1/w/146/h/87/q/75|imageslim'}}" /> <span class="gktime">{{$v['size']}}</span><span class="spclose"><!-- <a href="#"><img src="/homes/images/grzx/close.png" /></a> --></span></div>
           <div class="title8">
             <h1><a href="/video/play/index/{{$v['id']}}">{{$v['video_title']}}</a></h1>
-            <h2><span class="gksj" style="font-size:12px">{{date('Y-m-d H:i:s',$v['created_at'])}}</span><span class="gkjd"></span></h2>
+            <h2><span class="gksj" style="font-size:12px">{{date('Y-m-d H:i:s',$history[$k]['created_at'])}}</span><span class="gkjd"></span></h2>
           </div>
         </li>
         @endforeach

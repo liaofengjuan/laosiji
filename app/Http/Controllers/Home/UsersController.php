@@ -155,6 +155,10 @@ class UsersController extends Controller
         $res = $userinfo -> save();
         if($res)
         {
+            $uu = User::where('id',$uid)->first();
+            $uu -> authority = 1;
+            $uu -> save();
+            session(['vip' => '6']);
             echo 2; //成功
         }else{
             echo 3; //失败

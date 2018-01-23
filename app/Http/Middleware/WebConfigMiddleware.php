@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Model\Config;
 
-class LoginStatusMiddleware
+class WebConfigMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,9 +16,10 @@ class LoginStatusMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(!session('user'))
+        $res = Config::where('id',1)->first();
+        if($res['status'] == '1')
         {
-            return redirect('/login');
+            return redirect('/webclose');   
         }
         return $next($request);
     }

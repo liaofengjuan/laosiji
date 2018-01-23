@@ -28,10 +28,15 @@ class ReplyController extends Controller
     public function postAddcomment(Request $request)
     {
         //获取该用户id
-        $uid = User::where('username',session('user'))->value('id');
+        $user = User::where('username',session('user'))->first();
+        if($user->userinfo['status'] == '1')
+        {
+            echo 44;
+            return;
+        }
         // 执行添加
         $com = new Comment;
-        $id = $com -> insertGetId(['uid'=>$uid,'vid'=>$request->input('vid'),'content'=>$request->input('cont'),'created_at'=>time()]);
+        $id = $com -> insertGetId(['uid'=>$user['id'],'vid'=>$request->input('vid'),'content'=>$request->input('cont'),'created_at'=>time()]);
         // dd($res);
         // $com = Comment::where('vid',$request->input('vid'))->orderBy('created_at','desc')->get();
         $res = Comment::where('id',$id)->first();
@@ -43,10 +48,15 @@ class ReplyController extends Controller
         }
     }
 
-    //添加评论
+    //添加回复
     public function postInsreply(Request $request)
     {
         $user = User::where('username',session('user'))->first();
+        if($user->userinfo['status'] == '1')
+        {
+            echo 44;
+            return;
+        }
         //获取评论数据
         $comment_id = $request->input('comment_id');
         $content = $request->input('content');
