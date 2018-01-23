@@ -16,19 +16,18 @@
             <div class="main-con am-text-default" >
             注册账户：开启<br/>
                 购买会员：开启<br/>
-                管理员个数：<font color="#538ec6"><strong>5</strong></font> 人<br/>
-                网站IP：10.11.217.50<br/>
+                <!-- 管理员个数：<font color="#538ec6"><strong>5</strong></font> 人<br/> -->
+                网站IP：{{GetHostByName($_SERVER['SERVER_NAME'])}}<br/>
                 程序编码：UTF-8<br/>
             </div>
         </td>
         <td align="left" valign="top" width="49%">
             <div class=" am-text-default">服务器信息</div>
             <div class="main-con am-text-default">
-            服务器软件：Apache/2.2.6 (Win32) PHP/5.2.5<br/>
-            PHP版本：5.2.5<br/>
-            MYSQL版本：5.0.45-community-nt<br/>
-            魔术引用：开启 (建议开启)<br/>
-            使用域名：www.yangguang.com <br/>
+            服务器软件：{{ $_SERVER['SERVER_SOFTWARE'] }}<br/>
+            PHP版本：{{ PHP_VERSION }}<br/>
+            <!-- MYSQL版本：{{}}<br/> -->
+            使用域名：www.guangxian.com <br/>
             </div>
         </td>
       </tr>
