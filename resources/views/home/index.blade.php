@@ -79,7 +79,7 @@
             <div class="titleinfo">
               <h1>{{$onlyMovies[0]->video_title}}</h1>
               <div class="spxx">
-                {{$onlyMovies[0]->clicks}}次播放 | 1,629次评论
+                {{$onlyMovies[0]->clicks}}次播放 
               </div>
             </div>
             <span class="sptime">
@@ -100,7 +100,7 @@
               </div>
               <div class="title3">
                 <div class="playtime">
-                  {{$onlyMovies[1]->clicks}}次播放 | 1,629次评论
+                  {{$onlyMovies[1]->clicks}}次播放 
                 </div>
               </div>
             </a>
@@ -113,7 +113,7 @@
                 <span class="play1">播放</span>
               </div>
               <div class="title3">
-                <div class="playtime">{{$onlyMovies[2]->clicks}}次播放 | 1,629次评论
+                <div class="playtime">{{$onlyMovies[2]->clicks}}次播放 
                 </div>
               </div>
             </a>
@@ -126,7 +126,7 @@
                 <span class="play1">播放</span>
               </div>
               <div class="title3">
-                <div class="playtime">{{$onlyMovies[3]->clicks}}次播放 | 1,629次评论
+                <div class="playtime">{{$onlyMovies[3]->clicks}}次播放 
                 </div>
               </div>
             </a>
@@ -139,7 +139,7 @@
                 <span class="play1">播放</span>
               </div>
               <div class="title3">
-                <div class="playtime">{{$onlyMovies[4]->clicks}}次播放 | 1,629次评论
+                <div class="playtime">{{$onlyMovies[4]->clicks}}次播放 
                 </div>
               </div>
             </a>
@@ -194,7 +194,7 @@
             </div>
             <div class="titlei">
               <span class="classtitle">{{$detail['video_title']}}</span>
-              <span class="classinfo">播放次数： {{$detail['clicks']}}次  评论量：111次
+              <span class="classinfo">播放次数： {{$detail['clicks']}}次  
               </span>
             </div>
           </a>

@@ -89,7 +89,7 @@
                     layer.msg('恭喜删除成功', {icon: 1});
                     obj.parent().parent().parent().parent().remove();
                 }else{
-                    layer.msg('抱歉删除失败');
+                    layer.msg('抱歉删除失败', {icon: 5});
                 }
                 
             })
