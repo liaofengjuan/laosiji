@@ -53,7 +53,7 @@ class LoginController extends Controller
         //判断密码是否正确
         if(Hash::check($data['password'],$user['password']))
         {
-            session(['user' => $user['username']]);//将用户名存入session
+            session(['admins' => $user['username']]);//将用户名存入session
             return redirect('/admin');//登录成功
         }else{
             return back() -> with('error','密码错误');; //密码错误
@@ -81,7 +81,7 @@ class LoginController extends Controller
     public function signout(Request $request)
     {
         //删除session中的值
-        $res = $request -> session() -> forget('user');
+        $res = $request -> session() -> forget('admins');
         if($res==null){
             return 0;//删除成功
         }else{
