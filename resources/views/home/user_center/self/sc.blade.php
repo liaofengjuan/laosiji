@@ -197,10 +197,12 @@ function readFile(){
             switch(msg)
             {               
                 case '2':
-                    layer.alert('上传成功！', {
-                      icon: 1,
-                      skin: 'layer-ext-moon' 
-                    })
+                    // layer.alert('上传成功！', {
+                    //   icon: 1,
+                    //   skin: 'layer-ext-moon' 
+                    // })
+                    alert(1);
+                    location.reload();
                     break;
                 case '3':
                     layer.alert('上传失败！', {

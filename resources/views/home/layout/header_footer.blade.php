@@ -36,7 +36,7 @@ EvPNG.fix('img,.content,.svc-payment,.svc-gathering,.svc-weg,.svc-tx,.svc-credit
   </div>
   <div class="hyname">
     <ul id="xiala">
-      <li><a href="#">{{session('user')}}</a>
+      <li><a href="#">{{session('user')}}@if(session('vip') == '6') <font color="red">[vip]</font> @else [普通用户] @endif</a>
         <ul id="xl" style="display:none;position:absolute;background-color:#F0F0F0;border:1px solid #dfdfdf;border-top:none;text-align:center">
           <li><a style="display:block;padding:0 5px" href="/center/self">个人中心</a></li>
           <li><a style="display:block;padding:0 5px" href="/signout">注销</a></li>

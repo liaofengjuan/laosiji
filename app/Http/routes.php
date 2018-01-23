@@ -63,7 +63,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'adminLogin']
 
 
 //前台路由组
-Route::group(['namespace'=>'Home'],function()
+Route::get('/webclose','Home\WebCloseController@index');	//网站关闭
+
+Route::group(['namespace'=>'Home','middleware'=>'webConfig'],function()
 {
 	//前台首页
 	Route::get('/',"IndexController@index");

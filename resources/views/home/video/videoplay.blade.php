@@ -204,7 +204,10 @@
     var t = new Date().Format("yyyy-MM-dd hh:mm:ss");
     // console.log(t);
     $.post('/reply/addcomment',{cont:cont,vid:'{{$data["id"]}}',_token:'{{csrf_token()}}'},function(msg){
-      if(msg == '3')
+      if(msg == '44')
+      {
+        alert('您已被禁言！')
+      }else if(msg == '3')
       {
         alert('评论失败！');
       }else if(msg){
@@ -221,13 +224,16 @@
     var comment_id = $(this).next().val();
     var th = $(this);
     $.post('/reply/insreply',{comment_id:comment_id,content:content,_token:'{{csrf_token()}}'},function(data){
-
-      if(data == '2')
+      if(data == '44')
+      {
+        alert('您已被禁言！');
+      }else if(data == '2')
       {
         alert('回复失败!');
         return;
-      }
+      }else{
         tjhuifu(data,th);     
+      }
     })
 
   })

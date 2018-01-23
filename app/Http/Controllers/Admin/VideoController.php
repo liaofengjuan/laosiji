@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Model\VideoInfo;//使用模型
 use App\Model\VideoType;//使用模型
 use App\Model\User;//使用模型
+use App\Model\History;//使用模型
+
 
 class VideoController extends Controller
 {
@@ -160,6 +162,7 @@ class VideoController extends Controller
     {
         //执行删除
         $res = VideoInfo::where('id',$id)->delete();
+        History::where('vid',$id)->delete();
         if($res){
             return 0;
         }else{
