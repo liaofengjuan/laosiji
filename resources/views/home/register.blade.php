@@ -4,6 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- <meta name="_token" content="{{ csrf_token() }}"/> -->
 	<link type="text/css" rel="stylesheet" href="/homes/login_register/css/style.css" />
+  <meta name="keywords" content="{{$webConfig['keywords']}}" />
+  <meta name="description" content="{{$webConfig['description']}}" />
+  <title>{{$webConfig['webname']}}</title>
     <!--[if IE 6]>
     <script src="/homes/login_register/js/iepng.js" type="text/javascript"></script>
         <script type="text/javascript">
@@ -31,8 +34,6 @@
     
 	<script type="text/javascript" src="/homes/login_register/js/lrscroll_1.js"></script>
     
-    
-<title>尤洪</title>
 </head>
 <body>  
 <!--Begin Header Begin-->
@@ -50,10 +51,10 @@
 <!--Begin Login Begin-->
 <div class="log_bg">	
     <div class="top">
-        <div class="logo"><a href="Index.html"><img src="/homes/login_register/images/logo.png" /></a></div>
+        <div class="logo"><a href="Index.html"><img src="/homes/login_register/images/loogo.jpg" /></a></div>
     </div>
 	<div class="regist">
-    	<div class="log_img"><img src="/homes/login_register/images/l_img.png" width="611" height="425" /></div>
+    	<div class="log_img"><img src="/homes/login_register/images/112.jpg" width="651" height="325" /></div>
 		<div class="reg_c" style="height:500px">
         	<form>
             <table border="0" style="width:420px; font-size:14px; margin-top:20px;" cellspacing="0" cellpadding="0">
@@ -61,7 +62,7 @@
               	<td width="95">&nbsp;</td>
                 <td>
                 	<span class="fl" style="font-size:24px;">注册</span>
-                    <span class="fr">已有商城账号，<a href="/login" style="color:#ff4e00;">我要登录</a></span>
+                    <span class="fr">已有账号，<a href="/login" style="color:#ff4e00;">我要登录</a></span>
                 </td>
               </tr>
               <tr height="50">
@@ -243,8 +244,18 @@
 <!--Begin Footer Begin-->
 <div class="btmbg">
     <div class="btm">
-        备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com   Copyright © 2015-2018 尤洪商城网 All Rights Reserved. 复制必究 , Technical Support: Dgg Group <br />
-        <img src="/homes/login_register/images/b_1.gif" width="98" height="33" /><img src="/homes/login_register/images/b_2.gif" width="98" height="33" /><img src="/homes/login_register/images/b_3.gif" width="98" height="33" /><img src="/homes/login_register/images/b_4.gif" width="98" height="33" /><img src="/homes/login_register/images/b_5.gif" width="98" height="33" /><img src="/homes/login_register/images/b_6.gif" width="98" height="33" />
+        {{$webConfig['copyright']}} <br />
+        @foreach($friendLink as $v)
+        <a href="{{$v['path']}}" target="_blank">
+          <img src="{{env('PATH_IMG').$v['logo'].'?imageView2/2/w/98/h/33/q/75|imageslim'}}" />
+        </a>
+        @endforeach
+        <!-- <img src="/homes/login_register/images/b_1.gif" width="98" height="33" />
+        <img src="/homes/login_register/images/b_2.gif" width="98" height="33" />
+        <img src="/homes/login_register/images/b_3.gif" width="98" height="33" />
+        <img src="/homes/login_register/images/b_4.gif" width="98" height="33" />
+        <img src="/homes/login_register/images/b_5.gif" width="98" height="33" />
+        <img src="/homes/login_register/images/b_6.gif" width="98" height="33" /> -->
     </div>    	
 </div>
 <!--End Footer End -->    

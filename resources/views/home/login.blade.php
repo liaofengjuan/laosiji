@@ -2,6 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="{{$webConfig['keywords']}}" />
+<meta name="description" content="{{$webConfig['description']}}" />
+<title>{{$webConfig['webname']}}</title>
 	<link type="text/css" rel="stylesheet" href="/homes/login_register/css/style.css" />
     <!--[if IE 6]>
     <script src="/homes/login_register/js/iepng.js" type="text/javascript"></script>
@@ -49,10 +52,10 @@
 <!--Begin Login Begin-->
 <div class="log_bg">	
     <div class="top">
-        <div class="logo"><a href="#"><img src="/homes/login_register/images/logo.png" /></a></div>
+        <div class="logo"><a href="#"><img src="/homes/login_register/images/loogo.jpg" /></a></div>
     </div>
 	<div class="login">
-    	<div class="log_img" style="margin-top:0"><img src="/homes/login_register/images/l_img.png" width="611" height="425" /></div>
+    	<div class="log_img" style="margin-top:0"><img src="/homes/login_register/images/112.jpg" width="651" height="325" /></div>
 		<div class="log_c" style="height:450px;margin-top:0">
         	<form>
             <table border="0" style="width:370px; font-size:14px; margin-top:30px;" cellspacing="0" cellpadding="0">
@@ -379,8 +382,12 @@
 <!--Begin Footer Begin-->
 <div class="btmbg">
     <div class="btm">
-        备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com   Copyright © 2015-2018 尤洪商城网 All Rights Reserved. 复制必究 , Technical Support: Dgg Group <br />
-        <img src="/homes/login_register/images/b_1.gif" width="98" height="33" /><img src="/homes/login_register/images/b_2.gif" width="98" height="33" /><img src="/homes/login_register/images/b_3.gif" width="98" height="33" /><img src="/homes/login_register/images/b_4.gif" width="98" height="33" /><img src="/homes/login_register/images/b_5.gif" width="98" height="33" /><img src="/homes/login_register/images/b_6.gif" width="98" height="33" />
+        {{$webConfig['copyright']}} <br />
+         @foreach($friendLink as $v)
+        <a href="{{$v['path']}}" target="_blank">
+          <img src="{{env('PATH_IMG').$v['logo'].'?imageView2/2/w/98/h/33/q/75|imageslim'}}" />
+        </a>
+        @endforeach
     </div>    	
 </div>
 <!--End Footer End -->    
