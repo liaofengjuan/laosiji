@@ -238,4 +238,46 @@ class UserController extends Controller
         // return view('admin.user.hander',['data'=>$data]);
     }
 
+    /**
+     * 加载修改密码页面
+     */
+    public function pass($id)
+    {
+        $data = User::where('id',$id)->first();
+        return view('admin.user.editPassword',['data'=>$data,'id'=>$id]);
+
+    }
+
+     /**
+     * 加载执行修改密码页面
+     */
+    public function doPass(Request $request, $id)
+    {
+        //获取新旧密码
+        $oldPass = $request -> input('oldPass');
+        $newPass = $request -> input('newPass');
+        //验证旧密码是否错误
+        $res = User::where('id',$id)->first();
+        if(!Hash::check($oldPass,$res['password']))
+        {
+            echo 2; //旧密码错误
+            return;
+        }else{
+            $res = User::where('id',$id)->first();
+            $res -> password = bcrypt($newPass);
+            $result = $res -> save();
+            //判断是否修改成功
+            if($result)
+            {
+                //删除登录session
+                $request->session()->forget('admins');
+                echo 3; //修改成功
+                return;
+            }else{
+                echo 4; //修改失败
+                return;
+            }
+        }
+    }
+
 }

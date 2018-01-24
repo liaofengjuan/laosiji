@@ -57,8 +57,8 @@
                     <div class="am-form-group">
                         <label  class="am-u-sm-3 am-form-label">状态</label>
                         <div class="am-u-sm-9" style="font-size:15px">
-                            <input type="radio" value="0" name="status" style="margin-left:10px" {{ $res['status']==0?'checked':'' }}>启用
-                            <input type="radio" value="1" name="status" style="margin-left:100px" {{ $res['status']==1?'checked':'' }}>禁用
+                            <input type="radio" value="0" name="status" style="margin-left:10px" {{ $res['status']==0?'checked':'' }}>开启
+                            <input type="radio" value="1" name="status" style="margin-left:100px" {{ $res['status']==1?'checked':'' }}>关闭
                         </div>
                     </div>
                      <div class="am-form-group">

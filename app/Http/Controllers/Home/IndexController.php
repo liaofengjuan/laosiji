@@ -52,7 +52,7 @@ class IndexController extends Controller
                         ->get();
 
         //原创精品
-        $onlyVideo = VideoType::where('pid',2)
+        $onlyVideo = VideoType::where('pid',17)
                                 ->where('status',0)
                                 ->get();
         //获取视频类中所有的子类

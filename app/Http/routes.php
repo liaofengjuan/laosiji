@@ -22,6 +22,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'adminLogin']
 	Route::post('/login/signout','LoginController@signout');//注销
 
 	Route::get('/','IndexController@index');
+	Route::get('/user/pass/{id}','UserController@pass');//加载修改密码页面
+	Route::post('/user/doPass/{id}','UserController@doPass');//执行修改密码页面
 	Route::get('/user/hander','UserController@hander');//加载管理员列表
 	Route::post('/user/username','UserController@username');//验证用户名
 	Route::post('/user/phone','UserController@phone');//验证手机号

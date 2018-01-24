@@ -76,7 +76,7 @@
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs" >
-                                            <a class="am-btn am-btn-default am-btn-secondary" role="button" href="{{url('admin/user/'.$v['id'].'/edit')}}"><span class="am-icon-pencil-square-o"></span>编辑</a>
+                                            <a class="am-btn am-btn-default am-btn-secondary" role="button" href="{{url('admin/user/pass/'.$v['id'])}}"><span class="am-icon-pencil-square-o"></span>修改密码</a>
                                             <a class="am-btn am-btn-default am-btn-danger del" role="button" href="javascript:;" onclick="del({{$v['id']}},$(this))"><span class="am-icon-trash"></span>删除</a>
                                         </div>
                                     </div>

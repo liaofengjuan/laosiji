@@ -78,7 +78,7 @@
                     </div>
                     <span class="user-panel-logged-in-text">
                     <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
-                        {{session('user')}}
+                        {{session('admins')}}
                     </span>
                     
                 </div>

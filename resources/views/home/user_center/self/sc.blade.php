@@ -201,7 +201,7 @@ function readFile(){
                     //   icon: 1,
                     //   skin: 'layer-ext-moon' 
                     // })
-                    alert(1);
+                    alert('上传成功!');
                     location.reload();
                     break;
                 case '3':

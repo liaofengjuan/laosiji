@@ -20,7 +20,7 @@
 
 
         </div>
-        <div class="tpl-block ">
+        <div class="tpl-block l-height">
 
             <div class="am-g tpl-amazeui-form">
 

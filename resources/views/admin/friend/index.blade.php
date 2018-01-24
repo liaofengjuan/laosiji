@@ -25,7 +25,7 @@
             </div>
             
         </div>
-        <div class="am-g">
+        <div class="am-g l-height">
             <div class="am-u-sm-12">
                 <form class="am-form">
                     <table class="am-table am-table-striped am-table-hover table-main" >

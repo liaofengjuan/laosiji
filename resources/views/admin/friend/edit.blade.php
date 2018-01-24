@@ -20,7 +20,7 @@
 
 
         </div>
-        <div class="tpl-block ">
+        <div class="tpl-block l-height">
 
             <div class="am-g tpl-amazeui-form">
 
@@ -45,8 +45,8 @@
                         <div class="am-form-group">
                             <label for="statusstatus" class="am-u-sm-3 am-form-label">状态</label>
                             <div class="am-u-sm-9" style="font-size:15px">
-                                <input type="radio" value="0" name="status" style="margin-left:10px" checked>启用
-                                <input type="radio" value="1" name="status" style="margin-left:100px" >禁用
+                                <input type="radio" value="0" name="status" style="margin-left:10px" {{$data['status']==0?'checked':''}}>启用
+                                <input type="radio" value="1" name="status" style="margin-left:100px" {{$data['status']==1?'checked':''}}>禁用
                             </div>
                         </div>
                         <div class="am-form-group" style="margin-top:50px">

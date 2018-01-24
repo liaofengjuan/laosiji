@@ -209,9 +209,9 @@
         @if($movies)
         @foreach($movies as $v)
           <div class="myvideo">
-            <a href="{{url('/video/play/index/'.$movies['id'])}}">
+            <a href="{{url('/video/play/index/'.$v['id'])}}">
               <div class="myvideoimg">
-              <img src="{{env('PATH_IMG').$movies['pic'].'?imageView2/1/w/217/h/132/q/75|imageslim'}}" onerror="javascript:this.src='/homes/images/my.jpg'"/>
+              <img src="{{env('PATH_IMG').$v['pic'].'?imageView2/1/w/217/h/132/q/75|imageslim'}}" onerror="javascript:this.src='/homes/images/my.jpg'"/>
                 <h3>{{$v['video_title']}}</h3>
                 <span class="play1">播放</span>
                 <span class="time">{{$v['size']}}</span></div>
